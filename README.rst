@@ -8,8 +8,11 @@ Here you can find a set of containers to help creating a bioinformatics core arc
 - PostgreSQL server
 - NFS server
 - Galaxy server
+- Zabbix server
 - Software server (i.e. a lot of pre-installed software)
-- Login server
+- Interative Compute server (a place for users to login)
+- SLURM head node
+- SLURM node
 
 Base images
 -----------
