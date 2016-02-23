@@ -1,13 +1,12 @@
 FROM tiagoantao/alpine-base
-ARG BASE=dc=example,dc=com
-ARG URI=ldap://ldap.example.com
-ARG PASS=obvious
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
 RUN apk add openldap openldap-back-bdb
 
-RUN cp /etc/openldap/DB_CONFIG.example /etc/openldap/DB_CONFIG 
+COPY etc/openldap/slapd.conf /etc/openldap
+COPY etc/openldap/ldap.conf /etc/openldap
+COPY etc/openldap/DB_CONFIG /etc/openldap
 
-VOLUME /var/lib/openldap/openldap-data
+VOLUME ["/var/lib/openldap/openldap-data", "/var/run/openldap/", "/etc/openldap"]
 
 EXPOSE 389
