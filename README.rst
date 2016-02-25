@@ -20,3 +20,6 @@ Base images
 We use Alpine Linux for simple servers (very small footprint)
 and Ubuntu for larger images. It might happen that some containers
 are derived from Debian ones.
+
+
+Todo: script to create docker volume directory structure

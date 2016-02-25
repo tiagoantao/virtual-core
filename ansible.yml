@@ -1,9 +1,0 @@
----
-- name: Bioinformatics core infrastructure
-  hosts: localhost
-  connection: local
-
-  tasks:
-  - name: Build LDAP server
-    command: docker build -t core-ldap docker/ldap
-

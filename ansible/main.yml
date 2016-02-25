@@ -1,0 +1,7 @@
+---
+- name: Bioinformatics core infrastructure
+  hosts: localhost
+  connection: local
+  roles:
+    - ldap
+
