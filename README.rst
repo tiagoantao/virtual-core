@@ -43,7 +43,7 @@ a starting point.
 1. Create a directory that will store all your docker volumes. This might need to be
 very big
 
-2. ``python3 src/copy_templates.py [Directory_Above]``
+2. ``python3 src/prepare_templates.py [Directory_Above]``
 
 3. ``cp ansible/etc/host.sample ansible/etc/hosts``
 
