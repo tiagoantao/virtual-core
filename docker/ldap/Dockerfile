@@ -7,7 +7,7 @@ COPY etc/openldap/slapd.conf /etc/openldap
 COPY etc/openldap/ldap.conf /etc/openldap
 COPY etc/openldap/DB_CONFIG /etc/openldap
 
-VOLUME ["/var/lib/openldap/openldap-data", "/var/run/openldap/", "/etc/openldap"]
+VOLUME ["/var/log/", "/var/lib/openldap/", "/var/run/openldap/", "/etc/openldap"]
 
 EXPOSE 389
 

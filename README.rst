@@ -23,3 +23,19 @@ are derived from Debian ones.
 
 
 Todo: script to create docker volume directory structure
+
+Dependencies
+------------
+
+- Python 3
+- PyYAML
+- Docker
+- Ansible (including playbook)
+
+
+Installation
+------------
+
+1. Create a directory that will store all your docker volumes. This might need to be
+very big
+2. Do ``python3 src/copy_templates.py [Directory_Above]``
