@@ -36,6 +36,15 @@ Dependencies
 Installation
 ------------
 
+This will install all your servers on the local machine. If you have a very large
+big-iron machine, this might be what you want. If you have a cluster, this is still
+a starting point.
+
 1. Create a directory that will store all your docker volumes. This might need to be
 very big
-2. Do ``python3 src/copy_templates.py [Directory_Above]``
+
+2. ``python3 src/copy_templates.py [Directory_Above]``
+
+3. ``cp ansible/etc/host.sample ansible/etc/hosts``
+
+4. ``cd ansible; ansible-playbook --ask-pass -i etc/hosts main.yml```
