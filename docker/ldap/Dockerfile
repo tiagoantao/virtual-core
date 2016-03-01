@@ -3,12 +3,10 @@ MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
 RUN apk add openldap openldap-back-bdb
 
-COPY etc/openldap/slapd.conf /etc/openldap
-COPY etc/openldap/ldap.conf /etc/openldap
-COPY etc/openldap/DB_CONFIG /etc/openldap
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 VOLUME ["/var/log/", "/var/lib/openldap/", "/var/run/openldap/", "/etc/openldap"]
 
 EXPOSE 389
 
-CMD ["slapd"]
+CMD ["/usr/sbin/slapd"]
