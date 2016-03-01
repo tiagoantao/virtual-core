@@ -7,6 +7,6 @@ COPY supervisord.conf /etc/supervisord.conf
 
 VOLUME ["/var/log", "/etc/php", "/etc/phpadmin", "/etc/nginx"]
 
-EXPOSE 8369
+EXPOSE 8389
 
-CMD ["/usr/sbin/nginx"]
+CMD ["supervisord"]
