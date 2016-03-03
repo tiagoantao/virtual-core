@@ -1,0 +1,13 @@
+---
+- name: Build PostgreSQL server
+  command: docker build -t core_postgres ../docker/postgres
+
+- name: PostgreSQL container
+  docker:
+    name: postgres
+    image: core_postgres
+    state: started
+    links: ["ldap:ldap"]
+    ports: ["5432:5432"]
+    volumes:
+      - "{{ postgres_dir }}/var/lib/postgresql:/var/lib/postgresql"

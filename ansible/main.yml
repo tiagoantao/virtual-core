@@ -4,6 +4,7 @@
   connection: local
   roles:
     - ldap
+    - postgres
     #- nfs
     #- software
 
