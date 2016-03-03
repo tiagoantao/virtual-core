@@ -1,0 +1,10 @@
+dn: olcBackend={0}bdb
+objectClass: olcBackendConfig
+olcBackend: {0}bdb
+structuralObjectClass: olcBackendConfig
+entryUUID: bdc6b860-758a-1035-9f89-23ebe46e3861
+creatorsName: cn=config
+createTimestamp: 20160303125359Z
+entryCSN: 20160303125359.051852Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20160303125359Z

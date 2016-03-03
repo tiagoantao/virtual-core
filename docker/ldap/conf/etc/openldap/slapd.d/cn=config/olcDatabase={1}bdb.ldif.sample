@@ -1,0 +1,29 @@
+dn: olcDatabase={1}bdb
+objectClass: olcDatabaseConfig
+objectClass: olcBdbConfig
+olcDatabase: {1}bdb
+olcDbDirectory: /var/lib/openldap
+olcSuffix: dc=example,dc=com
+olcAccess: {0}to attrs=userPassword,shadowLastChange by self write by anonym
+ ous auth by * none
+olcAccess: {1}to dn.base="" by * read
+olcAccess: {2}to * by * read
+olcLastMod: TRUE
+olcRootDN: cn=admin,dc=example,dc=com
+olcRootPW:: e1NTSEF9MUk0ZHg2a1BSMERFMzN5dStxNjlqd1VLQWpBOUVGQTc=
+olcDbCheckpoint: 512 30
+olcDbConfig: {0}set_cachesize 0 2097152 0
+olcDbConfig: {1}set_lk_max_objects 1500
+olcDbConfig: {2}set_lk_max_locks 1500
+olcDbConfig: {3}set_lk_max_lockers 1500
+olcDbIndex: objectClass eq
+olcDbIndex: cn,uid eq
+olcDbIndex: uidNumber,gidNumber eq
+olcDbIndex: member,memberUid eq
+structuralObjectClass: olcBdbConfig
+entryUUID: bdc6bc5c-758a-1035-9f8a-23ebe46e3861
+creatorsName: cn=config
+createTimestamp: 20160303125359Z
+entryCSN: 20160303125359.051955Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20160303125359Z

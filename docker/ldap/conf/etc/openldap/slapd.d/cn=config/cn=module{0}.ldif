@@ -1,0 +1,12 @@
+dn: cn=module{0}
+objectClass: olcModuleList
+cn: module{0}
+olcModulePath: /usr/lib/openldap
+olcModuleLoad: {0}back_bdb
+structuralObjectClass: olcModuleList
+entryUUID: bdc6a49c-758a-1035-9f88-23ebe46e3861
+creatorsName: cn=config
+createTimestamp: 20160303125359Z
+entryCSN: 20160303125359.051347Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20160303125359Z
