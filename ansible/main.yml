@@ -4,4 +4,6 @@
   connection: local
   roles:
     - ldap
+    #- nfs
+    #- software
 

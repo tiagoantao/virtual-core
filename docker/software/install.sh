@@ -9,10 +9,11 @@ bash Miniconda3-latest-Linux-x86_64.sh -p /software/conda -b
 /software/conda/bin/conda install -y blast fastqc fastx_toolkit 
 /software/conda/bin/conda install -y trimmomatic picard genepop bcftools 
 /software/conda/bin/conda install -y bedtools vcflib freebayes
+/software/conda/bin/conda install -y cutadapt mafft kraken mothur mummer
+/software/conda/bin/conda install -y muscle novoalign picard raxml snpeff spades trinity
 
 /software/conda/bin/conda install -y bioconductor-biocinstaller
 
 /software/conda/bin/conda install -y jupyter scipy scikit-learn matplotlib
 /software/conda/bin/conda install -y biopython
-
 
