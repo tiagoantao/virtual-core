@@ -1,2 +1,2 @@
-ldap_dir: /core/docker/volumes/ldap
-phpldapadmin_dir: /core/docker/volumes/phpldapadmin
+volumes:
+    - /source:/dest

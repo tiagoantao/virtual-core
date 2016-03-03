@@ -6,7 +6,7 @@ Here you can find a set of containers to help creating a bioinformatics core arc
 
 - LDAP server
 - PostgreSQL server
-- NFS server
+- NFS server (Not active)
 - Galaxy server
 - Zabbix server
 - Software server (i.e. a lot of pre-installed software)

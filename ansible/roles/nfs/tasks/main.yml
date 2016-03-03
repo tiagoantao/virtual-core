@@ -1,32 +1,13 @@
 ---
-- name: Build LDAP server
-  command: docker build -t core_ldap ../docker/ldap
+- name: Build NFS server
+  command: docker build -t core_nfs ../docker/nfs
 
-- name: Build phpLDAPadmin server
-  command: docker build -t core_phpldapadmin ../docker/phpldapadmin
-
-- name: LDAP container
+- name: NFS container
   docker:
-    name: ldap
-    image: core_ldap
+    name: nfs
+    image: core_nfs
     state: started
-    ports: ["0.0.0.0:389:389"]
-    volumes:
-      - "{{ ldap_dir }}/var/lib/openldap:/var/lib/openldap"
-      - "{{ ldap_dir }}/var/run/openldap:/var/run/openldap"
-      - "{{ ldap_dir }}/etc/openldap:/etc/openldap"
-      - "{{ ldap_dir }}/var/log:/var/log"
-
-- name: phpLDAPadmin container
-  docker:
-    name: phpldapadmin
-    image: core_phpldapadmin
-    state: started
-    links: ["ldap:ldap"]
-    ports: ["0.0.0.0:8389:8389"]
-    volumes:
-      - "{{ phpldapadmin_dir }}/var/log:/var/log"
-      - "{{ phpldapadmin_dir }}/etc/php:/etc/php"
-      - "{{ phpldapadmin_dir }}/etc/phpldapadmin:/etc/phpldapadmin"
-      - "{{ phpldapadmin_dir }}/etc/nginx:/etc/nginx"
+    privileged: yes
+    ports: ["111:111", "111:111/udp", "2049:2049", "2049:2049/udp"]
+    volumes: "{{ volumes }}"
 
