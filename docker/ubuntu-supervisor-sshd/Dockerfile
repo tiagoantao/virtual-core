@@ -11,6 +11,7 @@ RUN apt-get install -y openssh-server
 
 COPY supervisor-sshd.conf /etc/supervisor/conf.d/
 
+RUN mkdir /var/run/sshd
 RUN mkdir /root/.ssh
 
 EXPOSE 22
