@@ -9,6 +9,9 @@ RUN apt-get install -y openssh-server
 #this machine cannot be run without adding a root key
 #(and server key should be changed also)
 
+#You probably also need a /etc/ldap.conf
+
+COPY supervisor.conf /etc/supervisor/conf.d/
 COPY supervisor-sshd.conf /etc/supervisor/conf.d/
 
 RUN mkdir /var/run/sshd
