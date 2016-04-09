@@ -32,6 +32,13 @@ Dependencies
 - Docker
 - Ansible (including playbook)
 
+**If you use the setup wizard**
+
+- Flask
+- openssl and pyOpenSSL (if you need to generate keys)
+
+(explain with conda)
+
 
 Installation
 ------------
@@ -44,7 +51,7 @@ a reasonable starting point.
 very big.
 
 2. ``python3 src/prepare_templates.py [Directory_Above]`` . Prepares the ansible
-templates (this probably can be put inside ansible). 
+templates (this probably can be put inside ansible).
 
 3. ``python3 src/use_examples.py`` . This will copy the example configuration files
 to be used as the default ones. Make sure to change things in your final configuaration.

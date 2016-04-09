@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>Welcome to the setup wizard</h2>
+{% endblock %}
+
+{% block content %}
+<p>Here we will help you setup the Virtual Core software.</p>
+<p>You will be able to choose your prefered services (containers) and
+provide basic configuration information to get you started.</p>
+
+<div class="panel panel-danger">
+  <div class="panel-heading">Think security!</div>
+  <div class="panel-body">
+    Security is paramount and all connections to containers will be
+    encrypted. This wizard will help you with setting this up. Be prepared to:
+    <ul>
+      <li>Supply your SSH public key (to login to containers)</li>
+      <li>Most probably you have to supply certificates and private keys
+        for things HTTPS and FTPS servers</li>
+    </ul>
+    If you do not have these, the system will help you generate those.
+  </div>
+</div>
+
+<button type="button" onclick="window.location.href = '/sshkey';"
+        class="btn btn-primary btn-lg center-block">Lets start</button>
+{% endblock %}
