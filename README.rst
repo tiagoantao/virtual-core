@@ -59,6 +59,6 @@ to be used as the default ones. Make sure to change things in your final configu
 4. ``python3 src/create_directory_structure.py [Directory_Above]``
 
 
-4. ``cp ansible/etc/host.sample ansible/etc/hosts``
+4. ``cp etc/host.sample etc/hosts``
 
-5. ``cd ansible; ansible-playbook --ask-pass -i etc/hosts main.yml```
+5. ``cd ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml```

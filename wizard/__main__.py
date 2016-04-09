@@ -9,12 +9,32 @@
 .. moduleauthor:: Tiago Antao <tra@popgen.net>
 
 '''
-from flask import Flask, render_template
+import os
+
+from flask import Flask, render_template, redirect, url_for
+
 app = Flask(__name__)
 
-@app.route("/")
-def hello():
+@app.route('/')
+def welcome():
     return render_template('welcome.html')
 
+
+@app.route('/sshkey')
+def determine_ssh_status(run=0):
+    if not os.path.exists('etc/ssh'):
+        os.mkdir('etc/ssh')
+    if not os.path.exists('etc/ssh/authorized_keys'):
+        return render_template('need_ssh.html', run=run)
+    else:
+        return redirect(url_for(choose_machines))
+
+
+@app.route('/choose')
+def choose_machines():
+    return 'bla'
+
+
 if __name__ == "__main__":
+    app.debug = True
     app.run()

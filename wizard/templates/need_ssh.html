@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Check SSH key status{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>Making sure you have an authorized key</h2>
+{% endblock %}
+
+{% block content %}
+
+<div class="panel panel-danger">
+  <div class="panel-heading">Access the running containers requires a SSH key</div>
+  <div class="panel-body">
+      <p>If you alread have an SSH key, place it (<b>the public one</b>) in
+      etc/ssh/authorized_keys</p>
+
+      <p>If not, use ssh-keygen to create one. You will need this key pair
+          to login to all containers</p>
+
+  </div>
+</div>
+
+<button type="button" onclick="window.location.href = '/sshkey&run={{run + 1}}';"
+        class="btn btn-primary center-block">Click here when you have placed etc/ssh/authorized_keys</button>
+{% endblock %}
