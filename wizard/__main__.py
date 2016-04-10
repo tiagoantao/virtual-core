@@ -27,12 +27,12 @@ def determine_ssh_status(run=0):
     if not os.path.exists('etc/ssh/authorized_keys'):
         return render_template('need_ssh.html', run=run)
     else:
-        return redirect(url_for('choose_machines'))
+        return redirect(url_for('choose_containers'))
 
 
 @app.route('/choose')
-def choose_machines():
-    return 'bla'
+def choose_containers():
+    return render_template('choose_containers.html')
 
 
 if __name__ == "__main__":
