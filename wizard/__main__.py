@@ -20,14 +20,14 @@ def welcome():
     return render_template('welcome.html')
 
 
-@app.route('/sshkey')
+@app.route('/sshkey/<int:run>')
 def determine_ssh_status(run=0):
     if not os.path.exists('etc/ssh'):
         os.mkdir('etc/ssh')
     if not os.path.exists('etc/ssh/authorized_keys'):
         return render_template('need_ssh.html', run=run)
     else:
-        return redirect(url_for(choose_machines))
+        return redirect(url_for('choose_machines'))
 
 
 @app.route('/choose')

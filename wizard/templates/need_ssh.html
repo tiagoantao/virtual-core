@@ -10,18 +10,23 @@
 
 {% block content %}
 
-<div class="panel panel-danger">
+
+<div class="panel panel-info">
   <div class="panel-heading">Access the running containers requires a SSH key</div>
   <div class="panel-body">
       <p>If you alread have an SSH key, place it (<b>the public one</b>) in
-      etc/ssh/authorized_keys</p>
+      VIRTUAL_CORE_DIRECTORY/etc/ssh/authorized_keys. For example this might work:
+      <blockquote>cp ~/.ssh/id_rsa.pub etc/ssh/authorized_keys</blockquote></p>
 
       <p>If not, use ssh-keygen to create one. You will need this key pair
           to login to all containers</p>
+      {% if run > 0 %}
+      <div class="alert alert-danger">I still cannot find your public key!</div>
+      {% endif %}
 
   </div>
 </div>
 
-<button type="button" onclick="window.location.href = '/sshkey&run={{run + 1}}';"
+<button type="button" onclick="window.location.href = '/sshkey/{{run + 1}}';"
         class="btn btn-primary center-block">Click here when you have placed etc/ssh/authorized_keys</button>
 {% endblock %}
