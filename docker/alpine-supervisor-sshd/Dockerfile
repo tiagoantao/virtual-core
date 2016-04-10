@@ -3,13 +3,19 @@ MAINTAINER  Tiago Antao <tiagoantao@gmail.com>
 
 RUN apk upgrade
 RUN apk add supervisor nss-pam-ldapd
-RUN apk add openssh bash
+RUN apk add openssh bash 
+RUN apk add python3 wget
 
 #this machine cannot be run without adding a root key
 #(and server key should be changed also)
 
+#Explain prepare magic somewhere
+
+#Install Linking of configuration files and entrypoint
+RUN wget --no-check-certificate  https://raw.githubusercontent.com/tiagoantao/mutable_files/master/link_mutable_files.py -O /sbin/link_mutable_files.py
 COPY sbin/server_run.sh /sbin
-RUN chmod a+x /sbin/server_run.sh
+RUN chmod a+x /sbin/server_run.sh /sbin/link_mutable_files.py
+RUN mkdir /traverse
 
 COPY etc/supervisor.d/supervisor.ini /etc/supervisor.d/
 COPY etc/supervisor.d/supervisor-sshd.ini /etc/supervisor.d/
