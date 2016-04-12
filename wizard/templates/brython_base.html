@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block head %}
+  <script src="http://brython.info/src/brython_dist.js"></script>
+  {{ super() }}
+{% endblock %}
+{% block body_attributes %}onload="brython()"{% endblock %}
