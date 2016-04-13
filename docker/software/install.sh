@@ -22,12 +22,16 @@ bash Miniconda3-latest-Linux-x86_64.sh -p /software/conda -b
 /software/conda/bin/conda install -y jupyter scipy scikit-learn matplotlib
 /software/conda/bin/conda install -y biopython seaborn pandas
 
-/software/conda/bin/conda create -n python2 python=2
-source /software/conda/bin/conda/activate python2
-/software/conda/bin/conda install -c bioconda pyrad
-source /software/conda/bin/conda/deactivate
-
 /software/conda/bin/conda create -n dDocent python=3
 source /software/conda/bin/conda/activate dDocent
 /software/conda/bin/conda install -c bioconda ddocent
+source /software/conda/bin/conda/deactivate
+
+/software/conda/bin/conda create -n python2 python=2
+source /software/conda/bin/conda/activate python2
+/software/conda/bin/conda install -c bioconda pyrad 
+/software/conda/bin/conda install -y jupyter scipy scikit-learn matplotlib
+/software/conda/bin/conda install -y biopython seaborn pandas
+/software/conda/bin/conda install -c http://conda.binstar.org/bpeng simuPOP
+
 source /software/conda/bin/conda/deactivate
