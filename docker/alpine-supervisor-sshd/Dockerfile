@@ -13,14 +13,14 @@ RUN apk add python3 wget
 
 #Install Linking of configuration files and entrypoint
 RUN wget --no-check-certificate  https://raw.githubusercontent.com/tiagoantao/mutable_files/master/link_mutable_files.py -O /sbin/link_mutable_files.py
-COPY sbin/server_run.sh /sbin
+COPY copy/sbin/server_run.sh /sbin
 RUN chmod a+x /sbin/server_run.sh /sbin/link_mutable_files.py
 RUN mkdir /traverse
 
-COPY etc/supervisor.d/supervisor.ini /etc/supervisor.d/
-COPY etc/supervisor.d/supervisor-sshd.ini /etc/supervisor.d/
+COPY copy/etc/supervisor.d/supervisor.ini /etc/supervisor.d/
+COPY copy/etc/supervisor.d/supervisor-sshd.ini /etc/supervisor.d/
 
-COPY etc/ssh/sshd_config /etc/ssh/
+COPY copy/etc/ssh/sshd_config /etc/ssh/
 RUN ssh-keygen -A
 RUN mkdir /root/.ssh
 
