@@ -64,3 +64,10 @@ directory       /var/lib/openldap/openldap-data
 # Indices to maintain
 index   objectClass     eq
 
+#######################################################################
+# TLS/SSL
+#######################################################################
+TLSCACertificateFile /etc/openldap/cacert.pem
+TLSCertificateFile /etc/openldap/servercrt.pem
+TLSCertificateKeyFile /etc/openldap/serverkey.pem
+
