@@ -7,4 +7,4 @@ COPY etc/supervisor.d/ldap.ini /etc/supervisor.d
 
 VOLUME ["/etc/openldap", "/var/log/", "/var/lib/openldap/", "/var/run/openldap/"]
 
-EXPOSE 389
+EXPOSE 389 636
