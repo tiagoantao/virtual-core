@@ -10,7 +10,7 @@
     name: ldap
     image: core_ldap
     state: started
-    ports: ["0.0.0.0:389:389"]
+    ports: ["389:389", "636:636"]
     volumes:
       - "{{ ldap_dir }}/var/lib/openldap:/var/lib/openldap"
       - "{{ ldap_dir }}/var/run/openldap:/var/run/openldap"
