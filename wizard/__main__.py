@@ -15,6 +15,7 @@ from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def welcome():
     return render_template('welcome.html')
@@ -27,13 +28,20 @@ def determine_ssh_status(run=0):
     if not os.path.exists('etc/ssh/authorized_keys'):
         return render_template('need_ssh.html', run=run)
     else:
+        return redirect(url_for('get_named_directories_root'))
+
+
+@app.route('/named_directories/<root>')
+def get_named_directories_root(root=None):
+    if root is None or not os.path.isdir(root):
+        return render_template('named_directories.html', root=root)
+    else:
         return redirect(url_for('choose_containers'))
 
 
 @app.route('/choose')
 def choose_containers():
     return render_template('choose_containers.html')
-
 
 if __name__ == "__main__":
     app.debug = True

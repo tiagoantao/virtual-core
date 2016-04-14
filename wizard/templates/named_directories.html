@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Named Directories root{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>Specifying a directory to put your named directories</h2>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="panel panel-info">
+  <div class="panel-heading">Where to store your container state and data</div>
+  <div class="panel-body">
+      Containers should have no persitent mutable state. As a
+      starting point we will put all the named volumes for our
+      containers in a single place. This is OK for starting, but advanced
+      configurations might split named volumes across different partitions
+      and different physical servers.
+
+  </div>
+</div>
+<form role="form">
+ <div class="form-group">
+   <label for="email">Named directories location:</label>
+   <input type="text" class="form-control" id="named">
+ </div>
+ <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}

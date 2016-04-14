@@ -16,13 +16,32 @@ import yaml
 
 __version__ = '0.0.1+'
 
+config = None
+
 descriptive_names = {}
 dependencies = defaultdict(list)  # container dependencies extracted from links
 role_containers = defaultdict(list)
 
+
+def load_config():
+    '''Loads configuration from a previous execution.
+    '''
+    try:
+        config = yaml.load(open('virtual-core.yml'))
+    except FileNotFoundError:
+        config = []
+
+
+def save_config():
+    '''Saves configuration.
+    '''
+    w = open('virtual-core.yml', 'wt')
+    w.write(yaml.dump(config, default_flow_style=False))
+    w.close()
+
+
 def get_server_dependencies():
     main_roles = glob.glob('ansible/roles/**/tasks/main.yml')
-    print(main_roles)
     for main_role in main_roles:
         role = main_role.split('/')[2]
         with open(main_role) as f:
@@ -39,6 +58,7 @@ def get_server_dependencies():
                             dependencies[name].append(docker_name)
     print(dependencies)
 
+
 def get_all_dependencies(container):
     '''Returns all containers that are required by a certain container
     '''
@@ -51,4 +71,5 @@ def get_all_dependencies(container):
         del check_containers[container]
     return my_dependencies
 
+load_config()
 get_server_dependencies()
