@@ -70,4 +70,4 @@ index   objectClass     eq
 TLSCACertificateFile /etc/openldap/cacert.pem
 TLSCertificateFile /etc/openldap/servercrt.pem
 TLSCertificateKeyFile /etc/openldap/serverkey.pem
-
+TLSVerifyClient never
