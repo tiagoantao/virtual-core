@@ -2,7 +2,7 @@
 # This file should be world readable but not world writable.
 
 BASE	dc=example,dc=com
-URI	ldaps://ldaps.example.com
+URI	ldaps://ldaps.example.com ldap://ldap.example.com
 
 #SIZELIMIT	12
 #TIMELIMIT	15
