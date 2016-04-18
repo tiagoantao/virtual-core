@@ -23,7 +23,7 @@
     image: core_phpldapadmin
     state: started
     links: ["ldap:ldap"]
-    ports: ["0.0.0.0:8389:8389"]
+    ports: ["0.0.0.0:8636:443"]
     volumes:
       - "{{ phpldapadmin_dir }}/var/log:/var/log"
       - "{{ phpldapadmin_dir }}/etc/php:/etc/php"
