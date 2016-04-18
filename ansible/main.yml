@@ -5,6 +5,8 @@
   roles:
     - ldap
     - postgres
+    - galaxy
+    #- user_server
     #- nfs
     #- software
 
