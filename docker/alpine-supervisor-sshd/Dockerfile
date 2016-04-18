@@ -24,6 +24,6 @@ COPY copy/etc/ssh/sshd_config /etc/ssh/
 RUN ssh-keygen -A
 RUN mkdir /root/.ssh
 
-EXPOSE 22
+#EXPOSE 22
 
 CMD ["/sbin/server_run.sh"]

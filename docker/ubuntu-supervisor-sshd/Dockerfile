@@ -26,6 +26,6 @@ COPY copy/etc/supervisor/conf.d/supervisor-sshd.conf /etc/supervisor/conf.d/
 RUN mkdir /var/run/sshd
 RUN mkdir /root/.ssh
 
-EXPOSE 22
+#EXPOSE 22
 
 CMD ["/sbin/server_run.sh"]
