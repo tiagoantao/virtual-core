@@ -1,0 +1,14 @@
+---
+- name: Build User Server
+  command: docker build -t core_user_server ../docker/user-server
+
+- name: User Server container
+  docker:
+    name: user_server
+    image: core_user_server
+    state: started
+    links: ["ldap:ldap"]
+    ports: ["2222:22"]
+    volumes:
+      - "{{ home_dir }}:/home"
+      - "{{ software_dir }}:/core/software"
