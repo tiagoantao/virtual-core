@@ -26,10 +26,4 @@ RUN mkdir /var/run/sshd
 RUN mkdir /root/.ssh
 COPY authorized_keys /root/.ssh
 
-EXPOSE :22
-EXPOSE :80
-EXPOSE :21
-EXPOSE :8800
-EXPOSE :9002
-
 CMD /sbin/server_run.sh
