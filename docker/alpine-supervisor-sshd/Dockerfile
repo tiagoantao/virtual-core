@@ -1,7 +1,7 @@
 FROM tiagoantao/alpine-base
 MAINTAINER  Tiago Antao <tiagoantao@gmail.com>
 
-RUN apk upgrade
+RUN apk update
 RUN apk add supervisor nss-pam-ldapd
 RUN apk add openssh bash 
 RUN apk add python3 wget
