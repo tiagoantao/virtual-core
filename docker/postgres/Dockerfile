@@ -1,20 +1,23 @@
-FROM postgres:9.5
+FROM tiagoantao/alpine-supervisor-sshd
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
-#RUN apk add postgresql postgresql-client
-RUN apt-get update
-ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get install -y openssh-server
-RUN ssh-keygen -A
-RUN echo root:bla | chpasswd
-RUN echo PermitRootLogin yes >> /etc/ssh/sshd_config
-RUN echo PasswordAuthentication yes >> /etc/ssh/sshd_config
+RUN apk update
+RUN apk add postgresql postgresql-client sudo
 
-COPY run.sh /run.sh
-COPY supervisord.conf /etc/supervisord.conf
+#Making sure we are on version 9.5
+RUN ver=`pg_config --version`; if [ ${ver:10:4} != "9.5" ]; then exit 1; fi
+
+COPY copy/etc/supervisor.d/postgres.ini /etc/supervisor.d
+
+#We will initiate the data dir only if it is empty, so we copy to a temporary one
+COPY copy/sbin/prepare_magic.sh /sbin
+RUN mkdir -p /copy/var/lib/postgresql/data
+COPY copy/var/lib/postgresql/data/pg_hba.conf /copy/var/lib/postgresql/data
+COPY copy/var/lib/postgresql/data/postgresql.conf /copy/var/lib/postgresql/data
+RUN chown postgres.postgres /copy/var/lib/postgresql/data/*
+
+COPY authorized_keys /root/.ssh
 
 VOLUME ["/var/lib/postgresql"]
 
 EXPOSE 5432
-
-CMD ["bash", "run.sh"]
