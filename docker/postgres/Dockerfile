@@ -14,6 +14,9 @@ COPY copy/sbin/prepare_magic.sh /sbin
 RUN mkdir -p /copy/var/lib/postgresql/data
 COPY copy/var/lib/postgresql/data/pg_hba.conf /copy/var/lib/postgresql/data
 COPY copy/var/lib/postgresql/data/postgresql.conf /copy/var/lib/postgresql/data
+
+COPY copy/var/lib/postgresql/data/server.crt /copy/var/lib/postgresql/data
+COPY copy/var/lib/postgresql/data/server.key /copy/var/lib/postgresql/data
 RUN chown postgres.postgres /copy/var/lib/postgresql/data/*
 
 COPY authorized_keys /root/.ssh
