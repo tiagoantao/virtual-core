@@ -7,6 +7,12 @@ olcArgsFile: /var/run/openldap/slapd.args
 olcLogLevel: none
 olcPidFile: /var/run/openldap/slapd.pid
 olcToolThreads: 1
+olcTLSCACertificateFile: /etc/openldap/cacert.pem
+olcTLSCertificateFile: /etc/openldap/servercrt.pem
+olcTLSCertificateKeyFile: /etc/openldap/serverkey.pem
+olcTLSCRLCheck: none
+olcTLSVerifyClient: never
+olcTLSProtocolMin: 0.0
 structuralObjectClass: olcGlobal
 entryUUID: bdc62148-758a-1035-9f80-23ebe46e3861
 creatorsName: cn=config
