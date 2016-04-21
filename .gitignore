@@ -1,3 +1,10 @@
 virtual-core.yml
 __pycache__
 /etc/ssh
+authorized_keys
+
+docker/postgres/copy/var/lib/postgresql/data/pg_hba.conf
+docker/postgres/copy/var/lib/postgresql/data/server.crt
+docker/postgres/copy/var/lib/postgresql/data/server.key
+
+docker/galaxy/copy/etc/galaxy.ini

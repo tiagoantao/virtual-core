@@ -4,8 +4,8 @@
   connection: local
   roles:
     - ldap
-    - postgres
-    - galaxy
+    #- postgres
+    #- galaxy
     #- user_server
     #- nfs
     #- software
