@@ -42,6 +42,12 @@ def explain_certificate_authority(run=0):
         return redirect(url_for('get_named_directories_root'))
 
 
+@app.route('/create_ca')
+def create_certificate_authority(run=0):
+    if os.path.exists('etc/ca/demoCA'):
+        return render_template('exists_ca.html')
+
+
 @app.route('/named_directories/<root>')
 def get_named_directories_root(root=None):
     if root is None or not os.path.isdir(root):

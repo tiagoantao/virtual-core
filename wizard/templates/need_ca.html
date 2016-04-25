@@ -30,8 +30,7 @@
       {% if run > 0 %}
       <div class="alert alert-danger">XXX</div>
       {% endif %}
-      In order for this process to conclude
-        you need to either:
+      In order for this process to conclude you need to either:
         <ul>
             <li></li>
             <li></li>
@@ -44,10 +43,17 @@
 <div class="panel panel-info">
     <div class="panel-heading">How to self-sign your own certificates</div>
     <div class="panel-body">
+      <p>You can either do this manually, see <a href="http://www.openldap.org/faq/data/cache/185.html">the OpenLDAP FAQ entry on SSL (using certificates)</a>.</p>
+
+      <p>Or you can use our CA creation wizard. Note that this is mostly for testing. You should review our security infrastructure carefuly.</p>
+
+
+    <button type="button" onclick="window.location.href = '/create_ca';"
+        class="btn btn-primary center-block">Click here when to create a temoporary certificate authority</button>
     </div>
 </div>
 
 <button type="button" onclick="window.location.href = '/sshkey/{{run + 1}}';"
-        class="btn btn-primary center-block">Click here when you have placed etc/ssh/authorized_keys</button>
+        class="btn btn-primary center-block">Click here when ...</button>
 
 {% endblock %}
