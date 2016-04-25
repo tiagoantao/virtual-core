@@ -11,14 +11,45 @@
 '''
 import os
 
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, request, url_for
+
+import wizard
 
 app = Flask(__name__)
 
 
-@app.route('/')
-def welcome():
-    return render_template('welcome.html')
+def _delist(form, exceptions=[]):
+    delist = {}
+    for k, v in form.items():
+        if type(v) == list and k not in exceptions:
+            delist[k] = v[0]
+        else:
+            delist[k] = v
+    return delist
+
+
+def _has_all_parameters(form, parameters):
+    for parameter in parameters:
+        if parameter in form:
+              if form[parameter] == '':
+                  return False
+        else:
+            return False
+    return True
+
+
+@app.route('/', methods=['GET'])
+@app.route('/<int:run>', methods=['GET', 'POST'])
+def welcome(run=0):
+    if run == 0:
+        form = wizard.config.get('General', {})
+    else:
+        form = _delist(request.form)
+        if _has_all_parameters(form, ['country', 'state', 'locality', 'orgname', 'orgunit', 'commonname', 'email']):
+            wizard.change_config('General', **form)
+            return redirect(url_for('determine_ssh_status', run=0))
+    all_params = {'run': run, **form}
+    return render_template('welcome.html', **all_params)
 
 
 @app.route('/sshkey/<int:run>')

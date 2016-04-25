@@ -26,10 +26,11 @@ role_containers = defaultdict(list)
 def load_config():
     '''Loads configuration from a previous execution.
     '''
+    global config
     try:
         config = yaml.load(open('virtual-core.yml'))
     except FileNotFoundError:
-        config = []
+        config = {}
 
 
 def save_config():
@@ -38,6 +39,14 @@ def save_config():
     w = open('virtual-core.yml', 'wt')
     w.write(yaml.dump(config, default_flow_style=False))
     w.close()
+
+
+def change_config(section, **kwargs):
+    if section not in config:
+        config[section] = {}
+    for k, v in kwargs.items():
+        config[section][k] = v
+    save_config()
 
 
 def get_server_dependencies():

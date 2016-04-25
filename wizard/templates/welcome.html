@@ -9,6 +9,11 @@
 {% endblock %}
 
 {% block content %}
+
+{% if run > 0 %}
+<div class="alert alert-danger">Please fill the form below to continue</div>
+{% endif %}
+
 <p>Here we will help you setup the Virtual Core software.</p>
 <p>You will be able to choose your prefered services (containers) and
 provide basic configuration information to get you started.</p>
@@ -30,6 +35,39 @@ but this can be easily changed, check the documentation.</p>
   </div>
 </div>
 
-<button type="button" onclick="window.location.href = '/sshkey/0';"
-        class="btn btn-primary btn-lg center-block">Lets start</button>
+<div class="panel panel-info">
+  <form action="/1" method="POST">
+    <div class="form-group">
+        <label for="country">Country (two letter ISO code):</label>
+        <input type="text" class="form-control" maxlength="2" name="country", value="{{ country }}">
+    </div>
+    <div class="form-group">
+        <label for="state">State or Province</label>
+        <input type="text" class="form-control" name="state" value="{{ state }}">
+    </div>
+    <div class="form-group">
+        <label for="locality">Locality (City, Town, ...):</label>
+        <input type="text" class="form-control" name="locality" value="{{ locality }}">
+    </div>
+    <div class="form-group">
+        <label for="orgname">Organization Name:</label>
+        <input type="text" class="form-control" name="orgname" value="{{ orgname }}">
+    </div>
+    <div class="form-group">
+        <label for="orgunit">Organization Unit (e.g. Department of XX):</label>
+        <input type="text" class="form-control" name="orgunit" value="{{ orgunit }}">
+    </div>
+    <div class="form-group">
+        <label for="commonname">Common name (e.g. Virtual Core of XX)</label>
+        <input type="text" class="form-control" name="commonname" value="{{ commonname }}">
+    </div>
+    <div class="form-group">
+        <label for="email">email:</label>
+        <input type="email" class="form-control" name="email" value="{{ email }}">
+    </div>
+    <input type="submit"
+        class="btn btn-primary btn-lg center-block" value="Lets start"/>
+  </form>
+</div>
+
 {% endblock %}
