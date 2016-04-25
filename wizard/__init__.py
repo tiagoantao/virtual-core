@@ -56,7 +56,6 @@ def get_server_dependencies():
                         for link in entry['docker']['links']:
                             docker_name, internal_name = tuple(link.split(':'))
                             dependencies[name].append(docker_name)
-    print(dependencies)
 
 
 def get_all_dependencies(container):

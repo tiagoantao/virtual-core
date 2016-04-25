@@ -28,6 +28,17 @@ def determine_ssh_status(run=0):
     if not os.path.exists('etc/ssh/authorized_keys'):
         return render_template('need_ssh.html', run=run)
     else:
+        return redirect(url_for('explain_certificate_authority', run=0))
+
+
+@app.route('/ca/<int:run>')
+def explain_certificate_authority(run=0):
+    if not os.path.exists('etc/ca'):
+        os.mkdir('etc/ca')
+    if not os.path.exists('etc/ca/UNDERSTAND') or \
+            not os.path.exists('etc/ca/demoCA'):
+        return render_template('need_ca.html', run=run)
+    else:
         return redirect(url_for('get_named_directories_root'))
 
 

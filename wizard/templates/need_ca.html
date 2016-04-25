@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Check Certificate Authorithy status{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>Making sure you can have all required certificates</h2>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="panel panel-primary">
+  <div class="panel-heading">Secure communications will require certificates</div>
+  <div class="panel-body">
+      <p>Secured communications will require certificates and keys. For example
+      the LDAP server (which is the only container that is mandatory)
+      will require one.</p>
+
+      <p>Here you will have two alternatives:</p>
+      <ul>
+          <li>If you are testing this software or do not care about warnings
+              about self-signed certificates, you will create your own
+              Certificate Authority. Check the instructions below.</li>
+          <li>You can use certificates from a recognized certificate authority.
+          This is a longer process that might cost money. Check, for example:
+          <a href="https://letsencrypt.org/">Let's encrypt</a>.</li>
+      </ul>
+      {% if run > 0 %}
+      <div class="alert alert-danger">XXX</div>
+      {% endif %}
+      In order for this process to conclude
+        you need to either:
+        <ul>
+            <li></li>
+            <li></li>
+        <ul>
+
+  </div>
+</div>
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">How to self-sign your own certificates</div>
+    <div class="panel-body">
+    </div>
+</div>
+
+<button type="button" onclick="window.location.href = '/sshkey/{{run + 1}}';"
+        class="btn btn-primary center-block">Click here when you have placed etc/ssh/authorized_keys</button>
+
+{% endblock %}
