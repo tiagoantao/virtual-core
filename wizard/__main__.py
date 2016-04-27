@@ -15,8 +15,28 @@ import socket
 from flask import Flask, render_template, redirect, request, url_for
 
 import wizard
+from wizard import ca
 
 app = Flask(__name__)
+
+_ca_template = '''
+[ req ]
+default_bits           = 2048
+distinguished_name     = req_distinguished_name
+attributes             = req_attributes
+prompt                 = no
+
+[ req_distinguished_name ]
+countryName            = {country}
+stateOrProvinceName    = {state}
+localityName           = {locality}
+organizationName       = {orgname}
+organizationalUnitName = {orgunit}
+commonName             = {commonname}
+emailAddress           = {email}
+
+[ req_attributes ]
+'''
 
 
 def _delist(form, exceptions=[]):
@@ -67,6 +87,7 @@ def determine_ssh_status(run=0):
 
 @app.route('/ca/<int:run>')
 def explain_certificate_authority(run=0):
+    # TODO: this needs to be changed
     if not os.path.exists('etc/ca'):
         os.mkdir('etc/ca')
     if not os.path.exists('etc/ca/UNDERSTAND') or \
@@ -80,14 +101,27 @@ def explain_certificate_authority(run=0):
 def create_certificate_authority(run=0):
     if os.path.exists('etc/ca/demoCA'):
         return render_template('exists_ca.html', next_route='/named_directories')
+    ca_template = _ca_template.format(
+        country=wizard.config['General']['country'],
+        state=wizard.config['General']['state'],
+        locality=wizard.config['General']['locality'],
+        orgname=wizard.config['General']['orgname'],
+        orgunit=wizard.config['General']['orgunit'],
+        commonname=wizard.config['General']['commonname'],
+        email=wizard.config['General']['email'])
+    with open('init.ssl', 'wt') as w:
+        w.write(ca_template)
+    ca_ok = ca.create_ca()
+    if ca_ok:
+        return redirect(url_for('get_named_directories_root'))
+    return render_template('ca_not_created.html')
 
 
 @app.route('/named_directories')
 def get_named_directories_root():
     if root is None or not os.path.isdir(root):
         return render_template('named_directories.html', root=root)
-    else:
-        return redirect(url_for('choose_containers'))
+    return redirect(url_for('choose_containers'))
 
 
 @app.route('/choose')

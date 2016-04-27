@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Certificate Authority creation FAILED{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>CA creation FAILED</h2>
+{% endblock %}
+
+{% block content %}
+
+<div class="panel panel-danger">
+  <div class="panel-heading">Certificate authority creation FAILED</div>
+  <div class="panel-body">
+    CA could not be created. This is most probably because openssl is not installed. Please install openssl.
+
+    <button type="button" onclick="window.location.href = '/create_ca';"
+        class="btn btn-primary center-block">Retry CA creation</button>
+    </div>
+
+
+  </div>
+</div>
+
+</div>
+
+{% endblock %}
