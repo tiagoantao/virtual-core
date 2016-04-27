@@ -45,6 +45,9 @@ Dependencies
 Installation
 ------------
 
+
+TODO: refer the easy to use web configuration interface!
+
 This will install all your servers on the local machine. If you have a very large
 big-iron machine, this might be what you want. If you have a cluster, this is still
 a reasonable starting point.
