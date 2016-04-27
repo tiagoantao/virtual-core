@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}CA already exists{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>CA already exists</h2>
+{% endblock %}
+
+{% block content %}
+
+<div class="panel panel-danger">
+  <div class="panel-heading">The etc/ca/demoCA directory already exists</div>
+  <div class="panel-body">
+    You already have a directory with a potential certificate authority.
+
+    You can either erase the directory manually (do rm -rf etc/ca/demoCA) and recreate the CA
+
+    <button type="button" onclick="window.location.href = '/create_ca';"
+        class="btn btn-primary center-block">Create a temoporary certificate authority (after deleting the current one)</button>
+    </div>
+
+    or continue with the current certificate authority
+
+    <button type="button" onclick="window.location.href = '{{ next_route }}';"
+        class="btn btn-primary center-block">Continue with current CA</button>
+    </div>
+
+
+  </div>
+</div>
+
+</div>
+
+{% endblock %}
