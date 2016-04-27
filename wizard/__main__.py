@@ -10,6 +10,7 @@
 
 '''
 import os
+import socket
 
 from flask import Flask, render_template, redirect, request, url_for
 
@@ -45,9 +46,11 @@ def welcome(run=0):
         form = wizard.config.get('General', {})
     else:
         form = _delist(request.form)
-        if _has_all_parameters(form, ['country', 'state', 'locality', 'orgname', 'orgunit', 'commonname', 'email']):
+        if _has_all_parameters(form, ['host', 'country', 'state', 'locality', 'orgname', 'orgunit', 'commonname', 'email']):
             wizard.change_config('General', **form)
             return redirect(url_for('determine_ssh_status', run=0))
+    if 'host' not in form:
+        form['host'] = socket.getfqdn()
     all_params = {'run': run, **form}
     return render_template('welcome.html', **all_params)
 
