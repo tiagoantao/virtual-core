@@ -117,10 +117,16 @@ def create_certificate_authority(run=0):
     return render_template('ca_not_created.html')
 
 
-@app.route('/named_directories')
+@app.route('/named_directories', methods=['GET','POST'])
 def get_named_directories_root():
+    form = _delist(request.form)
+    if 'named' in form:
+        root = form['named']
+    else:
+        root = wizard.config.get('nameddirectoriesroot', None)
     if root is None or not os.path.isdir(root):
         return render_template('named_directories.html', root=root)
+    wizard.change_config('General', nameddirectoriesroot=root)
     return redirect(url_for('choose_containers'))
 
 
