@@ -90,7 +90,7 @@ def explain_certificate_authority(run=0):
     # TODO: this needs to be changed
     if not os.path.exists('etc/ca'):
         os.mkdir('etc/ca')
-    if not os.path.exists('etc/ca/UNDERSTAND') or \
+    if not os.path.exists('etc/ca/UNDERSTAND') and \
             not os.path.exists('etc/ca/demoCA'):
         return render_template('need_ca.html', run=run)
     else:
@@ -123,7 +123,7 @@ def get_named_directories_root():
     if 'named' in form:
         root = form['named']
     else:
-        root = wizard.config.get('nameddirectoriesroot', None)
+        root = wizard.config['General'].get('nameddirectoriesroot', None)
     if root is None or not os.path.isdir(root):
         return render_template('named_directories.html', root=root)
     wizard.change_config('General', nameddirectoriesroot=root)
