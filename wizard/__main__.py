@@ -132,7 +132,11 @@ def get_named_directories_root():
 
 @app.route('/choose')
 def choose_containers():
-    return render_template('choose_containers.html')
+    return render_template('choose_containers.html',
+        descriptive_names=wizard.descriptive_names,
+        dependencies=wizard.dependencies,
+        role_containers=wizard.role_containers,
+        container_order=wizard.container_order)
 
 if __name__ == "__main__":
     app.debug = True

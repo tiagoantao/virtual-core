@@ -21,6 +21,7 @@ config = None
 descriptive_names = {}
 dependencies = defaultdict(list)  # container dependencies extracted from links
 role_containers = defaultdict(list)
+container_order = []  # A possible container order
 
 
 def load_config():
@@ -67,6 +68,22 @@ def get_server_dependencies():
                             dependencies[name].append(docker_name)
 
 
+def compute_container_order(done=set(['ldap'])):
+        if len(done) == 1:
+            container_order = ['ldap']
+        else:
+            container_order = []
+        for container, deps in dependencies.items():
+            if container in done:
+                continue
+            print(container, deps)
+            done.add(container)
+            pre_containers = compute_container_order(done)
+            container_order.append(container)
+            container_order.extend(pre_containers)
+        return container_order
+    
+
 def get_all_dependencies(container):
     '''Returns all containers that are required by a certain container
     '''
@@ -81,3 +98,4 @@ def get_all_dependencies(container):
 
 load_config()
 get_server_dependencies()
+container_order = compute_container_order()
