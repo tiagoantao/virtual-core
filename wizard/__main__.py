@@ -132,10 +132,12 @@ def get_named_directories_root():
 
 @app.route('/choose')
 def choose_containers():
+    active_containers = wizard.config.get('Active Containers', ['ldap'])
     return render_template('choose_containers.html',
         descriptive_names=wizard.descriptive_names,
         dependencies=wizard.dependencies,
-        role_containers=wizard.role_containers,
+        container_role=wizard.container_role,
+        active_containers=active_containers,
         container_order=wizard.container_order)
 
 if __name__ == "__main__":
