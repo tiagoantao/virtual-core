@@ -1,9 +1,14 @@
 FROM tiagoantao/ubuntu-supervisor-sshd
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
-COPY ldap.conf /etc/
+RUN apt-get update -y
+RUN apt-get install -y nfs-common
+
+COPY copy/etc/ldap.conf /etc/
 COPY authorized_keys /root/.ssh
-COPY skel-profile /etc/skel/.profile
+COPY copy/etc/skel/.profile /etc/skel/.profile
+
+RUN mkdir /data
 
 RUN mkdir /core
 RUN mkdir /core/software
