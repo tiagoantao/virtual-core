@@ -130,15 +130,25 @@ def get_named_directories_root():
     return redirect(url_for('choose_containers'))
 
 
-@app.route('/choose')
+@app.route('/choose', methods=['GET', 'POST'])
 def choose_containers():
-    active_containers = wizard.config.get('Active Containers', ['ldap'])
+    if len(request.form) > 0:
+        active_containers = []
+        for entry in request.form:
+            active_containers.append(entry)
+        wizard.change_config('General', containers=active_containers)
+        return redirect(url_for('configure_containers'))
+    active_containers = wizard.config['General'].get('containers', ['ldap'])
     return render_template('choose_containers.html',
         descriptive_names=wizard.descriptive_names,
         dependencies=wizard.dependencies,
         container_role=wizard.container_role,
         active_containers=active_containers,
         container_order=wizard.container_order)
+
+@app.route('/configure_all', methods=['GET', 'POST'])
+def configure_containers():
+    return render_template(configure_containers, active_containers=active_containers)
 
 if __name__ == "__main__":
     app.debug = True
