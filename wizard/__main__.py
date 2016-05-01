@@ -151,11 +151,14 @@ def _render_configure_template(template, container, **kwargs):
     complete_configuration = [container for container in wizard.container_order if wizard.is_configuration_complete(container)]
     if container is not None:
         samples = wizard.get_configuration_file_samples(container)
+        complete_samples = [file_name for file_name in samples if wizard.is_file_configured(container, file_name)]
     else:
         samples = None
+        complete_samples = None
     return render_template(template,
         current_container=container,
         samples=samples,
+        complete_samples=complete_samples,
         complete_configuration=complete_configuration,
         containers=wizard.container_order,
         **kwargs)

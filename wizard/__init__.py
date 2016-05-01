@@ -11,6 +11,7 @@
 '''
 from collections import defaultdict
 import glob
+import os
 
 import yaml
 
@@ -103,8 +104,22 @@ def get_configuration_file_samples(container):
     return samples
 
 
-def is_configuration_complete(container):
+def is_file_configured(container, file_name):
+    final_name = file_name[:-7]
+    if os.path.exists(final_name):
+        return True
+    return False
+
+
+def all_files_configured(container):
+    for file_name in get_configuration_file_samples(container):
+        if not is_file_configured(container, file_name):
+            return False
     return True
+
+
+def is_configuration_complete(container):
+    return all_files_configured(container)
 
 load_config()
 get_server_dependencies()
