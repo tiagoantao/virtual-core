@@ -1,0 +1,33 @@
+{% extends "configure_containers_base.html" %}
+{% block title %}Configure file{% endblock %}
+
+{% block config %}
+<div class="panel panel-default">
+  <div class="panel-heading text-center">
+Edit {{file_name[:-7]}}
+</div>
+
+<form action="/process_file" method="POST">
+  <div class="panel-body">
+    <div class="alert alert-warning">{{warn}}
+    </div>
+
+  <div class="text-center">
+    <button class="btn" type="submit" name="operation" value="save">Save</button>
+    <button class="btn" type="submit" name="operation" value="reload">Reload Sample</button>
+  </div>
+  <input type="hidden" name="container" value="{{current_container}}">
+  <input type="hidden" name="file_name" value="{{file_name}}">
+  <div class="form-group">
+    <label for="file_contents">Content</label>
+    <textarea class="form-control" rows="20" name="file_contents">{{file_contents}}</textarea>
+  </div>
+  <div class="text-center">
+    <button class="btn" type="submit" name="operation" value="save">Save</button>
+    <button class="btn" type="submit" name="operation" value="reload">Reload Sample</button>
+  </div>
+  </div>
+</form>
+</div>
+
+{% endblock %}

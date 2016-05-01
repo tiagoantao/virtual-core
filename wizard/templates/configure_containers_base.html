@@ -32,8 +32,16 @@
           <b>Security</b>
       </div>
       <div class="well text-center">
-          <b>General configuration</b>
+          <b>General configuration files</b>
       </div>
+      <ul class="list-group">
+        {% for sample in samples %}
+          <li class="list-group-item">
+            <a href="/configure_file/{{current_container}}/{{sample}}">{{sample[sample.rfind('/') + 1:-7]}}</a>
+            <span class="glyphicon glyphicon-remove text-danger"></span>
+          </li>
+        {% endfor %}
+      </ul>
     {% endif %}
 </div>
 

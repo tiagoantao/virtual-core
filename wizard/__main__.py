@@ -147,14 +147,65 @@ def choose_containers():
         container_order=wizard.container_order)
 
 
+def _render_configure_template(template, container, **kwargs):
+    complete_configuration = [container for container in wizard.container_order if wizard.is_configuration_complete(container)]
+    if container is not None:
+        samples = wizard.get_configuration_file_samples(container)
+    else:
+        samples = None
+    return render_template(template,
+        current_container=container,
+        samples=samples,
+        complete_configuration=complete_configuration,
+        containers=wizard.container_order,
+        **kwargs)
+
+
 @app.route('/configure')
 @app.route('/configure/<string:container>')
 def configure_containers(container=None):
-    complete_configuration = [container for container in wizard.container_order if wizard.is_configuration_complete(container)]
-    return render_template('configure_containers.html',
-        current_container=container,
-        complete_configuration=complete_configuration,
-        containers=wizard.container_order)
+    return _render_configure_template('configure_containers.html', container)
+
+
+@app.route('/configure_file/<string:container>/<path:file_name>')
+def configure_container_file(container, file_name):
+    final_file = file_name[:-7]
+    if os.path.exists(final_file):
+        warn = 'File Already exists, editing'
+        load_name = final_file
+    else:
+        warn = 'Using sample file'
+        load_name = file_name
+    with open(load_name) as f:
+        file_contents = f.read()
+    return _render_configure_template('configure_container_file.html', container,
+        file_name=file_name,
+        file_contents=file_contents,
+        warn=warn)
+
+
+@app.route('/process_file', methods=['POST'])
+def process_file():
+    container = request.form['container']
+    file_name = request.form['file_name']
+    file_contents = request.form['file_contents']
+    final_file = file_name[:-7]
+    operation = request.form['operation']
+    if operation == 'save':
+        with open(final_file, 'wt') as w:
+            w.write(file_contents)
+        warn = 'File Saved'
+    elif operation == 'reload':
+        warn = 'Sample reloaded'
+        with open(file_name) as f:
+            file_contents = f.read()
+    else:
+        warn = 'Unknown operation'
+    return _render_configure_template('configure_container_file.html', container,
+        file_name=file_name,
+        file_contents=file_contents,
+        warn=warn)
+    
 
 if __name__ == "__main__":
     app.debug = True
