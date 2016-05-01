@@ -147,10 +147,12 @@ def choose_containers():
         container_order=wizard.container_order)
 
 
-@app.route('/configure_all')
-def configure_containers():
+@app.route('/configure')
+@app.route('/configure/<string:container>')
+def configure_containers(container=None):
     complete_configuration = [container for container in wizard.container_order if wizard.is_configuration_complete(container)]
     return render_template('configure_containers.html',
+        current_container=container,
         complete_configuration=complete_configuration,
         containers=wizard.container_order)
 

@@ -98,6 +98,11 @@ def get_all_dependencies(container):
     return my_dependencies
 
 
+def get_configuration_file_samples(container):
+    samples = glob.glob('docker/%s/**/*sample' % container, recursive=True)
+    return samples
+
+
 def is_configuration_complete(container):
     return True
 
