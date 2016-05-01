@@ -97,6 +97,10 @@ def get_all_dependencies(container):
         del check_containers[container]
     return my_dependencies
 
+
+def is_configuration_complete(container):
+    return True
+
 load_config()
 get_server_dependencies()
 container_order = compute_container_order()

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Configure containers{% endblock %}
+
+{% block top %}
+<h2>Configure containers</h2>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-3">
+    {% for container in containers %}
+      <div class="well">
+          <h4 class="text-center">{{ container }}
+          {% if container in complete_configuration %}
+            <span class="glyphicon glyphicon-ok text-success"></span></h4>
+          {% else %}
+            <span class="glyphicon glyphicon-remove text-danger"></span></h4>
+          {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="col-sm-6">
+    {% block config %}
+    {% endblock %}
+  </div>
+  <div class="col-sm-3">
+    <div class="well text-center">
+        <b>Security</b>
+    </div>
+    <div class="well text-center">
+        <b>General configuration</b>
+  </div>
+</div>
+
+{% endblock %}
