@@ -130,8 +130,12 @@ def all_files_configured(container):
     return True
 
 
+def all_requirements_done(container):
+    pass
+
+
 def is_configuration_complete(container):
-    return all_files_configured(container)
+    return all_files_configured(container) and all_requirements_done(container)
 
 load_config()
 load_requirements()
