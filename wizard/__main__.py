@@ -156,9 +156,10 @@ def _render_configure_template(template, container, **kwargs):
         if wizard.is_configuration_complete(container)]
     if container is not None:
         samples = wizard.get_configuration_file_samples(container)
-        requirements = [req, wizard.descriptive_requirements[req]
+        print(wizard.requirements[container])
+        requirements = [(req, wizard.descriptive_requirements[req])
                         for req in wizard.requirements[container]
-                        if req not in ['ca']]
+                        if 'ca' not in req]  # CA is hard-coded, maybe add needs_input to YAML
         complete_samples = [
             file_name for file_name in samples
             if wizard.is_file_configured(container, file_name)]
@@ -170,7 +171,7 @@ def _render_configure_template(template, container, **kwargs):
                            samples=samples,
                            complete_samples=complete_samples,
                            security=requirements,
-                           complete_requirements=[]
+                           complete_requirements=[],
                            complete_configuration=complete_configuration,
                            containers=wizard.container_order,
                            **kwargs)
