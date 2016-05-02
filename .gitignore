@@ -1,7 +1,25 @@
 virtual-core.yml
 __pycache__
-/etc/ssh
+etc/ssh
+etc/ca
+etc/hosts
 authorized_keys
+init.ssl
+
+ansible/roles/galaxy/vars/main.yml
+ansible/roles/ldap/vars/main.yml
+ansible/roles/postgres/vars/main.yml
+ansible/roles/software/vars/main.yml
+ansible/roles/user_server/vars/main.yml
+
+docker/ldap/named/etc/openldap/ldap.conf
+docker/ldap/named/etc/openldap/slapd.conf
+docker/ldap/named/etc/openldap/slapd.d/cn=config.ldif
+docker/ldap/named/etc/openldap/slapd.d/cn=config/olcDatabase={1}bdb.ldif
+docker/phpldapadmin/named/etc/phpldapadmin/config.php
+
+docker/galaxy/proftpd.conf
+docker/galaxy/reports_wsgi.ini
 
 docker/postgres/copy/var/lib/postgresql/data/pg_hba.conf
 docker/postgres/copy/var/lib/postgresql/data/server.crt
