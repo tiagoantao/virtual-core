@@ -84,7 +84,7 @@ def compute_container_order(done=set(['ldap'])):
             container_order.append(container)
             container_order.extend(pre_containers)
         return container_order
-    
+
 
 def get_all_dependencies(container):
     '''Returns all containers that are required by a certain container

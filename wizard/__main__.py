@@ -52,8 +52,8 @@ def _delist(form, exceptions=[]):
 def _has_all_parameters(form, parameters):
     for parameter in parameters:
         if parameter in form:
-              if form[parameter] == '':
-                  return False
+            if form[parameter] == '':
+                return False
         else:
             return False
     return True
@@ -66,7 +66,9 @@ def welcome(run=0):
         form = wizard.config.get('General', {})
     else:
         form = _delist(request.form)
-        if _has_all_parameters(form, ['host', 'country', 'state', 'locality', 'orgname', 'orgunit', 'commonname', 'email']):
+        if _has_all_parameters(form, ['host', 'country', 'state', 'locality',
+                                      'orgname', 'orgunit', 'commonname',
+                                      'email']):
             wizard.change_config('General', **form)
             return redirect(url_for('determine_ssh_status', run=0))
     if 'host' not in form:
@@ -100,7 +102,8 @@ def explain_certificate_authority(run=0):
 @app.route('/create_ca')
 def create_certificate_authority(run=0):
     if os.path.exists('etc/ca/demoCA'):
-        return render_template('exists_ca.html', next_route='/named_directories')
+        return render_template('exists_ca.html',
+                               next_route='/named_directories')
     ca_template = _ca_template.format(
         country=wizard.config['General']['country'],
         state=wizard.config['General']['state'],
@@ -117,7 +120,7 @@ def create_certificate_authority(run=0):
     return render_template('ca_not_created.html')
 
 
-@app.route('/named_directories', methods=['GET','POST'])
+@app.route('/named_directories', methods=['GET', 'POST'])
 def get_named_directories_root():
     form = _delist(request.form)
     if 'named' in form:
@@ -140,28 +143,32 @@ def choose_containers():
         return redirect(url_for('configure_containers'))
     active_containers = wizard.config['General'].get('containers', ['ldap'])
     return render_template('choose_containers.html',
-        descriptive_names=wizard.descriptive_names,
-        dependencies=wizard.dependencies,
-        container_role=wizard.container_role,
-        active_containers=active_containers,
-        container_order=wizard.container_order)
+                           descriptive_names=wizard.descriptive_names,
+                           dependencies=wizard.dependencies,
+                           container_role=wizard.container_role,
+                           active_containers=active_containers,
+                           container_order=wizard.container_order)
 
 
 def _render_configure_template(template, container, **kwargs):
-    complete_configuration = [container for container in wizard.container_order if wizard.is_configuration_complete(container)]
+    complete_configuration = [
+        container for container in wizard.container_order
+        if wizard.is_configuration_complete(container)]
     if container is not None:
         samples = wizard.get_configuration_file_samples(container)
-        complete_samples = [file_name for file_name in samples if wizard.is_file_configured(container, file_name)]
+        complete_samples = [
+            file_name for file_name in samples
+            if wizard.is_file_configured(container, file_name)]
     else:
         samples = None
         complete_samples = None
     return render_template(template,
-        current_container=container,
-        samples=samples,
-        complete_samples=complete_samples,
-        complete_configuration=complete_configuration,
-        containers=wizard.container_order,
-        **kwargs)
+                           current_container=container,
+                           samples=samples,
+                           complete_samples=complete_samples,
+                           complete_configuration=complete_configuration,
+                           containers=wizard.container_order,
+                           **kwargs)
 
 
 @app.route('/configure')
@@ -181,10 +188,11 @@ def configure_container_file(container, file_name):
         load_name = file_name
     with open(load_name) as f:
         file_contents = f.read()
-    return _render_configure_template('configure_container_file.html', container,
-        file_name=file_name,
-        file_contents=file_contents,
-        warn=warn)
+    return _render_configure_template('configure_container_file.html',
+                                      container,
+                                      file_name=file_name,
+                                      file_contents=file_contents,
+                                      warn=warn)
 
 
 @app.route('/process_file', methods=['POST'])
@@ -204,11 +212,12 @@ def process_file():
             file_contents = f.read()
     else:
         warn = 'Unknown operation'
-    return _render_configure_template('configure_container_file.html', container,
-        file_name=file_name,
-        file_contents=file_contents,
-        warn=warn)
-    
+    return _render_configure_template('configure_container_file.html',
+                                      container,
+                                      file_name=file_name,
+                                      file_contents=file_contents,
+                                      warn=warn)
+
 
 if __name__ == "__main__":
     app.debug = True
