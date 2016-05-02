@@ -158,8 +158,7 @@ def _render_configure_template(template, container, **kwargs):
         samples = wizard.get_configuration_file_samples(container)
         print(wizard.requirements[container])
         requirements = [(req, wizard.descriptive_requirements[req])
-                        for req in wizard.requirements[container]
-                        if 'ca' not in req]  # CA is hard-coded, maybe add needs_input to YAML
+                        for req in wizard.requirements[container]]
         complete_samples = [
             file_name for file_name in samples
             if wizard.is_file_configured(container, file_name)]
@@ -224,6 +223,24 @@ def process_file():
                                       file_contents=file_contents,
                                       warn=warn)
 
+
+def _configure_ca(container):
+    return _render_configure_template('configure_containers.html',
+                                      container,
+                                      warn='Certificate Authorithy already configured')
+
+
+def _configure_ssl(container):
+    pass
+
+
+@app.route('/configure_requirements/<string:container>/<string:requirement>')
+def configure_requirements(container, requirement):
+    print(requirement)
+    if requirement == 'ca':
+        return _configure_ca(container)
+    elif requirement == 'ssl':
+        return _configure_ssl(container)
 
 if __name__ == "__main__":
     app.debug = True

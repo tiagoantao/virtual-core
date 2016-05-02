@@ -22,6 +22,10 @@
     {% endfor %}
   </div>
   <div class="col-sm-6">
+    {% if warn != '' %}
+        <div class="alert alert-warning text-center">{{warn}}
+        </div>
+    {% endif %}
     {% block config %}
     {% endblock %}
   </div>
@@ -33,7 +37,7 @@
       </div>
       {% for req, req_text in security %}
         <li class="list-group-item">
-          <a href="/configure_req/{{current_container}}/{{req}}">{{req_text}}</a>
+          <a href="/configure_requirements/{{current_container}}/{{req}}">{{req_text}}</a>
           {% if req in complete_requirements %}
             <span class="glyphicon glyphicon-ok text-success"></span>
           {% else %}
