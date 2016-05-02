@@ -24,6 +24,11 @@ dependencies = defaultdict(list)  # container dependencies extracted from links
 role_containers = defaultdict(list)
 container_role = defaultdict(str)
 container_order = []  # A possible container order
+requirements = defaultdict(list)
+descriptive_requirements = {
+    'ca': 'Certificate Authority',
+    'ssl': 'SSL key and ceritificate'
+}
 
 
 def load_config():
@@ -34,6 +39,13 @@ def load_config():
         config = yaml.load(open('virtual-core.yml'))
     except FileNotFoundError:
         config = {}
+
+
+def load_requirements():
+    '''Loads container requirements.
+    '''
+    global requirements
+    requirements = yaml.load(open('containers.yml'))
 
 
 def save_config():
@@ -122,5 +134,6 @@ def is_configuration_complete(container):
     return all_files_configured(container)
 
 load_config()
+load_requirements()
 get_server_dependencies()
 container_order = compute_container_order()

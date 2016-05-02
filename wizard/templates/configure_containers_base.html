@@ -31,6 +31,16 @@
       <div class="well text-center">
           <b>Security</b>
       </div>
+      {% for req, req_text in security %}
+        <li class="list-group-item">
+          <a href="/configure_req/{{current_container}}/{{req}}">{{req_text}}</a>
+          {% if req in complete_requirements %}
+            <span class="glyphicon glyphicon-ok text-success"></span>
+          {% else %}
+            <span class="glyphicon glyphicon-remove text-danger"></span>
+          {% endif %}
+        </li>
+      {% endfor %}
       <div class="well text-center">
           <b>General configuration files</b>
       </div>
