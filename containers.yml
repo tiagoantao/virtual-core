@@ -1,0 +1,9 @@
+- ldap:
+    - ca:
+        certifcate:
+            - /etc/openldap/cacert.pem
+    - ssl:
+        certificate:
+            - /etc/openldap/servercrt.pem
+        key:
+            - /etc/openldap/serverkey.pem
