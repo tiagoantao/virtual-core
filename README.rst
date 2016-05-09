@@ -67,3 +67,11 @@ to be used as the default ones. Make sure to change things in your final configu
 5. ``cp etc/host.sample etc/hosts``
 
 6. ``cd ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml``
+
+
+Author and License
+------------------
+
+Copyright by Tiago Antao. Licensed under GNU Affero General Public License
+version 3.
+
