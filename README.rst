@@ -68,6 +68,14 @@ to be used as the default ones. Make sure to change things in your final configu
 
 6. ``cd ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml``
 
+Acknowledgements
+----------------
+
+The sequencer Samba file is heavily inspired on David Personette's `Samba container`_.
+
+The current Galaxy configuration is based on Björn Grüning's `Galaxy container`_.
+
+
 
 Author and License
 ------------------
@@ -75,3 +83,7 @@ Author and License
 Copyright by Tiago Antao. Licensed under GNU Affero General Public License
 version 3.
 
+
+.. _Samba container: https://github.com/dperson/samba/blob/master/samba.sh
+
+.. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable
