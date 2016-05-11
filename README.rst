@@ -71,10 +71,10 @@ to be used as the default ones. Make sure to change things in your final configu
 Acknowledgements
 ----------------
 
-The sequencer Samba file is heavily inspired on David Personette's `Samba container`_.
+The sequencer Samba file configuration was originally inspired on David Personette's `Samba container`_.
+It is currently completely different.
 
 The current Galaxy configuration is based on Björn Grüning's `Galaxy container`_.
-
 
 
 Author and License

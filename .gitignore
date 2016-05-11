@@ -18,6 +18,9 @@ docker/ldap/named/etc/openldap/slapd.d/cn=config.ldif
 docker/ldap/named/etc/openldap/slapd.d/cn=config/olcDatabase={1}bdb.ldif
 docker/phpldapadmin/named/etc/phpldapadmin/config.php
 
+docker/sequencer/copy/etc/ldap.conf
+docker/sequencer/copy/etc/samba/smb.conf
+
 docker/galaxy/proftpd.conf
 docker/galaxy/reports_wsgi.ini
 
