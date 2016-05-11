@@ -84,6 +84,6 @@ Copyright by Tiago Antao. Licensed under GNU Affero General Public License
 version 3.
 
 
-.. _Samba container: https://github.com/dperson/samba/blob/master/samba.sh
+.. _Samba container: https://github.com/dperson/samba
 
 .. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable
