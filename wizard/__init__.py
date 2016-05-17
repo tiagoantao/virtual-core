@@ -11,6 +11,7 @@
 '''
 from collections import defaultdict
 import glob
+import os
 
 import yaml
 
@@ -21,6 +22,13 @@ config = None
 descriptive_names = {}
 dependencies = defaultdict(list)  # container dependencies extracted from links
 role_containers = defaultdict(list)
+container_role = defaultdict(str)
+container_order = []  # A possible container order
+requirements = defaultdict(list)
+descriptive_requirements = {
+    'ca': 'Certificate Authority',
+    'ssl': 'SSL key and ceritificate'
+}
 
 
 def load_config():
@@ -31,6 +39,13 @@ def load_config():
         config = yaml.load(open('virtual-core.yml'))
     except FileNotFoundError:
         config = {}
+
+
+def load_requirements():
+    '''Loads container requirements.
+    '''
+    global requirements
+    requirements = yaml.load(open('containers.yml'))
 
 
 def save_config():
@@ -60,11 +75,27 @@ def get_server_dependencies():
                     descriptive_name = entry['name']
                     name = entry['docker']['name']
                     role_containers[role].append(name)
+                    container_role[name] = role
                     descriptive_names[name] = descriptive_name
                     if 'links' in entry['docker']:
                         for link in entry['docker']['links']:
                             docker_name, internal_name = tuple(link.split(':'))
                             dependencies[name].append(docker_name)
+
+
+def compute_container_order(done=set(['ldap'])):
+        if len(done) == 1:
+            container_order = ['ldap']
+        else:
+            container_order = []
+        for container, deps in dependencies.items():
+            if container in done:
+                continue
+            done.add(container)
+            pre_containers = compute_container_order(done)
+            container_order.append(container)
+            container_order.extend(pre_containers)
+        return container_order
 
 
 def get_all_dependencies(container):
@@ -79,5 +110,34 @@ def get_all_dependencies(container):
         del check_containers[container]
     return my_dependencies
 
+
+def get_configuration_file_samples(container):
+    samples = glob.glob('docker/%s/**/*sample' % container, recursive=True)
+    return samples
+
+
+def is_file_configured(container, file_name):
+    final_name = file_name[:-7]
+    if os.path.exists(final_name):
+        return True
+    return False
+
+
+def all_files_configured(container):
+    for file_name in get_configuration_file_samples(container):
+        if not is_file_configured(container, file_name):
+            return False
+    return True
+
+
+def all_requirements_done(container):
+    pass
+
+
+def is_configuration_complete(container):
+    return all_files_configured(container) and all_requirements_done(container)
+
 load_config()
+load_requirements()
 get_server_dependencies()
+container_order = compute_container_order()

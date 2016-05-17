@@ -67,3 +67,23 @@ to be used as the default ones. Make sure to change things in your final configu
 5. ``cp etc/host.sample etc/hosts``
 
 6. ``cd ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml``
+
+Acknowledgements
+----------------
+
+The sequencer Samba file configuration was originally inspired on David Personette's `Samba container`_.
+It is currently completely different.
+
+The current Galaxy configuration is based on Björn Grüning's `Galaxy container`_.
+
+
+Author and License
+------------------
+
+Copyright by Tiago Antao. Licensed under GNU Affero General Public License
+version 3.
+
+
+.. _Samba container: https://github.com/dperson/samba
+
+.. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable

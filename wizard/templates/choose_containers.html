@@ -6,6 +6,70 @@
 {% endblock %}
 
 {% block content %}
+<script type="text/python">
+from browser import document, window
 
+dependencies = {
+{% for container, deps in dependencies.items() %}
+    '{{container}}': {{deps|safe}},
+{% endfor %}
+}
+
+
+def activate_deps(container):
+    deps = dependencies.get(container, [])
+    for dep in deps:
+        document['id-' + dep].checked = True
+        activate_deps(dep)
+
+
+def deactivate_offspring(container):
+    for offspring, deps in dependencies.items():
+        if container in deps:
+            deactivate_offspring(offspring)
+            document['id-' + offspring].checked = False
+
+
+def check_container(ob):
+    container = ob.name
+    if ob.checked:
+        activate_deps(container)
+    else:
+        deactivate_offspring(container)
+
+window.check_container = check_container
+
+</script>
+
+  <form action="/choose" method="POST">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+            <th>Use</th><th>Container</th><th>Service</th><th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for container in container_order %}
+          <tr>
+            <td>
+              <input type="checkbox" class="form-control"
+                     id="id-{{container}}"
+                     name="{{container}}"
+                     onclick="check_container(this)"
+                     {{ 'checked' if container in active_containers else '' }}/>
+            </td>
+            <td>{{container}}</td>
+            <td>{{container_role[container]}}</td>
+            <td>{{descriptive_names[container]}}</td>
+          </tr>
+        {% endfor %}
+        <tr><td colspan="4">
+            <input type="submit"
+                   class="btn btn-primary btn-lg center-block"
+                   value="Choose containers"/>
+        </td></tr>
+      </tbody>
+    </table>
+  </form>
 
 {% endblock %}
