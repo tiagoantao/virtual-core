@@ -2,6 +2,7 @@ virtual-core.yml
 __pycache__
 etc/ssh
 etc/ca
+etc/ldap
 etc/hosts
 ansible/main.retry
 authorized_keys

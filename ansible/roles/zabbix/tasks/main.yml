@@ -1,0 +1,13 @@
+---
+- name: Build Zabbix server
+  command: docker build -t core_zabbix ../docker/zabbix
+
+- name: Zabbix container
+  docker:
+    name: zabbix
+    image: core_zabbix
+    state: started
+    links: ["ldap:ldap", "postgres:postgres"]
+    ports: ["9443:443"]
+    volumes:
+      - "{{ zabbix_dir }}/var/log:/var/log"

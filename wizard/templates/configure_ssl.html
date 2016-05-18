@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Create SSL key and certificate{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>Create SSL key and certificate</h2>
+{% endblock %}
+
+{% block content %}
+
+{% if already_created %}
+  <div class="alert alert-danger">Overwriting existing SSL files</div>
+{% endif %}
+<div class="alert alert-danger">The data below was lifted from
+  your orignal answers, be sure to check it. You will have to re-type the full host name
+  always.
+
+The Server key will be generated <b>without password</b>!</div>
+
+<div class="panel panel-info">
+  <form action="/create_ssl/{{ current_container }}" method="POST">
+    <div class="form-group">
+        <label for="country">Country (two letter ISO code):</label>
+        <input type="text" class="form-control" maxlength="2" name="country", value="{{ country }}">
+    </div>
+    <div class="form-group">
+        <label for="state">State or Province</label>
+        <input type="text" class="form-control" name="state" value="{{ state }}">
+    </div>
+    <div class="form-group">
+        <label for="locality">Locality (City, Town, ...):</label>
+        <input type="text" class="form-control" name="locality" value="{{ locality }}">
+    </div>
+    <div class="form-group">
+        <label for="orgname">Organization Name:</label>
+        <input type="text" class="form-control" name="orgname" value="{{ orgname }}">
+    </div>
+    <div class="form-group">
+        <label for="orgunit">Organization Unit (e.g. Department of XX):</label>
+        <input type="text" class="form-control" name="orgunit" value="{{ orgunit }}">
+    </div>
+    <div class="form-group">
+        <label for="host">Full hostname as seen from the exterior</label>
+        <input type="text" class="form-control" name="commonname" value="{{ commonname }}">
+    </div>
+    <div class="form-group">
+        <label for="email">email:</label>
+        <input type="email" class="form-control" name="email" value="{{ email }}">
+    </div>
+    <input type="submit"
+        class="btn btn-primary btn-lg center-block" value="Lets start"/>
+  </form>
+</div>
+
+{% endblock %}

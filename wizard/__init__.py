@@ -45,7 +45,7 @@ def load_requirements():
     '''Loads container requirements.
     '''
     global requirements
-    requirements = yaml.load(open('containers.yml'))
+    requirements = defaultdict(list, yaml.load(open('containers.yml')))
 
 
 def save_config():
@@ -130,12 +130,27 @@ def all_files_configured(container):
     return True
 
 
+def is_configuration_complete(container):
+    return all_files_configured(container) and all_requirements_done(container)
+
+
+def is_ssl_configured(container):
+    if os.path.exists('etc/%s/ssl.key.pem' % container) and os.path.exists('etc/%s/ssl.cert.pem' % container):
+        return True
+    return False
+
+
+def is_requirement_fullfiled(req, container):
+    if req == 'ca':
+        return True
+    elif req == 'ssl':
+        return is_ssl_configured(container)
+    return False
+
+
 def all_requirements_done(container):
     pass
 
-
-def is_configuration_complete(container):
-    return all_files_configured(container) and all_requirements_done(container)
 
 load_config()
 load_requirements()

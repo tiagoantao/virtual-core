@@ -10,6 +10,7 @@
 
 '''
 import os
+import shutil
 import socket
 
 from flask import Flask, render_template, redirect, request, url_for
@@ -37,6 +38,15 @@ emailAddress           = {email}
 
 [ req_attributes ]
 '''
+
+_ssl_template = '''
+C={country}
+ST={state}
+localityName={locality}
+O={orgname}
+organizationalUnitName={orgunit}
+commonName={commonname}
+emailAddress={email}'''
 
 
 def _delist(form, exceptions=[]):
@@ -73,6 +83,7 @@ def welcome(run=0):
             return redirect(url_for('determine_ssh_status', run=0))
     if 'host' not in form:
         form['host'] = socket.getfqdn()
+        
     all_params = {'run': run, **form}
     return render_template('welcome.html', **all_params)
 
@@ -116,6 +127,7 @@ def create_certificate_authority(run=0):
         w.write(ca_template)
     ca_ok = ca.create_ca()
     if ca_ok:
+        wizard.change_config('CA', type='self-signed')
         return redirect(url_for('get_named_directories_root'))
     return render_template('ca_not_created.html')
 
@@ -159,20 +171,25 @@ def _render_configure_template(template, container, **kwargs):
         print(wizard.requirements[container])
         requirements = [(req, wizard.descriptive_requirements[req])
                         for req in wizard.requirements[container]]
+        complete_requirements = [req for req in wizard.requirements[container]
+                                 if wizard.is_requirement_fullfiled(req, container)]
         complete_samples = [
             file_name for file_name in samples
             if wizard.is_file_configured(container, file_name)]
     else:
         samples = None
         complete_samples = None
+        requirements = None
+    my_containers = [container for container in wizard.container_order
+                               if container in wizard.config['General']['containers']]
     return render_template(template,
                            current_container=container,
                            samples=samples,
                            complete_samples=complete_samples,
                            security=requirements,
-                           complete_requirements=[],
+                           complete_requirements=complete_requirements,
                            complete_configuration=complete_configuration,
-                           containers=wizard.container_order,
+                           containers=my_containers,
                            **kwargs)
 
 
@@ -230,13 +247,41 @@ def _configure_ca(container):
                                       warn='Certificate Authorithy already configured')
 
 
+@app.route('/create_ssl/<string:container>', methods=['POST'])
+def configure_ssl(container):
+    form = _delist(request.form)
+    if _has_all_parameters(form, ['country', 'state', 'locality',
+                                  'orgname', 'orgunit', 'commonname',
+                                  'email']):
+        ssl_config = _ssl_template.format(**form)
+        ssl_ok = ca.create_ssl('/etc/%s' % container, ssl_config)
+        if ssl_ok:
+            try:
+                os.mkdir('etc/%s' % container)
+            except:
+                pass  # Already exists, that is fine
+            shutil.move('etc/ca/privkey.pem', 'etc/%s/ssl.key.pem' % container)
+            shutil.move('etc/ca/newcert.pem', 'etc/%s/ssl.cert.pem' % container)
+            return redirect(url_for('configure_containers'))
+        return render_template('ssl_not_created.html')
+    return _configure_ssl(container)
+
+
 def _configure_ssl(container):
-    pass
+    return _render_configure_template(
+        'configure_ssl.html', container=container,
+        already_created=wizard.is_ssl_configured(container),
+        country=wizard.config['General']['country'],
+        state=wizard.config['General']['state'],
+        locality=wizard.config['General']['locality'],
+        orgname=wizard.config['General']['orgname'],
+        orgunit=wizard.config['General']['orgunit'],
+        email=wizard.config['General']['email'])
+
 
 
 @app.route('/configure_requirements/<string:container>/<string:requirement>')
 def configure_requirements(container, requirement):
-    print(requirement)
     if requirement == 'ca':
         return _configure_ca(container)
     elif requirement == 'ssl':
