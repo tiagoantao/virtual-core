@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+'''
+    Pre-processes the YAML files as a function of the volume directory.
+
+    Probably not the an approach that can be called "best-practice"
+'''
 import glob
 import sys
 

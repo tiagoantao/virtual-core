@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+'''
+    Creates the directory structure and copies the files across.
+'''
 import glob
 import os
 import shutil
