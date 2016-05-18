@@ -46,20 +46,24 @@ Installation
 ------------
 
 
-TODO: refer the easy to use web configuration interface!
+
 
 This will install all your servers on the local machine. If you have a very large
 big-iron machine, this might be what you want. If you have a cluster, this is still
-a reasonable starting point.
+a reasonable starting point, though you will have some work to do, especially
+on the security front.
 
-1. Create a directory that will store all your docker volumes. This might need to be
+1. Use the wizard to configure the most complicated stuff:
+``PYTHONPATH=. python -m wizard``
+
+2. Create a directory that will store all your docker volumes. This might need to be
 very big.
 
-2. ``python3 src/prepare_templates.py [Directory_Above]`` . Prepares the ansible
+3. ``python3 src/prepare_templates.py [Directory_Above]`` . Prepares the ansible
 templates (this probably can be put inside ansible).
 
-3. ``python3 src/use_examples.py`` . This will copy the example configuration files
-to be used as the default ones. Make sure to change things in your final configuaration.
+4. Optional and **not recommended**: ``python3 src/use_examples.py`` . This will copy the example configuration files
+to be used as the default ones. Make sure to change things in your final configuaration. **You only run this if you did not run step 1, the wizard. Suggestion: run the wizard.**
 
 4. ``python3 src/create_directory_structure.py [Directory_Above]``
 
