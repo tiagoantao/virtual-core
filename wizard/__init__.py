@@ -130,17 +130,13 @@ def all_files_configured(container):
     return True
 
 
-def is_configuration_complete(container):
-    return all_files_configured(container) and all_requirements_done(container)
-
-
 def is_ssl_configured(container):
     if os.path.exists('etc/%s/ssl.key.pem' % container) and os.path.exists('etc/%s/ssl.cert.pem' % container):
         return True
     return False
 
 
-def is_requirement_fullfiled(req, container):
+def is_requirement_fullfiled(container, req):
     if req == 'ca':
         return True
     elif req == 'ssl':
@@ -149,7 +145,14 @@ def is_requirement_fullfiled(req, container):
 
 
 def all_requirements_done(container):
-    pass
+    for req in requirements[container]:
+        if not is_requirement_fullfiled(container, req):
+            return False
+    return True
+
+
+def is_configuration_complete(container):
+    return all_files_configured(container) and all_requirements_done(container)
 
 
 load_config()

@@ -171,8 +171,6 @@ def _render_configure_template(template, container, **kwargs):
         print(wizard.requirements[container])
         requirements = [(req, wizard.descriptive_requirements[req])
                         for req in wizard.requirements[container]]
-        complete_requirements = [req for req in wizard.requirements[container]
-                                 if wizard.is_requirement_fullfiled(req, container)]
         complete_samples = [
             file_name for file_name in samples
             if wizard.is_file_configured(container, file_name)]
@@ -180,6 +178,8 @@ def _render_configure_template(template, container, **kwargs):
         samples = None
         complete_samples = None
         requirements = None
+    complete_requirements = [req for req in wizard.requirements[container]
+                             if wizard.is_requirement_fullfiled(container, req)]
     my_containers = [container for container in wizard.container_order
                                if container in wizard.config['General']['containers']]
     return render_template(template,
@@ -210,10 +210,13 @@ def configure_container_file(container, file_name):
         load_name = file_name
     with open(load_name) as f:
         file_contents = f.read()
+    with open(file_name + '.doc') as d:
+        documentation = d.read()
     return _render_configure_template('configure_container_file.html',
                                       container,
                                       file_name=file_name,
                                       file_contents=file_contents,
+                                      documentation=documentation,
                                       warn=warn)
 
 
