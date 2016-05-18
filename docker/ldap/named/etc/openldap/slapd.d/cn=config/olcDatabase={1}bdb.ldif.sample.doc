@@ -1,0 +1,10 @@
+Here you will want to change at least
+
+<br>
+olcRootDN and oldRootPW
+
+<br>
+
+Note that the password <a href="http://www.openldap.org/devel/admin/slapdconf2.html">can (and should) be encrypted</a>.
+
+
