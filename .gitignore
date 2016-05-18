@@ -3,6 +3,7 @@ __pycache__
 etc/ssh
 etc/ca
 etc/hosts
+ansible/main.retry
 authorized_keys
 init.ssl
 
@@ -29,3 +30,5 @@ docker/postgres/copy/var/lib/postgresql/data/server.crt
 docker/postgres/copy/var/lib/postgresql/data/server.key
 
 docker/galaxy/copy/etc/galaxy.ini
+
+docker/user-server/copy/etc/ldap.conf
