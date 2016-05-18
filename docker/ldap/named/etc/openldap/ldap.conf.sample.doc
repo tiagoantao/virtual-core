@@ -1,0 +1,8 @@
+This allows you to configure ldap.conf.
+
+There are two lines that you have to look at (at least):
+
+<ul>
+  <li>BASE, for the LDAP base
+  <li>URI, for the URL of your LDAP site
+</ul>

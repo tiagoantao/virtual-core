@@ -10,7 +10,7 @@ olcAccess: {1}to dn.base="" by * read
 olcAccess: {2}to * by * read
 olcLastMod: TRUE
 olcRootDN: cn=Manager,dc=example,dc=com
-olcRootPW:: e1NTSEF9MUk0ZHg2a1BSMERFMzN5dStxNjlqd1VLQWpBOUVGQTc=
+olcRootPW: secret
 olcDbCheckpoint: 512 30
 olcDbConfig: {0}set_cachesize 0 2097152 0
 olcDbConfig: {1}set_lk_max_objects 1500
