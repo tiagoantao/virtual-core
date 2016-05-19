@@ -31,12 +31,12 @@ for sample in samples:
         machine = k[:-4]
         print(machine)
         make_dir(my_dir + machine)
-        for sample_dir, dirs, fnames in os.walk('docker/%s/conf' % machine):
+        for sample_dir, dirs, fnames in os.walk('docker/%s/named' % machine):
             root = '/'.join([my_dir, machine] + sample_dir.split('/')[3:])
             for in_dir in dirs:
                 make_dir(root +  '/' + in_dir)
             for fname in fnames:
-                if fname.endswith('.sample'):
+                if fname.endswith('.sample') or fname.endswith('.sample.doc'):
                     continue
                 print(sample_dir + '/' + fname, root)
                 shutil.copyfile(sample_dir + '/' + fname, root + '/' + fname)
