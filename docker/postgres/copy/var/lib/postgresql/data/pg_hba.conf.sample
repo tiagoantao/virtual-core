@@ -86,5 +86,6 @@ local   all             all                                     trust
 host    all             all             127.0.0.1/32            trust
 # IPv6 local connections:
 host    all             all             ::1/128                 trust
+host    zabbix          zabbix          zabbix                  trust
 host    all             all             172.17.0.1/24           ldap    ldapserver=ldap ldapbasedn="dc=example,dc=com"
 hostssl all             all             all                     ldap    ldapserver=ldap ldapbasedn="dc=example,dc=com"
