@@ -1,9 +1,27 @@
 ldap:
   ca:
-    certifcate:
+    certificate:
       - /etc/openldap/cacert.pem
   ssl:
     certificate:
       - /etc/openldap/servercrt.pem
     key:
       - /etc/openldap/serverkey.pem
+phpldapadmin:
+  ssl:
+    certificate:
+      - /etc/nginx/cert.pem
+    key:
+      - /etc/nginx/cert.key
+zabbix:
+  ssl:
+    certificate:
+      - /etc/nginx/cert.pem
+    key:
+      - /etc/nginx/cert.key
+postgres:
+  ssl:
+    certificate:
+      - /var/lib/postgresql/data/server.crt
+    key:
+      - /var/lib/postgresql/data/server.key
