@@ -178,7 +178,6 @@ def _render_configure_template(template, container, **kwargs):
         if wizard.is_configuration_complete(container)]
     if container is not None:
         samples = wizard.get_configuration_file_samples(container)
-        print(wizard.requirements[container])
         requirements = [(req, wizard.descriptive_requirements[req])
                         for req in wizard.requirements[container]]
         complete_samples = [
@@ -302,6 +301,48 @@ def configure_requirements(container, requirement):
         return _configure_ca(container)
     elif requirement == 'ssl':
         return _configure_ssl(container)
+
+
+def _copy(orig, container, fname):
+    try:
+        shutil.copy(orig, 'docker/%s/copy/%s' % (container, fname[1:]))
+    except:
+        shutil.copy(orig, 'docker/%s/named/%s' % (container, fname[1:]))
+
+
+def _copy_ca_artefact(container, artefact, fname):
+    if artefact == 'certificate':
+        _copy('etc/ca/cacert.pem', container, fname)
+        return
+    raise Exception('Unknown artefact %s' % artefact)
+
+
+def _copy_ssl_artefact(container, artefact, fname):
+    if artefact == 'certificate':
+        _copy('etc/%s/ssl.cert.pem' % container, container, fname)
+        return
+    elif artefact == 'key':
+        _copy('etc/%s/ssl.key.pem' % container, container, fname)
+        return
+    raise Exception('Unknown artefact %s' % artefact)
+
+
+@app.route('/generate')
+def generate_configuration():
+    container_confs = wizard.requirements
+    for container, services in container_confs.items():
+        shutil.copy('etc/ssh/authorized_keys', 'docker/%s' % container)
+        for service, artefacts in services.items():
+            for artefact, files in artefacts.items():
+                for fname in files:
+                    if service == 'ssl':
+                        _copy_ssl_artefact(container, str(artefact), fname)
+                    elif service == 'ca':
+                        _copy_ca_artefact(container, str(artefact), fname)
+    return render_template('generate_configuration.html',
+                           container_confs=container_confs,
+                           menu_options=wizard.get_available_options())
+
 
 if __name__ == "__main__":
     app.debug = True
