@@ -1,35 +1,46 @@
 virtual-core.yml
 __pycache__
-etc/ssh
 etc/ca
-etc/ldap
 etc/hosts
+etc/ldap
+etc/phpldapadmin
+etc/postgres
+etc/ssh
+etc/zabbix
 ansible/main.retry
 authorized_keys
 init.ssl
 
-ansible/roles/galaxy/vars/main.yml
-ansible/roles/ldap/vars/main.yml
-ansible/roles/postgres/vars/main.yml
-ansible/roles/software/vars/main.yml
-ansible/roles/user_server/vars/main.yml
+ansible/roles/*/vars/main.yml
 
+
+docker/ldap/named/etc/openldap/cacert.pem
 docker/ldap/named/etc/openldap/ldap.conf
+docker/ldap/named/etc/openldap/servercrt.pem
+docker/ldap/named/etc/openldap/serverkey.pem
 docker/ldap/named/etc/openldap/slapd.conf
-docker/ldap/named/etc/openldap/slapd.d/cn=config.ldif
 docker/ldap/named/etc/openldap/slapd.d/cn=config/olcDatabase={1}bdb.ldif
+
+docker/phpldapadmin/copy/etc/nginx/cert.key
+docker/phpldapadmin/copy/etc/nginx/cert.pem
 docker/phpldapadmin/named/etc/phpldapadmin/config.php
 
-docker/sequencer/copy/etc/ldap.conf
-docker/sequencer/copy/etc/samba/smb.conf
-
-docker/galaxy/proftpd.conf
-docker/galaxy/reports_wsgi.ini
 
 docker/postgres/copy/var/lib/postgresql/data/pg_hba.conf
 docker/postgres/copy/var/lib/postgresql/data/server.crt
 docker/postgres/copy/var/lib/postgresql/data/server.key
 
+
+docker/zabbix/copy/etc/nginx/cert.key
+docker/zabbix/copy/etc/nginx/cert.pem
+
+
 docker/galaxy/copy/etc/galaxy.ini
+docker/galaxy/proftpd.conf
+docker/galaxy/reports_wsgi.ini
+
+
+docker/sequencer/copy/etc/ldap.conf
+docker/sequencer/copy/etc/samba/smb.conf
 
 docker/user-server/copy/etc/ldap.conf
