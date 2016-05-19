@@ -2,9 +2,8 @@ FROM tiagoantao/alpine-supervisor-sshd
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
 RUN apk update
-RUN apk add sqlite
-RUN apk add php5-fpm nginx php5-openssl php5-sqlite3 php5-sysvsem
-RUN apk add zabbix zabbix-sqlite zabbix-webif zabbix-setup
+RUN apk add php5-fpm nginx php5-openssl php5-pgsql
+RUN apk add zabbix zabbix-pgsql zabbix-webif zabbix-setup
 
 
 COPY copy/etc/supervisor.d/zabbix.ini /etc/supervisor.d
