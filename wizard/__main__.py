@@ -85,7 +85,9 @@ def welcome(run=0):
         form['host'] = socket.getfqdn()
         
     all_params = {'run': run, **form}
-    return render_template('welcome.html', **all_params)
+    return render_template('welcome.html',
+                           menu_options=wizard.get_available_options(),
+                           **all_params)
 
 
 @app.route('/sshkey/<int:run>')
@@ -93,7 +95,8 @@ def determine_ssh_status(run=0):
     if not os.path.exists('etc/ssh'):
         os.mkdir('etc/ssh')
     if not os.path.exists('etc/ssh/authorized_keys'):
-        return render_template('need_ssh.html', run=run)
+        return render_template('need_ssh.html', run=run,
+                               menu_options=wizard.get_available_options())
     else:
         return redirect(url_for('explain_certificate_authority', run=0))
 
@@ -105,7 +108,9 @@ def explain_certificate_authority(run=0):
         os.mkdir('etc/ca')
     if not os.path.exists('etc/ca/UNDERSTAND') and \
             not os.path.exists('etc/ca/demoCA'):
-        return render_template('need_ca.html', run=run)
+        return render_template('need_ca.html',
+                               menu_options=wizard.get_available_options(),
+                               run=run)
     else:
         return redirect(url_for('get_named_directories_root'))
 
@@ -114,6 +119,7 @@ def explain_certificate_authority(run=0):
 def create_certificate_authority(run=0):
     if os.path.exists('etc/ca/demoCA'):
         return render_template('exists_ca.html',
+                               menu_options=wizard.get_available_options(),
                                next_route='/named_directories')
     ca_template = _ca_template.format(
         country=wizard.config['General']['country'],
@@ -129,7 +135,8 @@ def create_certificate_authority(run=0):
     if ca_ok:
         wizard.change_config('CA', type='self-signed')
         return redirect(url_for('get_named_directories_root'))
-    return render_template('ca_not_created.html')
+    return render_template('ca_not_created.html',
+                           menu_options=wizard.get_available_options())
 
 
 @app.route('/named_directories', methods=['GET', 'POST'])
@@ -140,7 +147,9 @@ def get_named_directories_root():
     else:
         root = wizard.config['General'].get('nameddirectoriesroot', None)
     if root is None or not os.path.isdir(root):
-        return render_template('named_directories.html', root=root)
+        return render_template('named_directories.html',
+                               menu_options=wizard.get_available_options(),
+                               root=root)
     wizard.change_config('General', nameddirectoriesroot=root)
     return redirect(url_for('choose_containers'))
 
@@ -155,6 +164,7 @@ def choose_containers():
         return redirect(url_for('configure_containers'))
     active_containers = wizard.config['General'].get('containers', ['ldap'])
     return render_template('choose_containers.html',
+                           menu_options=wizard.get_available_options(),
                            descriptive_names=wizard.descriptive_names,
                            dependencies=wizard.dependencies,
                            container_role=wizard.container_role,
@@ -183,6 +193,7 @@ def _render_configure_template(template, container, **kwargs):
     my_containers = [container for container in wizard.container_order
                                if container in wizard.config['General']['containers']]
     return render_template(template,
+                           menu_options=wizard.get_available_options(),
                            current_container=container,
                            samples=samples,
                            complete_samples=complete_samples,
@@ -196,7 +207,8 @@ def _render_configure_template(template, container, **kwargs):
 @app.route('/configure')
 @app.route('/configure/<string:container>')
 def configure_containers(container=None):
-    return _render_configure_template('configure_containers.html', container)
+    return _render_configure_template('configure_containers.html',
+                                      container)
 
 
 @app.route('/configure_file/<string:container>/<path:file_name>')
@@ -266,7 +278,8 @@ def configure_ssl(container):
             shutil.move('etc/ca/privkey.pem', 'etc/%s/ssl.key.pem' % container)
             shutil.move('etc/ca/newcert.pem', 'etc/%s/ssl.cert.pem' % container)
             return redirect(url_for('configure_containers'))
-        return render_template('ssl_not_created.html')
+        return render_template('ssl_not_created.html',
+                               menu_options=wizard.get_available_options())
     return _configure_ssl(container)
 
 

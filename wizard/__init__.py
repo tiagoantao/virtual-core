@@ -155,6 +155,24 @@ def is_configuration_complete(container):
     return all_files_configured(container) and all_requirements_done(container)
 
 
+def all_containers_configured():
+    for container in config['General']['containers']:
+        if not is_configuration_complete(container):
+            return False
+    return True
+
+
+def get_available_options():
+    options = [('Basic options', '/')]
+    if 'General' in config:
+        options.append(('Choose containers', '/choose'))
+        if 'containers' in config['General']:
+            options.append(('Configure Containers', '/configure'))
+            if all_containers_configured():
+                options.append(('Generate configuration files', '/generate'))
+    return options
+
+
 load_config()
 load_requirements()
 get_server_dependencies()
