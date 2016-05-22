@@ -6,7 +6,7 @@ Include /etc/proftpd/modules.conf
 ServerName                      "Public Galaxy FTP"
 ServerType                      standalone
 DefaultServer                   on
-Port                            21
+Port                            2222
 Umask                           022
 #SyslogFacility                 DAEMON
 #SyslogLevel                    debug
@@ -39,6 +39,19 @@ AllowStoreRestart               on
 <Limit RETR>
     DenyAll
 </Limit>
+
+
+#SFTP
+SFTPEngine on
+Port 2222
+SFTPLog /var/log/proftpd/sftp.log
+# Configure both the RSA and DSA host keys, using the same host key
+# files that OpenSSH uses.
+SFTPHostKey /etc/ssh/ssh_host_rsa_key
+SFTPHostKey /etc/ssh/ssh_host_dsa_key
+SFTPCompression delayed
+SFTPAuthMethods ldap
+
 
 # Do not authenticate against real (system) users
 AuthPAM                         off
