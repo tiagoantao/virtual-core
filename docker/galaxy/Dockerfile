@@ -1,4 +1,4 @@
-FROM bgruening/galaxy-stable
+FROM bgruening/galaxy-stable:16.04
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
 RUN apt-get update
@@ -8,7 +8,7 @@ RUN apt-get install -y openssh-server
 #COPY startup /usr/bin
 #COPY export_user_files.py /usr/local/bin
 COPY copy/etc/galaxy.ini /etc/galaxy
-COPY copy/etc/reports_wsgi.ini /etc/galaxy
+COPY copy/etc/galaxy/reports_wsgi.ini /etc/galaxy
 COPY copy/galaxy-central/config/auth_conf.xml /galaxy-central/config
 COPY copy/etc/supervisor/conf.d/galaxy.conf /etc/supervisor/conf.d
 COPY copy/etc/proftpd/modules.conf /etc/proftpd
