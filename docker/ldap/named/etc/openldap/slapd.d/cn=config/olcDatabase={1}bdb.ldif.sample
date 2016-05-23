@@ -4,8 +4,7 @@ objectClass: olcBdbConfig
 olcDatabase: {1}bdb
 olcDbDirectory: /var/lib/openldap/openldap-data
 olcSuffix: dc=example,dc=com
-olcAccess: {0}to attrs=userPassword,shadowLastChange by self write by anonym
- ous auth by * none
+olcAccess: {0}to attrs=userPassword,shadowLastChange by self write by anonymous auth by * none
 olcAccess: {1}to dn.base="" by * read
 olcAccess: {2}to * by * read
 olcLastMod: TRUE
