@@ -14,8 +14,7 @@ COPY copy/etc/supervisor/conf.d/galaxy.conf /etc/supervisor/conf.d
 COPY copy/etc/proftpd/modules.conf /etc/proftpd
 COPY copy/etc/proftpd/proftpd.conf /etc/proftpd
 
-#Install Linking of configuration files and entrypoint
-RUN wget --no-check-certificate  https://raw.githubusercontent.com/tiagoantao/mutable_files/master/link_mutable_files.py -O /sbin/link_mutable_files.py 
+COPY link_mutable_files.py -O /sbin/link_mutable_files.py 
 COPY copy/sbin/server_run.sh /sbin
 RUN chmod a+x /sbin/server_run.sh /sbin/link_mutable_files.py
 RUN mkdir /traverse
