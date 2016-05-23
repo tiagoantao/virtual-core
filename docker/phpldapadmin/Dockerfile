@@ -1,15 +1,18 @@
-FROM tiagoantao/alpine-supervisor-sshd
+FROM tiagoantao/ubuntu-supervisor-sshd
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
-RUN apk update
-RUN apk add php-fpm nginx
-RUN apk add phpldapadmin php-openssl php-gettext php-xml php-ldap
+RUN apt-get update
+RUN apt-get install -y nginx php php-fpm php-ldap
+RUN apt-get install -y  phpldapadmin
 
-COPY copy/etc/supervisor.d/phpldap.ini /etc/supervisor.d
+RUN mkdir /run/php
+COPY copy/etc/supervisor/conf.d/phpldap.conf /etc/supervisor/conf.d
 COPY authorized_keys /root/.ssh
+COPY copy/etc/nginx/cert.key /etc/nginx
+COPY copy/etc/nginx/cert.pem /etc/nginx
+COPY copy/etc/nginx/nginx.conf /etc/nginx
 
-VOLUME ["/var/log", "/etc/php", "/etc/phpadmin", "/etc/nginx"]
-#Do we need /etc/php and /etc/phpadmin as a Export?
+VOLUME ["/var/log"]
 
 EXPOSE 443
 
