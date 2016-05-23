@@ -18,7 +18,7 @@ RUN apt-get install -y python3 wget
 #Explain prepare magic somewhere
 
 #Install Linking of configuration files and entrypoint
-RUN wget --no-check-certificate  https://raw.githubusercontent.com/tiagoantao/mutable_files/master/link_mutable_files.py -O /sbin/link_mutable_files.py
+COPY link_mutable_files.py /sbin/link_mutable_files.py
 COPY copy/sbin/server_run.sh /sbin
 RUN chmod a+x /sbin/server_run.sh /sbin/link_mutable_files.py
 RUN mkdir /traverse
