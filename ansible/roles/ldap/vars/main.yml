@@ -1,0 +1,2 @@
+ldap_dir: "{{ volume_dir }}/ldap"
+phpldapadmin_dir: "{{volume_dir}}/phpldapadmin"
