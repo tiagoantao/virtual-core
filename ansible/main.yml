@@ -3,8 +3,10 @@
   hosts: localhost
   connection: local
   roles:
+    - common
     - ldap
-    #- postgres
+    - postgres
+    - zabbix
     #- galaxy
     #- user_server
     #- nfs
