@@ -201,6 +201,34 @@ def generate_configuration():
                         _copy_ca_artefact(container, str(artefact), fname)
 
 
+def create_directory_structure(my_dir):
+    samples = glob.glob('ansible/roles/**/vars/main.yml')
+    for sample in samples:
+        if sample not in wizard.requirements():
+            continue
+        conf = yaml.load(open(sample))
+        for k, container_dir in conf.items():
+            if not k.endswith('_dir'):
+                continue
+            machine = k[:-4]
+            print(machine)
+            make_dir(my_dir + machine)
+            for sample_dir, dirs, fnames in os.walk('docker/%s/named' % machine):
+                root = '/'.join([my_dir, machine] + sample_dir.split('/')[3:])
+                for in_dir in dirs:
+                    make_dir(root +  '/' + in_dir)
+                for fname in fnames:
+                    if fname.endswith('.sample') or fname.endswith('.sample.doc'):
+                        continue
+                    print(sample_dir + '/' + fname, root)
+                    shutil.copyfile(sample_dir + '/' + fname, root + '/' + fname)
+
+
+def deploy_on_volumes():
+    my_dir = config['General']['nameddirectoriesroot']
+    create_directory_structure(my_dir)
+
+
 def get_available_options():
     options = [('Basic options', '/')]
     if 'General' in config:
@@ -209,6 +237,8 @@ def get_available_options():
             options.append(('Configure Containers', '/configure'))
             if all_containers_configured():
                 options.append(('Generate configuration files', '/generate'))
+                if all_configurations_copied():
+                    options.append(('Deploy on volumes', '/deploy'))
     return options
 
 
