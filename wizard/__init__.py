@@ -162,6 +162,45 @@ def all_containers_configured():
     return True
 
 
+def _copy(orig, container, fname, check):
+    copy = 'docker/%s/copy/%s' % (container, fname[1:])
+    named = 'docker/%s/named/%s' % (container, fname[1:])
+    if check:
+        return os.path.exists(copy) or os.path.exists(named)
+    try:
+        shutil.copy(orig, copy)
+    except:
+        shutil.copy(orig, named)
+
+
+def _copy_ca_artefact(container, artefact, fname, check):
+    if artefact == 'certificate':
+        return _copy('etc/ca/cacert.pem', container, fname, check)
+    raise Exception('Unknown artefact %s' % artefact)
+
+
+def _copy_ssl_artefact(container, artefact, fname, check=False):
+    if artefact == 'certificate':
+        return _copy('etc/%s/ssl.cert.pem' % container,
+                     container, fname, check)
+    elif artefact == 'key':
+        return _copy('etc/%s/ssl.key.pem' % container,
+                     container, fname, check)
+    raise Exception('Unknown artefact %s' % artefact)
+
+
+def generate_configuration():
+    for container, services in wizard.requirements.items():
+        shutil.copy('etc/ssh/authorized_keys', 'docker/%s' % container)
+        for service, artefacts in services.items():
+            for artefact, files in artefacts.items():
+                for fname in files:
+                    if service == 'ssl':
+                        _copy_ssl_artefact(container, str(artefact), fname)
+                    elif service == 'ca':
+                        _copy_ca_artefact(container, str(artefact), fname)
+
+
 def get_available_options():
     options = [('Basic options', '/')]
     if 'General' in config:
