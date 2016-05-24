@@ -8,8 +8,10 @@ then
 fi
 
 #in the (probable) case /var/log is a VOLUME
-if [[ ! -e /var/log/supervisor ]]; then
+if [ ! -e /var/log/supervisor ]; then
    mkdir /var/log/supervisor
+   #a few extras
+   mkdir /var/log/nginx
 fi
 
 /usr/bin/supervisord
