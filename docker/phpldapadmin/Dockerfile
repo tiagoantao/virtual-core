@@ -11,6 +11,7 @@ COPY authorized_keys /root/.ssh
 COPY copy/etc/nginx/cert.key /etc/nginx
 COPY copy/etc/nginx/cert.pem /etc/nginx
 COPY copy/etc/nginx/nginx.conf /etc/nginx
+COPY copy/etc/phpldapadmin/config.php /etc/phpldapadmin
 
 VOLUME ["/var/log"]
 
