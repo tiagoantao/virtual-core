@@ -12,6 +12,7 @@
 from collections import defaultdict
 import glob
 import os
+import shutil
 
 import yaml
 
@@ -173,7 +174,7 @@ def _copy(orig, container, fname, check):
         shutil.copy(orig, named)
 
 
-def _copy_ca_artefact(container, artefact, fname, check):
+def _copy_ca_artefact(container, artefact, fname, check=False):
     if artefact == 'certificate':
         return _copy('etc/ca/cacert.pem', container, fname, check)
     raise Exception('Unknown artefact %s' % artefact)
@@ -190,7 +191,7 @@ def _copy_ssl_artefact(container, artefact, fname, check=False):
 
 
 def generate_configuration():
-    for container, services in wizard.requirements.items():
+    for container, services in requirements.items():
         shutil.copy('etc/ssh/authorized_keys', 'docker/%s' % container)
         for service, artefacts in services.items():
             for artefact, files in artefacts.items():
@@ -201,24 +202,52 @@ def generate_configuration():
                         _copy_ca_artefact(container, str(artefact), fname)
 
 
+def all_configurations_copied():
+    for container, services in requirements.items():
+        if not os.path.exists('docker/%s' % container):
+            return False
+        for service, artefacts in services.items():
+            for artefact, files in artefacts.items():
+                for fname in files:
+                    if service == 'ssl':
+                       ret =  _copy_ssl_artefact(container,
+                                                 str(artefact), fname, True)
+                    elif service == 'ca':
+                        ret = _copy_ca_artefact(container,
+                                                str(artefact), fname, True)
+                    if not ret:
+                        return False
+    return True
+
+
 def create_directory_structure(my_dir):
     samples = glob.glob('ansible/roles/**/vars/main.yml')
+    print(list(requirements.keys()), samples)
     for sample in samples:
-        if sample not in wizard.requirements():
+        host = sample.split('/')[2]
+        if host not in requirements:
             continue
         conf = yaml.load(open(sample))
         for k, container_dir in conf.items():
             if not k.endswith('_dir'):
                 continue
             machine = k[:-4]
-            print(machine)
-            make_dir(my_dir + machine)
+            print(my_dir, machine)
+            try:
+                os.mkdir(my_dir + '/' + machine)
+            except FileExistsError:
+                pass  # OK
             for sample_dir, dirs, fnames in os.walk('docker/%s/named' % machine):
                 root = '/'.join([my_dir, machine] + sample_dir.split('/')[3:])
                 for in_dir in dirs:
-                    make_dir(root +  '/' + in_dir)
+                    try:
+                        print(root, in_dir)
+                        os.mkdir(root + '/' + in_dir)
+                    except FileExistsError:
+                        pass  # OK
                 for fname in fnames:
-                    if fname.endswith('.sample') or fname.endswith('.sample.doc'):
+                    if fname.endswith('.sample') or \
+                       fname.endswith('.sample.doc') or fname == '.gitignore':
                         continue
                     print(sample_dir + '/' + fname, root)
                     shutil.copyfile(sample_dir + '/' + fname, root + '/' + fname)

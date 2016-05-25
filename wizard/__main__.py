@@ -235,7 +235,8 @@ def configure_container_file(container, file_name):
 def process_file():
     container = request.form['container']
     file_name = request.form['file_name']
-    file_contents = request.form['file_contents']
+    file_contents = request.form['file_contents'].replace('\r', '')
+    #html textareas newlines are DOS, thus the replace
     final_file = file_name[:-7]
     operation = request.form['operation']
     if operation == 'save':
@@ -307,6 +308,14 @@ def configure_requirements(container, requirement):
 def generate_configuration():
     wizard.generate_configuration()
     return render_template('generate_configuration.html',
+                           container_confs=wizard.requirements,
+                           menu_options=wizard.get_available_options())
+
+
+@app.route('/deploy')
+def deploy_configuration():
+    wizard.deploy_on_volumes()
+    return render_template('deployment.html',
                            container_confs=wizard.requirements,
                            menu_options=wizard.get_available_options())
 

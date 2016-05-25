@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Generating configuration{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block top %}
+<h2>Deployment</h2>
+{% endblock %}
+
+{% block content %}
+
+<div class="panel panel-info">
+  <div class="panel-heading">Deployed files</div>
+  <div class="panel-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Container</th>
+            <th>Service</th>
+            <th>Artefact</th>
+            <th>File</th>
+      </tr>
+      <tr>
+        {% for container, services in container_confs.items() %}
+          {% set first_service = True %}
+          {% for service, artefacts in services.items() %}
+            {% set first_file = True %}
+            {% for artefact, files in artefacts.items() %}
+              <tr>
+                <td>{% if first_service %}{{container}}{% endif %}</td>
+                <td>{% if first_file %}{{service}}{% endif %}</td>
+                <td>{{artefact}}</td>
+                <td>{{', '.join(files)}}</td>
+              </tr>
+              {% set first_file = False %}
+              {% set first_service = False %}
+            {% endfor %}
+          {% endfor %}
+      {% endfor %}
+      </tr>
+  </div>
+</div>
+
+{% endblock %}
