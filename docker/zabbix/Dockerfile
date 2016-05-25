@@ -8,9 +8,10 @@ RUN apt-get remove -y postgresql postgresql-9.5
 
 
 COPY copy/etc/supervisor/conf.d/zabbix.conf /etc/supervisor/conf.d
-#COPY authorized_keys /root/.ssh
+COPY authorized_keys /root/.ssh
 
 RUN mkdir /var/run/nginx
+RUN mkdir /run/php
 
 #COPY copy/sbin/prepare_magic.sh /sbin
 #RUN chmod a+x /sbin/prepare_magic.sh
