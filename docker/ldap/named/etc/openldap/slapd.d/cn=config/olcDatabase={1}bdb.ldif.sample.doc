@@ -7,4 +7,6 @@ olcRootDN and oldRootPW
 
 Note that the password <a href="http://www.openldap.org/devel/admin/slapdconf2.html">can (and should) be encrypted</a>.
 
+Be careful as it is currently setup as CLEARTEXT (secret).<b>You have to changed this in production</b>
+
 
