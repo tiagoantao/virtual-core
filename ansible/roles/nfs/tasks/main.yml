@@ -6,7 +6,7 @@
   docker:
     name: nfs
     image: core_nfs
-    state: started
+    state: reloaded
     privileged: yes
     ports: ["111:111", "111:111/udp", "2049:2049", "2049:2049/udp"]
     volumes: "{{ volumes }}"

@@ -6,7 +6,7 @@
   docker:
     name: zabbix
     image: core_zabbix
-    state: started
+    state: reloaded
     links: ["ldap:ldap", "postgres:postgres"]
     ports: ["9443:443"]
     volumes:

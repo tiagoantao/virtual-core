@@ -6,7 +6,7 @@
   docker:
     name: user_server
     image: core_user_server
-    state: started
+    state: reloaded
     links: ["ldap:ldap"]
     ports: ["2222:22"]
     volumes:

@@ -6,7 +6,7 @@
   docker:
     name: software
     image: core_software
-    state: started
+    state: reloaded
     volumes:
       - "{{ software_dir }}:/software"
 

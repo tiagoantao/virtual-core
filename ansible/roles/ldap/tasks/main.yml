@@ -9,7 +9,7 @@
   docker:
     name: ldap
     image: core_ldap
-    state: started
+    state: reloaded
     ports: ["636:636"]
     volumes:
       - "{{ ldap_dir }}/var/lib/openldap:/var/lib/openldap"
@@ -21,7 +21,7 @@
   docker:
     name: phpldapadmin
     image: core_phpldapadmin
-    state: started
+    state: reloaded
     links: ["ldap:ldap"]
     ports: ["8636:443"]
     volumes:
