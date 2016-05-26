@@ -7,7 +7,7 @@
     name: zabbix
     image: core_zabbix
     state: reloaded
-    links: ["ldap:ldap", "postgres:postgres"]
+    net: virtual_core
     ports: ["9443:443"]
     volumes:
       - "{{ zabbix_dir }}/var/log:/var/log"

@@ -6,8 +6,8 @@
   docker:
     name: postgres
     image: core_postgres
+    net: virtual_core
     state: reloaded
-    links: ["ldap:ldap"]
     ports: ["5432:5432"]
     volumes:
       - "{{ postgres_dir }}/var/lib/postgresql:/var/lib/postgresql"

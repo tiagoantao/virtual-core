@@ -9,6 +9,7 @@
   docker:
     name: ldap
     image: core_ldap
+    net: virtual_core
     state: reloaded
     ports: ["636:636"]
     volumes:
@@ -21,8 +22,8 @@
   docker:
     name: phpldapadmin
     image: core_phpldapadmin
+    net: virtual_core
     state: reloaded
-    links: ["ldap:ldap"]
     ports: ["8636:443"]
     volumes:
       - "{{ phpldapadmin_dir }}/var/log:/var/log"

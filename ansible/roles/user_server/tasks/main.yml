@@ -6,8 +6,8 @@
   docker:
     name: user_server
     image: core_user_server
+    net: virtual_core
     state: reloaded
-    links: ["ldap:ldap"]
     ports: ["2222:22"]
     volumes:
       - "{{ home_dir }}:/home"
