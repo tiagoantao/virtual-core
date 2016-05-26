@@ -21,7 +21,7 @@ change /etc/ldap.conf
 
 If you are using your own certificate authority, you will need to add
 the certificate of the authority, by changing the `TLS_CACERT` parameter
-on /etc/ldap.conf and /etc/ldap/ldap.conf . Be careful with auto-reconfiguration
+on /etc/ldap/ldap.conf . Be careful with auto-reconfiguration
 
 Finally do
 
