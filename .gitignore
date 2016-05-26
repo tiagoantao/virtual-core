@@ -11,7 +11,7 @@ ansible/main.retry
 authorized_keys
 init.ssl
 
-ansible/roles/*/vars/main.yml
+link_mutable_files.py
 
 
 docker/ldap/named/etc/openldap/cacert.pem
@@ -23,7 +23,7 @@ docker/ldap/named/etc/openldap/slapd.d/cn=config/olcDatabase={1}bdb.ldif
 
 docker/phpldapadmin/copy/etc/nginx/cert.key
 docker/phpldapadmin/copy/etc/nginx/cert.pem
-docker/phpldapadmin/named/etc/phpldapadmin/config.php
+docker/phpldapadmin/copy/etc/phpldapadmin/config.php
 
 
 docker/postgres/copy/var/lib/postgresql/data/pg_hba.conf
