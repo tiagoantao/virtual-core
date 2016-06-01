@@ -1,4 +1,4 @@
-FROM bgruening/galaxy-stable:16.04
+FROM quay.io/bgruening/galaxy:16.04
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
 RUN apt-get update
@@ -14,7 +14,7 @@ COPY copy/etc/supervisor/conf.d/galaxy.conf /etc/supervisor/conf.d
 COPY copy/etc/proftpd/modules.conf /etc/proftpd
 COPY copy/etc/proftpd/proftpd.conf /etc/proftpd
 
-COPY link_mutable_files.py -O /sbin/link_mutable_files.py 
+COPY link_mutable_files.py /sbin/link_mutable_files.py 
 COPY copy/sbin/server_run.sh /sbin
 RUN chmod a+x /sbin/server_run.sh /sbin/link_mutable_files.py
 RUN mkdir /traverse

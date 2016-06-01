@@ -95,7 +95,7 @@ paste.app_factory = galaxy.web.buildapp:app_factory
 # may use a SQLAlchemy connection string to specify an external database
 # instead.  This string takes many options which are explained in detail in the
 # config file documentation.
-database_connection = postgresql://galaxy_core:PASSWORD@postgres/galaxy
+database_connection = postgresql://galaxy_core@postgres/galaxy
 
 # If the server logs errors about not having enough database pool connections,
 # you will want to increase these values, or consider running more Galaxy
@@ -857,13 +857,13 @@ use_interactive = True
 # Allow users to remove their datasets from disk immediately (otherwise,
 # datasets will be removed after a time period specified by an administrator in
 # the cleanup scripts run via cron)
-#allow_user_dataset_purge = False
+allow_user_dataset_purge = True
 
 # By default, users' data will be public, but setting this to True will cause
 # it to be private.  Does not affect existing users and data, only ones created
 # after this option is set.  Users may still change their default back to
 # public.
-#new_user_dataset_access_role_default_private = False
+new_user_dataset_access_role_default_private = True
 
 # Expose user list.  Setting this to True will expose the user list to
 # authenticated users.  This makes sharing datasets in smaller galaxy instances
@@ -925,7 +925,7 @@ use_interactive = True
 # XML config file that allows the use of different authentication providers
 # (e.g. LDAP) instead or in addition to local authentication (.sample is used
 # if default does not exist).
-#auth_config_file = config/auth_conf.xml
+auth_config_file = config/auth_conf.xml
 
 # Optional list of email addresses of API users who can make calls on behalf of
 # other users.
