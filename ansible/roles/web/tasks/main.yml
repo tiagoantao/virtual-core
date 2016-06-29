@@ -1,0 +1,15 @@
+---
+- name: Build Web server
+  command: docker build -t core_web ../docker/web
+
+- name: Web container
+  docker:
+    name: web
+    image: core_web
+    net: virtual_core
+    state: reloaded
+    #ports: ["8000:80", "8021:21", "8800:8880", "9002:9002"]
+    ports: ["80:80"]
+    volumes:
+      - "{{ web_dir }}/var/log:/var/log"
+      - "{{ web_dir }}/var/www:/var/www"
