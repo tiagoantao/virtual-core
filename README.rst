@@ -1,8 +1,8 @@
 ------------------------------------------------
-A Bioinformatics core based on Docker containers
+A Data Science core based on Docker containers
 ------------------------------------------------
 
-Here you can find a set of containers to help creating a bioinformatics core architecture, for example:
+Here you can find a set of containers to help creating a data science core architecture, for example:
 
 - LDAP server
 - PostgreSQL server
@@ -14,6 +14,9 @@ Here you can find a set of containers to help creating a bioinformatics core arc
 - Interative Compute server (a place for users to login)
 - SLURM head node
 - SLURM node
+
+There is a focus on bioinformatics, but the infrastructure can be used for
+other applications.
 
 Base images
 -----------
