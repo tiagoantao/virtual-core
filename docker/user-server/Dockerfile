@@ -13,8 +13,9 @@ COPY copy/etc/nsswitch.conf /etc/
 
 RUN mkdir /core
 RUN mkdir /core/software
+RUN mkdir /scratch
 
-VOLUME ["/core/software", "/home", "/var/log/"]
+VOLUME ["/core/software", "/home", "/var/log/", "/scratch"]
 
 COPY /copy/sbin/add_software.sh /sbin
 RUN bash /sbin/add_software.sh
