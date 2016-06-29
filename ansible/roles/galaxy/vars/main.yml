@@ -1,1 +1,1 @@
-galaxy_dir: "{{volume_dir}}/galaxy"
+galaxy_dir: "{{galaxy_dir}}/docker/volumes/"

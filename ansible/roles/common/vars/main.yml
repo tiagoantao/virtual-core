@@ -1,1 +1,2 @@
-volume_dir: /tmp/vc
+volume_dir: /core/docker/volumes
+galaxy_dir: /core/galaxy

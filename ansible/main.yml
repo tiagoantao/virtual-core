@@ -7,7 +7,7 @@
     - ldap
     - postgres
     - zabbix
-    #- galaxy
+    - galaxy
     #- user_server
     #- nfs
     #- software
