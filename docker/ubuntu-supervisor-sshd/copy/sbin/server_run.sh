@@ -13,6 +13,7 @@ if [ ! -e /var/log/supervisor ]; then
    #a few extras
    mkdir /var/log/nginx
    mkdir /var/log/zabbix
+   mkdir /var/log/uwsgi
 fi
 
 /usr/bin/supervisord
