@@ -25,3 +25,9 @@ postgres:
       - /var/lib/postgresql/data/server.crt
     key:
       - /var/lib/postgresql/data/server.key
+galaxy:
+  ssl:
+    certificate:
+      - /etc/nginx/cert.pem
+    key:
+      - /etc/nginx/cert.key

@@ -5,6 +5,10 @@ RUN apt-get update
 RUN apt-get install -y libsasl2-dev libldap2-dev proftpd-mod-ldap
 RUN apt-get install -y openssh-server
 
+COPY copy/etc/nginx/cert.key /etc/nginx
+COPY copy/etc/nginx/cert.pem /etc/nginx
+COPY copy/etc/nginx/nginx.conf /etc/nginx
+
 COPY copy/etc/galaxy.ini /etc/galaxy
 COPY copy/etc/galaxy/reports_wsgi.ini /etc/galaxy
 COPY copy/galaxy-central/config/auth_conf.xml /galaxy-central/config
