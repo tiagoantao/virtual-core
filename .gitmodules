@@ -1,6 +1,3 @@
 [submodule "sequencer_router"]
 	path = sequencer_router
 	url = https://github.com/tiagoantao/sequencer_router.git
-[submodule "mutable_files"]
-	path = mutable_files
-	url = https://github.com/tiagoantao/mutable_files.git
