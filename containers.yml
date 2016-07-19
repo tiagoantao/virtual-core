@@ -31,3 +31,9 @@ galaxy:
       - /etc/nginx/cert.pem
     key:
       - /etc/nginx/cert.key
+analysis:
+  ssl:
+    certificate:
+      - /etc/jupterhub/cert.pem
+    key:
+      - /etc/jupterhub/cert.key
