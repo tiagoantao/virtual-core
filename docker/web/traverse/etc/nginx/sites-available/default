@@ -14,11 +14,6 @@
 # Default server configuration
 #
 
-upstream uwsgi {
-        uwsgi_pass unix:///var/run/uwsgi.sock;
-        include snippets/uwsgi.conf;
-}
-
 server {
 	listen 80 default_server;
 	listen [::]:80 default_server;
@@ -72,7 +67,9 @@ server {
 
 
         location ~ \.cgi$ {
-            include snippets/uwsgi.conf
+            include snippets/uwsgi.conf;
+            uwsgi_pass unix:///tmp/uwsgi.sock;
+            uwsgi_modifer1 9;
         }
 }
 
