@@ -9,7 +9,7 @@
 #------------------------------------------------------------------------------
 
 # A parent class for Configurables that log.
-# 
+#
 # Subclasses have a log trait, and the default behavior is to get the logger
 # from the currently running Application.
 
@@ -18,7 +18,7 @@
 #------------------------------------------------------------------------------
 
 # A configurable that only allows one instance.
-# 
+#
 # This class is for classes that should only have one instance of itself or
 # *any* subclass. To create and retrieve such a class use the
 # :meth:`SingletonConfigurable.instance` method.
@@ -45,7 +45,7 @@
 # An Application for starting a Multi-User Jupyter Notebook server.
 
 # Grant admin users permission to access single-user servers.
-# 
+#
 # Users should be properly informed if this is enabled.
 c.JupyterHub.admin_access = True
 
@@ -111,15 +111,15 @@ c.JupyterHub.admin_access = True
 # c.JupyterHub.cookie_max_age_days = 14
 
 # The cookie secret to use to encrypt cookies.
-# 
+#
 # Loaded from the JPY_COOKIE_SECRET env variable by default.
 # c.JupyterHub.cookie_secret = b''
 
 # File in which to store the cookie secret.
-# c.JupyterHub.cookie_secret_file = 'jupyterhub_cookie_secret'
+c.JupyterHub.cookie_secret_file = '/srv/jupyterhub/cookie_secret'
 
 # The location of jupyterhub data files (e.g. /usr/local/share/jupyter/hub)
-# c.JupyterHub.data_files_path = '/vcore/software/conda/share/jupyter/hub'
+c.JupyterHub.data_files_path = '/vcore/software/conda/share/jupyter/hub'
 
 # Include any kwargs to pass to the database connection. See
 # sqlalchemy.create_engine for details.
@@ -156,7 +156,7 @@ c.JupyterHub.admin_access = True
 # c.JupyterHub.hub_prefix = '/hub/'
 
 # The public facing ip of the whole application (the proxy)
-# c.JupyterHub.ip = ''
+c.JupyterHub.ip = '0.0.0.0'
 
 # Supply extra arguments that will be passed to Jinja environment.
 # c.JupyterHub.jinja_environment_options = {}
@@ -171,7 +171,7 @@ c.JupyterHub.admin_access = True
 # c.JupyterHub.pid_file = ''
 
 # The public facing port of the proxy
-# c.JupyterHub.port = 8000
+c.JupyterHub.port = 443
 
 # The ip for the proxy API handlers
 # c.JupyterHub.proxy_api_ip = '127.0.0.1'
@@ -180,9 +180,10 @@ c.JupyterHub.admin_access = True
 # c.JupyterHub.proxy_api_port = 0
 
 # The Proxy Auth token.
-# 
+#
 # Loaded from the CONFIGPROXY_AUTH_TOKEN env variable by default.
-# c.JupyterHub.proxy_auth_token = ''
+with open('/srv/jupyterhub/proxy_secret') as f:
+    c.JupyterHub.proxy_auth_token = f.readline().rstrip()
 
 # Interval (in seconds) at which to check if the proxy is running.
 # c.JupyterHub.proxy_check_interval = 30
@@ -203,12 +204,12 @@ c.JupyterHub.admin_access = True
 # Path to SSL certificate file for the public facing interface of the proxy
 #
 # Use with ssl_key
-# c.JupyterHub.ssl_cert = ''
+c.JupyterHub.ssl_cert = '/etc/jupyterhub/cert.pem'
 
 # Path to SSL key file for the public facing interface of the proxy
 #
 # Use with ssl_cert
-# c.JupyterHub.ssl_key = ''
+c.JupyterHub.ssl_key = '/etc/jupyterhub/cert.key'
 
 # Host to send statds metrics to
 # c.JupyterHub.statsd_host = ''
@@ -407,7 +408,7 @@ c.JupyterHub.admin_access = True
 
 # If a user is added that doesn't exist on the system, should I try to create
 # the system user?
-# c.LocalAuthenticator.create_system_users = False
+c.LocalAuthenticator.create_system_users = False
 
 # Automatically whitelist anyone in this group.
 # c.LocalAuthenticator.group_whitelist = set()
