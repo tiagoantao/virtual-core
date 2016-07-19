@@ -10,6 +10,8 @@
     state: reloaded
     #ports: ["8000:80", "8021:21", "8800:8880", "9002:9002"]
     ports: ["80:80"]
+    #privileged: yes
     volumes:
       - "{{ web_dir }}/var/log:/var/log"
       - "{{ web_dir }}/var/www:/var/www"
+      - "{{ web_dir }}/traverse:/traverse"

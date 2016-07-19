@@ -1,2 +1,3 @@
 volume_dir: /core/docker/volumes
 galaxy_dir: /core/galaxy
+software_dir: "{{volume_dir}}/software"

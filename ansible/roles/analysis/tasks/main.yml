@@ -1,0 +1,14 @@
+---
+- name: Build Exploratory Analysis Server
+  command: docker build -t core_analysis ../docker/analysis
+
+- name: Exploratory Analysis container
+  docker:
+    name: analysis
+    image: core_analysis
+    net: virtual_core
+    state: reloaded
+    ports: ["8443:443"]
+    volumes:
+      - "{{ analysis_dir }}/home:/home"
+      - "{{ software_dir }}:/vcore/software"

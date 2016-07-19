@@ -11,4 +11,4 @@
     ports: ["2222:22"]
     volumes:
       - "{{ home_dir }}:/home"
-      - "{{ software_dir }}:/core/software"
+      - "{{ software_dir }}:/vcore/software"
