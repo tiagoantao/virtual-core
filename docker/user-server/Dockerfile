@@ -11,11 +11,10 @@ COPY copy/etc/skel/.profile /etc/skel/.profile
 COPY copy/etc/pam.d/* /etc/pam.d/
 COPY copy/etc/nsswitch.conf /etc/
 
-RUN mkdir /core
-RUN mkdir /core/software
+RUN mkdir -p /vcore/software
 RUN mkdir /scratch
 
-VOLUME ["/core/software", "/home", "/var/log/", "/scratch"]
+VOLUME ["/vcore/software", "/home", "/var/log/", "/scratch"]
 
 COPY /copy/sbin/add_software.sh /sbin
 RUN bash /sbin/add_software.sh
