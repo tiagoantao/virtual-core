@@ -8,7 +8,7 @@
     image: core_analysis
     net: virtual_core
     state: reloaded
-    ports: ["8443:443"]
+    ports: ["7443:443"]
     volumes:
       - "{{ analysis_dir }}/home:/home"
       - "{{ software_dir }}:/vcore/software"

@@ -55,3 +55,33 @@ zabbix. Note a few things:
 #. Make sure you are happy with access rules, especially if you spread
    containers across multiple machines. In that case you have some
    tweaking to do.
+
+
+-----------
+Web service
+-----------
+
+uwsgi - same directory as static, extension cgi
+
+traverse...
+
+discuss architecture
+
+------------------
+Software container
+------------------
+
+
+-----------
+User server
+-----------
+
+based on software container
+
+-----------------------------------------
+Exploratory analysis (Jupyter Lab) server
+-----------------------------------------
+
+based on user server
+
+share the home dirs...
