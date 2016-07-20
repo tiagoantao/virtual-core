@@ -8,7 +8,7 @@ RUN apt-get upgrade -y
 RUN apt-get install -y supervisor libpam-ldap bash
 RUN apt-get install -y openssh-server
 RUN apt-get install -y zabbix-agent
-RUN apt-get install -y python3 wget
+RUN apt-get install -y python3 wget locales
 
 #this machine cannot be run without adding a root key
 #(and server key should be changed also)
