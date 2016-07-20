@@ -34,6 +34,10 @@ docker/postgres/copy/var/lib/postgresql/data/server.key
 docker/zabbix/copy/etc/nginx/cert.key
 docker/zabbix/copy/etc/nginx/cert.pem
 
+docker/analysis/copy/etc/jupyterhub/cert.key
+docker/analysis/copy/etc/jupyterhub/cert.pem
+docker/analysis/copy/etc/jupyterhub/jupyterhub_config.py
+
 
 docker/galaxy/copy/etc/galaxy.ini
 docker/galaxy/copy/etc/galaxy/reports_wsgi.ini

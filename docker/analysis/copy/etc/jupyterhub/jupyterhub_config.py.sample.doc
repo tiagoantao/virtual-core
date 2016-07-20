@@ -1,1 +1,2 @@
-Please check admin_access and put the desired admin in the list
+Please check admin_access and put the desired admin in the list. Note, it
+is NOT c.JupyterHub.admin_users but c.Authenticator.admin_users 
