@@ -21,6 +21,13 @@ These have the following features:
    can be installed and will be called before supervisor (e.g. to use
    passed environment variables to setup stuff) 
 
+.. TODO::
+   Discuss shared volumes and the need of consistent mount points
+
+.. TODO::
+   Talk about docker swarm
+
+
 ------------
 LDAP service
 ------------
@@ -72,6 +79,21 @@ Software container
 ------------------
 
 
+-------------
+Compute nodes
+-------------
+
+We provide support for clusters via SLURM_. You can be in one of three situations:
+
+#. You already have a cluster infrastructure not based on SLURM. If that is your
+case we do not support this directly. But if your cluster is based on free software
+we would be most happy to try to support it, please do contact us!
+#. You already have a SLURM based configuration. In this case you will have to
+make a few changes to the configuration. The wizard will help you here.
+#. You have nothing installed. We will take care of setting up a complete SLURM
+solution.
+
+
 -----------
 User server
 -----------
@@ -85,3 +107,5 @@ Exploratory analysis (Jupyter Lab) server
 based on user server
 
 share the home dirs...
+
+.. _SLURM: http://slurm.schedmd.com/slurm.html
