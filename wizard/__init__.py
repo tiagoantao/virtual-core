@@ -227,9 +227,19 @@ def all_configurations_copied():
     return True
 
 
+def _get_link_path(link_redir):
+    '''Get a link to another place for a config file.
+
+    Currently only configuration for other containers is supported.'''
+    info = yaml.load(open(link_redir))['container']
+    my_fname = 'docker/%s/copy/%s' % (info['name'], info['file'])
+    return my_fname
+
+
 def create_directory_structure(my_dir):
     samples = glob.glob('ansible/roles/**/vars/main.yml')
     print(list(requirements.keys()), samples)
+    links = []
     for sample in samples:
         host = sample.split('/')[2]
         if host not in requirements:
@@ -257,9 +267,16 @@ def create_directory_structure(my_dir):
                     if fname.endswith('.sample') or \
                        fname.endswith('.sample.doc') or fname == '.gitignore':
                         continue
+                    if fname.endswith('.link'):
+                        links.append((
+                            _get_link_path(sample_dir + '/' + fname),
+                            root + '/' + fname[:-5]))
+                        continue
                     print(sample_dir + '/' + fname, root)
                     shutil.copyfile(sample_dir + '/' + fname,
                                     root + '/' + fname)
+    for source, dest in links:
+        shutil.copyfile(source, dest)
 
 
 def deploy_on_volumes():
