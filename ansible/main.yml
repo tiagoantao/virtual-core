@@ -4,12 +4,14 @@
   connection: local
   roles:
     - common
-    - ldap
-    - postgres
-    - zabbix
-    - galaxy
-    - web
-    #- user_server
+    #- ldap
+    #- postgres
+    #- zabbix
+    #- galaxy
+    #- web
+    - compute_server
+    - user_server
+    - analysis
     #- nfs
     #- software
 

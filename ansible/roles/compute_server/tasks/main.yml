@@ -1,0 +1,12 @@
+---
+- name: Build Cluster Server
+  command: docker build -t core_compute_server ../docker/compute-server
+
+- name: Cluster Server container
+  docker:
+    name: compute_server
+    image: core_compute_server
+    net: virtual_core
+    state: reloaded
+    volumes:
+      - "{{ software_dir }}:/vcore/software"
