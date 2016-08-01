@@ -1,0 +1,12 @@
+[program:munge]
+command=/usr/sbin/munged -D
+user=munge
+autorestart=true
+
+[program:slurmctld]
+command=/usr/sbin/slurmctld -D
+autorestart=true
+
+[program:slurmd]
+command=/usr/sbin/slurmd -D
+autorestart=true

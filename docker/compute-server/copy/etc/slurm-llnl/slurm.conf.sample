@@ -158,5 +158,5 @@ SlurmdDebug=3
 # 
 # 
 # COMPUTE NODES 
-NodeName=core_compute_sever CPUs=4 RealMemory=1572864 CoresPerSocket=16 ThreadsPerCore=2 State=UNKNOWN 
-PartitionName=general Nodes=core_compute_sever Default=YES MaxTime=INFINITE State=UP
+NodeName=core_compute_server,core_galaxy CPUs=4 RealMemory=1572864 CoresPerSocket=16 ThreadsPerCore=2 State=UNKNOWN 
+PartitionName=general Nodes=core_compute_server Default=YES MaxTime=INFINITE State=UP
