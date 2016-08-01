@@ -83,7 +83,7 @@ def welcome(run=0):
             return redirect(url_for('determine_ssh_status', run=0))
     if 'host' not in form:
         form['host'] = socket.getfqdn()
-        
+
     all_params = {'run': run, **form}
     return render_template('welcome.html',
                            menu_options=wizard.get_available_options(),
@@ -188,9 +188,11 @@ def _render_configure_template(template, container, **kwargs):
         complete_samples = None
         requirements = None
     complete_requirements = [req for req in wizard.requirements[container]
-                             if wizard.is_requirement_fullfiled(container, req)]
-    my_containers = [container for container in wizard.container_order
-                               if container in wizard.config['General']['containers']]
+                             if wizard.is_requirement_fullfiled(
+                             container, req)]
+    my_containers = [container
+                     for container in wizard.container_order
+                     if container in wizard.config['General']['containers']]
     return render_template(template,
                            menu_options=wizard.get_available_options(),
                            current_container=container,
@@ -236,7 +238,7 @@ def process_file():
     container = request.form['container']
     file_name = request.form['file_name']
     file_contents = request.form['file_contents'].replace('\r', '')
-    #html textareas newlines are DOS, thus the replace
+    # html textareas newlines are DOS, thus the replace
     final_file = file_name[:-7]
     operation = request.form['operation']
     if operation == 'save':
@@ -257,9 +259,9 @@ def process_file():
 
 
 def _configure_ca(container):
-    return _render_configure_template('configure_containers.html',
-                                      container,
-                                      warn='Certificate Authorithy already configured')
+    return _render_configure_template(
+        'configure_containers.html', container,
+        warn='Certificate Authorithy already configured')
 
 
 @app.route('/create_ssl/<string:container>', methods=['POST'])
@@ -276,7 +278,8 @@ def configure_ssl(container):
             except:
                 pass  # Already exists, that is fine
             shutil.move('etc/ca/privkey.pem', 'etc/%s/ssl.key.pem' % container)
-            shutil.move('etc/ca/newcert.pem', 'etc/%s/ssl.cert.pem' % container)
+            shutil.move('etc/ca/newcert.pem',
+                        'etc/%s/ssl.cert.pem' % container)
             return redirect(url_for('configure_containers'))
         return render_template('ssl_not_created.html',
                                menu_options=wizard.get_available_options())
@@ -293,7 +296,6 @@ def _configure_ssl(container):
         orgname=wizard.config['General']['orgname'],
         orgunit=wizard.config['General']['orgunit'],
         email=wizard.config['General']['email'])
-
 
 
 @app.route('/configure_requirements/<string:container>/<string:requirement>')
