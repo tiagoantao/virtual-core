@@ -7,7 +7,9 @@ RUN apt-get install -y slurm-wlm
 #RUN mkdir /run/php
 COPY authorized_keys /root/.ssh
 
-RUN create-munge-key -f
+COPY munge.key /etc/munge
+RUN chown munge.munge /etc/munge/munge.key
+RUN chmod 0400 /etc/munge/munge.key
 RUN mkdir /var/run/munge
 RUN chown munge.munge /var/run/munge
 RUN chown munge.munge /var/log/munge

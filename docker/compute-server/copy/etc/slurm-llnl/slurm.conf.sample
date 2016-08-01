@@ -2,7 +2,7 @@
 # Put this file on all nodes of your cluster.
 # See the slurm.conf man page for more information.
 #
-ControlMachine=core_compute_server
+ControlMachine=compute_server
 #ControlAddr=
 #BackupController=
 #BackupAddr=
@@ -158,5 +158,5 @@ SlurmdDebug=3
 # 
 # 
 # COMPUTE NODES 
-NodeName=core_compute_server,core_galaxy CPUs=4 RealMemory=1572864 CoresPerSocket=16 ThreadsPerCore=2 State=UNKNOWN 
-PartitionName=general Nodes=core_compute_server Default=YES MaxTime=INFINITE State=UP
+NodeName=compute_server Sockets=4 CPUs=4 RealMemory=1572864 CoresPerSocket=16 ThreadsPerCore=2 State=UNKNOWN 
+PartitionName=general Nodes=compute_server Default=YES MaxTime=INFINITE State=UP
