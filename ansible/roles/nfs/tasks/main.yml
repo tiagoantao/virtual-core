@@ -5,6 +5,8 @@
 - name: NFS container
   docker:
     name: nfs
+    domainname: "{{domain_name}}"
+    hostname: nfs
     image: core_nfs
     state: reloaded
     privileged: yes

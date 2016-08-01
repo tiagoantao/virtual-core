@@ -5,6 +5,8 @@
 - name: Create software 
   docker:
     name: software
+    domainname: "{{domain_name}}"
+    hostname: software
     image: core_software
     state: reloaded
     volumes:

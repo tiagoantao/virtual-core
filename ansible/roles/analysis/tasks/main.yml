@@ -4,6 +4,8 @@
 
 - name: Exploratory Analysis container
   docker:
+    domainname: "{{domain_name}}"
+    hostname: analysis
     name: analysis
     image: core_analysis
     net: virtual_core

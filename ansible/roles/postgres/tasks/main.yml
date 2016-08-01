@@ -5,6 +5,8 @@
 - name: PostgreSQL container
   docker:
     name: postgres
+    domainname: "{{domain_name}}"
+    hostname: postgres
     image: core_postgres
     net: virtual_core
     state: reloaded

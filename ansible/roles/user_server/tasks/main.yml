@@ -5,6 +5,8 @@
 - name: User Server container
   docker:
     name: user_server
+    domainname: "{{domain_name}}"
+    hostname: user_server
     image: core_user_server
     net: virtual_core
     state: reloaded

@@ -5,6 +5,8 @@
 - name: Web container
   docker:
     name: web
+    domainname: "{{domain_name}}"
+    hostname: web
     image: core_web
     net: virtual_core
     state: reloaded

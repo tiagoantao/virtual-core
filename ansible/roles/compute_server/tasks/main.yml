@@ -4,8 +4,11 @@
 
 - name: Cluster Server container
   docker:
+    domainname: "{{domain_name}}"
+    hostname: compute_server
     name: compute_server
     image: core_compute_server
+    priviledged: yes
     net: virtual_core
     state: reloaded
     volumes:

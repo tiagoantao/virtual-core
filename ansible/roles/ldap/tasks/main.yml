@@ -7,6 +7,8 @@
 
 - name: LDAP container
   docker:
+    domainname: "{{domain_name}}"
+    hostname: ldap
     name: ldap
     image: core_ldap
     net: virtual_core
@@ -20,6 +22,8 @@
 
 - name: phpLDAPadmin container
   docker:
+    domainname: "{{domain_name}}"
+    hostname: phpldapadmin
     name: phpldapadmin
     image: core_phpldapadmin
     net: virtual_core

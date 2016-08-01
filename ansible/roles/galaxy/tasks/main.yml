@@ -4,6 +4,8 @@
 
 - name: Galaxy container
   docker:
+    domainname: "{{domain_name}}"
+    hostname: galaxy
     name: galaxy
     image: core_galaxy
     net: virtual_core

@@ -5,6 +5,8 @@
 - name: Zabbix container
   docker:
     name: zabbix
+    domainname: "{{domain_name}}"
+    hostname: zabbix
     image: core_zabbix
     state: reloaded
     net: virtual_core
