@@ -21,7 +21,8 @@ __version__ = '0.0.1+'
 config = None
 
 descriptive_names = {}
-dependencies = defaultdict(list)  # container dependencies extracted from links
+dependencies = defaultdict(set)
+# container dependencies extracted from links and dependencies.yml
 role_containers = defaultdict(list)
 container_role = defaultdict(str)
 container_order = []  # A possible container order
@@ -66,6 +67,11 @@ def change_config(section, **kwargs):
 
 
 def get_server_dependencies():
+    '''Checks dependencies and gets some metadata.'''
+    with open('dependencies.yml') as explicit_dependencies:
+        deps = yaml.load(explicit_dependencies)
+        for docker_name, server_dependencies in deps.items():
+            dependencies[docker_name] = set(server_dependencies)
     main_roles = glob.glob('ansible/roles/**/tasks/main.yml')
     for main_role in main_roles:
         role = main_role.split('/')[2]
@@ -81,7 +87,7 @@ def get_server_dependencies():
                     if 'links' in entry['docker']:
                         for link in entry['docker']['links']:
                             docker_name, internal_name = tuple(link.split(':'))
-                            dependencies[name].append(docker_name)
+                            dependencies[name].add(docker_name)
 
 
 def compute_container_order(done=set(['ldap'])):
@@ -132,7 +138,8 @@ def all_files_configured(container):
 
 
 def is_ssl_configured(container):
-    if os.path.exists('etc/%s/ssl.key.pem' % container) and os.path.exists('etc/%s/ssl.cert.pem' % container):
+    if os.path.exists('etc/%s/ssl.key.pem' % container) and \
+      os.path.exists('etc/%s/ssl.cert.pem' % container):
         return True
     return False
 
@@ -210,8 +217,8 @@ def all_configurations_copied():
             for artefact, files in artefacts.items():
                 for fname in files:
                     if service == 'ssl':
-                       ret =  _copy_ssl_artefact(container,
-                                                 str(artefact), fname, True)
+                        ret = _copy_ssl_artefact(
+                            container, str(artefact), fname, True)
                     elif service == 'ca':
                         ret = _copy_ca_artefact(container,
                                                 str(artefact), fname, True)
@@ -237,7 +244,8 @@ def create_directory_structure(my_dir):
                 os.mkdir(my_dir + '/' + machine)
             except FileExistsError:
                 pass  # OK
-            for sample_dir, dirs, fnames in os.walk('docker/%s/named' % machine):
+            for sample_dir, dirs, fnames in os.walk(
+              'docker/%s/named' % machine):
                 root = '/'.join([my_dir, machine] + sample_dir.split('/')[3:])
                 for in_dir in dirs:
                     try:
@@ -250,7 +258,8 @@ def create_directory_structure(my_dir):
                        fname.endswith('.sample.doc') or fname == '.gitignore':
                         continue
                     print(sample_dir + '/' + fname, root)
-                    shutil.copyfile(sample_dir + '/' + fname, root + '/' + fname)
+                    shutil.copyfile(sample_dir + '/' + fname,
+                                    root + '/' + fname)
 
 
 def deploy_on_volumes():

@@ -34,11 +34,13 @@ Dependencies
 - Python 3.5+
 - PyYAML
 - Docker
-- Ansible (including playbook)
+- Ansible (including playbook) - **Preferably `the most recent version`_**
 - docker-py
 
+.. TODO::
+    Check Python version for ansible (conda...)
 
-**If you use the setup wizard**
+**If you use the setup wizard** (strongly recommended for a first install)
 
 - Flask
 - openssl and pyOpenSSL (if you need to generate keys)
@@ -50,31 +52,17 @@ Installation
 ------------
 
 
-
-
 This will install all your servers on the local machine. If you have a very large
 big-iron machine, this might be what you want. If you have a cluster, this is still
 a reasonable starting point, though you will have some work to do, especially
 on the security front.
 
-1. Use the wizard to configure the most complicated stuff:
-``PYTHONPATH=. python -m wizard``
-
-2. Create a directory that will store all your docker volumes. This might need to be
-very big.
-
-3. ``python3 src/prepare_templates.py [Directory_Above]`` . Prepares the ansible
-templates (this probably can be put inside ansible).
-
-4. Optional and **not recommended**: ``python3 src/use_examples.py`` . This will copy the example configuration files
-to be used as the default ones. Make sure to change things in your final configuaration. **You only run this if you did not run step 1, the wizard. Suggestion: run the wizard.**
-
-4. ``python3 src/create_directory_structure.py [Directory_Above]``
-
-
-5. ``cp etc/host.sample etc/hosts``
-
-6. ``cd ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml``
+#. Use the wizard to configure the most complicated stuff: ``PYTHONPATH=. python -m wizard``
+#. Create a directory that will store all your docker volumes. This might need to be very big.
+#. ``python3 src/prepare_templates.py [Directory_Above]`` . Prepares the ansible templates (this probably can be put inside ansible).
+#. ``python3 src/create_directory_structure.py [Directory_Above]``
+#. ``cp etc/host.sample etc/hosts``
+#. ``cd ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml``
 
 Acknowledgements
 ----------------
@@ -92,6 +80,6 @@ Copyright by Tiago Antao. Licensed under GNU Affero General Public License
 version 3.
 
 
-.. _Samba container: https://github.com/dperson/samba
-
+.. _the most recent version: http://docs.ansible.com/ansible/intro_installation.html
 .. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable
+.. _Samba container: https://github.com/dperson/samba

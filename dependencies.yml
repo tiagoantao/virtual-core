@@ -1,20 +1,22 @@
 analysis:
   - ldap
-compute-server:
+compute_server:
   - ldap
 galaxy:
   - ldap
   - postgres
-  - compute-server
+  - compute_server
 phpldapadmin:
   - ldap
 postgres:
   - ldap
 sequencer:
   - ldap
-user-server:
+user_server:
   - ldap
 web:
   - ldap
 zabbix:
+  - ldap
+sequencer:
   - ldap
