@@ -98,7 +98,8 @@ solution.
 User server
 -----------
 
-based on software container
+based on software container.
+It is also a SLURM head node (if desired).
 
 -----------------------------------------
 Exploratory analysis (Jupyter Lab) server

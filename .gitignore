@@ -9,6 +9,7 @@ etc/ssh
 etc/zabbix
 ansible/main.retry
 authorized_keys
+munge.key
 init.ssl
 
 link_mutable_files.py
@@ -39,6 +40,7 @@ docker/analysis/copy/etc/jupyterhub/cert.pem
 docker/analysis/copy/etc/jupyterhub/jupyterhub_config.py
 
 docker/compute-server/copy/etc/slurm-llnl/slurm.conf
+docker/compute-server/copy/etc/supervisor/conf.d/slurm.conf
 
 
 docker/galaxy/copy/etc/galaxy.ini

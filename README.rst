@@ -12,8 +12,8 @@ Here you can find a set of containers to help creating a data science core archi
 - Zabbix server
 - Software server (i.e. a lot of pre-installed software)
 - Interative Compute server (a place for users to login)
-- SLURM head node
-- SLURM node
+- Exploratory Analysis server (JupyterHub with JupyterLab)
+- SLURM grid configuration
 
 There is a focus on bioinformatics, but the infrastructure can be used for
 other applications.
@@ -36,6 +36,7 @@ Dependencies
 - Docker
 - Ansible (including playbook)
 - docker-py
+
 
 **If you use the setup wizard**
 
