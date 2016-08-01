@@ -1,5 +1,5 @@
 [program:munge]
-command=/usr/sbin/munged -D
+command=/usr/sbin/munged -F
 user=munge
 autorestart=true
 
