@@ -1,0 +1,2 @@
+Configuration for SLURM. You will need to change this only if you have
+an existing SLURM configuration.
