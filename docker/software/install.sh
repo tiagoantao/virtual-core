@@ -37,6 +37,6 @@ $CONDA install -y pyrad
 $CONDA install -y fastq-join pear
 
 $CONDA install -c http://conda.binstar.org/bpeng simuPOP
-$CONDA install -y biopython qiime qiime-default-reference
+$CONDA install -y biopython qiime qiime-default-reference bioblend
 
 source $CONDA/deactivate
