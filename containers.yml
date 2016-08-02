@@ -34,6 +34,6 @@ galaxy:
 analysis:
   ssl:
     certificate:
-      - /etc/jupterhub/cert.pem
+      - /etc/jupyterhub/cert.pem
     key:
-      - /etc/jupterhub/cert.key
+      - /etc/jupyterhub/cert.key
