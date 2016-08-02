@@ -49,7 +49,7 @@
                  to the LDAP server for search. -->
             <!-- For OpenLDAP: -->
         <search-fields>uid,mail</search-fields>
-        <search-base>dc=dbs,dc=umt,dc=edu</search-base>
+        <search-base>dc=example,dc=com</search-base>
 
             <!-- If login-use-username is False -->
         <search-filter>(mail={email})</search-filter>
