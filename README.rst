@@ -34,7 +34,7 @@ Dependencies
 - Python 3.5+
 - PyYAML
 - Docker
-- Ansible (including playbook) - **Preferably `the most recent version`_**
+- Ansible (including playbook) - **Preferably** `the most recent version`_
 - docker-py
 
 .. TODO::

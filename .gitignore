@@ -1,6 +1,8 @@
 virtual-core.yml
 __pycache__
+etc/analysis
 etc/ca
+etc/galaxy
 etc/hosts
 etc/ldap
 etc/phpldapadmin
@@ -39,18 +41,20 @@ docker/analysis/copy/etc/jupyterhub/cert.key
 docker/analysis/copy/etc/jupyterhub/cert.pem
 docker/analysis/copy/etc/jupyterhub/jupyterhub_config.py
 
-docker/compute-server/copy/etc/slurm-llnl/slurm.conf
-docker/compute-server/copy/etc/supervisor/conf.d/slurm.conf
+docker/compute_server/copy/etc/slurm-llnl/slurm.conf
+docker/compute_server/copy/etc/supervisor/conf.d/slurm.conf
 
 
 docker/galaxy/copy/etc/galaxy.ini
 docker/galaxy/copy/etc/galaxy/reports_wsgi.ini
 docker/galaxy/copy/etc/proftpd/proftpd.conf
+docker/galaxy/copy/etc/nginx/cert.key
+docker/galaxy/copy/etc/nginx/cert.pem
 
 
 docker/sequencer/copy/etc/ldap.conf
 docker/sequencer/copy/etc/samba/smb.conf
 
-docker/user-server/copy/etc/ldap.conf
-docker/user-server/copy/etc/ldap/ldap.conf
-docker/user-server/copy/sbin/add_software.sh
+docker/user_server/copy/etc/ldap.conf
+docker/user_server/copy/etc/ldap/ldap.conf
+docker/user_server/copy/sbin/add_software.sh

@@ -26,7 +26,7 @@ dependencies = defaultdict(set)
 role_containers = defaultdict(list)
 container_role = defaultdict(str)
 container_order = []  # A possible container order
-requirements = defaultdict(list)
+requirements = defaultdict(dict)
 descriptive_requirements = {
     'ca': 'Certificate Authority',
     'ssl': 'SSL key and ceritificate'
@@ -47,7 +47,7 @@ def load_requirements():
     '''Loads container requirements.
     '''
     global requirements
-    requirements = defaultdict(list, yaml.load(open('containers.yml')))
+    requirements = defaultdict(dict, yaml.load(open('containers.yml')))
 
 
 def save_config():
@@ -211,6 +211,7 @@ def generate_configuration():
 
 def all_configurations_copied():
     for container, services in requirements.items():
+        print(container, services)
         if not os.path.exists('docker/%s' % container):
             return False
         for service, artefacts in services.items():
@@ -237,8 +238,8 @@ def _get_link_path(link_redir):
 
 
 def create_directory_structure(my_dir):
-    samples = glob.glob('ansible/roles/**/vars/main.yml')
-    print(list(requirements.keys()), samples)
+    samples = glob.glob('ansible/roles/**/tasks/main.yml')
+    print(list(requirements.keys()), samples, os.getcwd())
     links = []
     for sample in samples:
         host = sample.split('/')[2]
