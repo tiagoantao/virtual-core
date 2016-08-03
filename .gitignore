@@ -9,6 +9,7 @@ etc/phpldapadmin
 etc/postgres
 etc/ssh
 etc/zabbix
+ansible/main.yml
 ansible/main.retry
 authorized_keys
 munge.key

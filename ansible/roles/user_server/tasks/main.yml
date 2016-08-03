@@ -12,5 +12,4 @@
     state: reloaded
     ports: ["2222:22"]
     volumes:
-      - "{{ home_dir }}:/home"
       - "{{ software_dir }}:/vcore/software"
