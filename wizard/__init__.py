@@ -91,18 +91,18 @@ def get_server_dependencies():
 
 
 def compute_container_order(done=set(['ldap'])):
-        if len(done) == 1:
-            container_order = ['ldap']
-        else:
-            container_order = []
-        for container, deps in dependencies.items():
-            if container in done:
-                continue
-            done.add(container)
-            pre_containers = compute_container_order(done)
-            container_order.append(container)
-            container_order.extend(pre_containers)
-        return container_order
+    if len(done) == 1:
+        container_order = ['ldap']
+    else:
+        container_order = []
+    for container, deps in dependencies.items():
+        if container in done:
+            continue
+        done.add(container)
+        pre_containers = compute_container_order(done)
+        container_order.append(container)
+        container_order.extend(pre_containers)
+    return container_order
 
 
 def get_all_dependencies(container):
@@ -139,7 +139,7 @@ def all_files_configured(container):
 
 def is_ssl_configured(container):
     if os.path.exists('etc/%s/ssl.key.pem' % container) and \
-      os.path.exists('etc/%s/ssl.cert.pem' % container):
+            os.path.exists('etc/%s/ssl.cert.pem' % container):
         return True
     return False
 
@@ -237,33 +237,51 @@ def _get_link_path(link_redir):
     return my_fname
 
 
-def create_directory_structure(my_dir):
-    samples = glob.glob('ansible/roles/**/tasks/main.yml')
+def check_copies(checkup):
+
+    def check_cases(cases):
+        for case in cases:
+            machine = case.split('/')[1]
+            root = case[:-7]
+            checkup[machine].append((os.path.isfile(root), dest, 'copy'))
+    samples = glob.glob('docker/**/*sample', recursive=True)
+    check_cases(samples)
+    links = glob.glob('docker/**/*link', recursive=True)
+    check_cases(links)
+    return checkup
+
+
+def deploy(my_dir, check_instead=False):
+    samples = glob.glob('ansible/roles/**/vars/main.yml')
     print(list(requirements.keys()), samples, os.getcwd())
+    checkup = defaultdict(list)
     links = []
     for sample in samples:
         host = sample.split('/')[2]
         if host not in requirements:
             continue
         conf = yaml.load(open(sample))
+        print(9999, sample, conf)
         for k, container_dir in conf.items():
             if not k.endswith('_dir'):
                 continue
             machine = k[:-4]
             print(my_dir, machine)
-            try:
-                os.mkdir(my_dir + '/' + machine)
-            except FileExistsError:
-                pass  # OK
+            if not check_instead:
+                try:
+                    os.mkdir(my_dir + '/' + machine)
+                except FileExistsError:
+                    pass  # OK
             for sample_dir, dirs, fnames in os.walk(
-              'docker/%s/named' % machine):
+                    'docker/%s/named' % machine):
                 root = '/'.join([my_dir, machine] + sample_dir.split('/')[3:])
-                for in_dir in dirs:
-                    try:
-                        print(root, in_dir)
-                        os.mkdir(root + '/' + in_dir)
-                    except FileExistsError:
-                        pass  # OK
+                if not check_instead:
+                    for in_dir in dirs:
+                        try:
+                            print(root, in_dir)
+                            os.mkdir(root + '/' + in_dir)
+                        except FileExistsError:
+                            pass  # OK
                 for fname in fnames:
                     if fname.endswith('.sample') or \
                        fname.endswith('.sample.doc') or fname == '.gitignore':
@@ -274,15 +292,30 @@ def create_directory_structure(my_dir):
                             root + '/' + fname[:-5]))
                         continue
                     print(sample_dir + '/' + fname, root)
-                    shutil.copyfile(sample_dir + '/' + fname,
-                                    root + '/' + fname)
+                    dest = root + '/' + fname
+                    if check_instead:
+                        checkup[machine].append((os.path.isfile(dest),
+                                                 dest, 'file'))
+                    else:
+                        shutil.copyfile(sample_dir + '/' + fname,
+                                        root + '/' + fname)
     for source, dest in links:
-        shutil.copyfile(source, dest)
+        if check_instead:
+            checkup[machine].append((os.path.isfile(dest), dest, 'link'))
+        else:
+            shutil.copyfile(source, dest)
+    if check_instead:
+        return check_copies(checkup)
 
 
 def deploy_on_volumes():
     my_dir = config['General']['nameddirectoriesroot']
-    create_directory_structure(my_dir)
+    deploy(my_dir)
+
+
+def check_deployment():
+    my_dir = config['General']['nameddirectoriesroot']
+    return deploy(my_dir, check_instead=True)
 
 
 def get_available_options():
@@ -295,6 +328,7 @@ def get_available_options():
                 options.append(('Generate configuration files', '/generate'))
                 if all_configurations_copied():
                     options.append(('Deploy on volumes', '/deploy'))
+                    options.append(('Check deployment', '/check_deployment'))
     return options
 
 

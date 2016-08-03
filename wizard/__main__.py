@@ -322,6 +322,15 @@ def deploy_configuration():
                            menu_options=wizard.get_available_options())
 
 
+@app.route('/check_deployment')
+def check_deployment():
+    checkup = wizard.check_deployment()
+    return render_template('check_deployment.html',
+                           checkup=checkup,
+                           container_confs=wizard.requirements,
+                           menu_options=wizard.get_available_options())
+
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

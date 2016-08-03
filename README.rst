@@ -57,7 +57,7 @@ big-iron machine, this might be what you want. If you have a cluster, this is st
 a reasonable starting point, though you will have some work to do, especially
 on the security front.
 
-#. Use the wizard to configure the most complicated stuff: ``PYTHONPATH=. python -m wizard``
+#. Use the wizard to configure the most complicated stuff: ``./run_wizard.sh``
 #. Create a directory that will store all your docker volumes. This might need to be very big.
 #. ``python3 src/prepare_templates.py [Directory_Above]`` . Prepares the ansible templates (this probably can be put inside ansible).
 #. ``python3 src/create_directory_structure.py [Directory_Above]``
