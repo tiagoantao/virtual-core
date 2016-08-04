@@ -1,6 +1,6 @@
 ---
 - name: Build User Server
-  command: docker build -t core_user_server ../docker/user-server
+  command: docker build -t core_user_server ../docker/user_server
 
 - name: User Server container
   docker:
