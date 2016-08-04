@@ -25,3 +25,4 @@ COPY authorized_keys /root/.ssh
 COPY /copy/add_ldap.sh /
 RUN bash /add_ldap.sh; rm /add_ldap.sh
 
+EXPOSE 9002 8800 21 443

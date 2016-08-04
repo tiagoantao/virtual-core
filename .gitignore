@@ -17,7 +17,6 @@ init.ssl
 
 link_mutable_files.py
 
-
 docker/ldap/named/etc/openldap/cacert.pem
 docker/ldap/named/etc/openldap/ldap.conf
 docker/ldap/named/etc/openldap/servercrt.pem
@@ -59,3 +58,5 @@ docker/sequencer/copy/etc/samba/smb.conf
 docker/user_server/copy/etc/ldap.conf
 docker/user_server/copy/etc/ldap/ldap.conf
 docker/user_server/copy/sbin/add_software.sh
+docker/user_server/copy/etc/slurm-llnl/slurm.conf
+
