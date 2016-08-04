@@ -14,6 +14,6 @@
     ports: ["8000:80", "8021:21", "8800:8880"]
     privileged: yes
     volumes:
-      - "{{ galaxy_dir }}/data:/data"
-      - "{{ galaxy_dir }}/export:/export"
-      - "{{ galaxy_dir }}/var/lib/docker:/var/lib/docker"
+      - "{{ galaxy_volume_dir }}/data:/data"
+      - "{{ galaxy_volume_dir }}/export:/export"
+      - "{{ galaxy_volume_dir }}/var/lib/docker:/var/lib/docker"
