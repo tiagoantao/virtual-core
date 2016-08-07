@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -d /vcore/software/conda/bin ]; then
+if [ ! -d /vcore/software/conda/bin ]; then
   wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
   bash Miniconda3-latest-Linux-x86_64.sh -p /vcore/software/conda -b

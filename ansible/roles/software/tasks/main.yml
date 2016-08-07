@@ -6,9 +6,11 @@
   docker:
     name: software
     domainname: "{{domain_name}}"
+    net: virtual_core
     hostname: software
     image: core_software
     state: reloaded
     volumes:
       - "{{ software_dir }}:/vcore/software"
+      - "{{ software_utils_dir}}:/software_utils"
 
