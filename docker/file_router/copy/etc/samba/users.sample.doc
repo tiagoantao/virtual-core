@@ -1,0 +1,9 @@
+Put
+
+
+<br>
+user:uid:clear_passwd
+<br>
+
+per line. The uid should be the unix uid. The password is in clear text, you can
+login into the machine afterwards and change it with smbpasswd
