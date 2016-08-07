@@ -73,6 +73,13 @@ traverse...
 
 discuss architecture
 
+
+-----------
+File router
+-----------
+
+The samba user is not LDAP based. Password supplied in the clear
+
 ------------------
 Software container
 ------------------
