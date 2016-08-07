@@ -10,5 +10,5 @@
     image: core_software
     state: reloaded
     volumes:
-      - "{{ software_dir }}:/software"
+      - "{{ software_dir }}:/vcore/software"
 

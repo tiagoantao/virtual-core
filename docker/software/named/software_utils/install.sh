@@ -1,9 +1,12 @@
 #!/bin/bash
 
-wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+if [ -d /vcore/software/conda/bin ]; then
+  wget http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
-bash Miniconda3-latest-Linux-x86_64.sh -p /software/conda -b
-CONDA=/software/conda/bin/conda
+  bash Miniconda3-latest-Linux-x86_64.sh -p /vcore/software/conda -b
+fi
+
+CONDA=/vcore/software/conda/bin/conda
 
 $CONDA config --add channels r
 $CONDA config --add channels bioconda
@@ -30,6 +33,7 @@ $CONDA install -y bioconductor-edger
 $CONDA install -y jupyter jupyterhub scipy scikit-learn matplotlib
 $CONDA install -y seaborn pandas rpy2
 $CONDA install -y biopython
+$CONDA install -y bioblend
 
 $CONDA create -n python2 python=2
 source $CONDA/activate python2

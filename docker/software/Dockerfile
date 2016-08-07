@@ -1,8 +1,8 @@
-FROM tiagoantao/alpine-base
+FROM tiagoantao/ubuntu-supervisor-sshd
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
-VOLUME ["/software"]
+RUN mkdir -p /vcore/software
 
-COPY install.sh /
+VOLUME ["/vcore/software"]
 
 CMD ["bash", "install.sh"]
