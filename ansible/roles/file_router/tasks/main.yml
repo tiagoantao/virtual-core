@@ -1,0 +1,15 @@
+---
+- name: Build File Router
+  command: docker build -t core_file_router ../docker/file_router
+
+- name: File Router container
+  docker:
+    name: file_router
+    domainname: "{{domain_name}}"
+    hostname: file_router
+    image: core_file_router
+    state: reloaded
+    privileged: yes
+    ports: ["111:111", "111:111/udp", "2049:2049", "2049:2049/udp"]
+    volumes: "{{ volumes }}"
+

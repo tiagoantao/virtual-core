@@ -1,5 +1,6 @@
 virtual-core.yml
 __pycache__
+_build
 etc/analysis
 etc/ca
 etc/galaxy

@@ -12,6 +12,6 @@
     - compute_server
     - user_server
     - analysis
-    - nfs
+    - file_router
     - software
 
