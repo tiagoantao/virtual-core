@@ -1,2 +1,2 @@
 #!/bin/bash
-PYTHONPATH=. python -m wizard
+PYTHONPATH=. python3 -m wizard
