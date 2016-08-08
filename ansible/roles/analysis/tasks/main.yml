@@ -1,6 +1,6 @@
 ---
 - name: Build Exploratory Analysis Server
-  command: docker build -t core_analysis ../docker/analysis
+  command: docker build -t core_analysis ../../docker/analysis
 
 - name: Exploratory Analysis container
   docker:

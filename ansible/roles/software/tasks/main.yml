@@ -1,6 +1,6 @@
 ---
 - name: Build Software builder
-  command: docker build -t core_software ../docker/software
+  command: docker build -t core_software ../../docker/software
 
 - name: Create software 
   docker:

@@ -1,6 +1,6 @@
 ---
 - name: Build PostgreSQL server
-  command: docker build -t core_postgres ../docker/postgres
+  command: docker build -t core_postgres ../../docker/postgres
 
 - name: PostgreSQL container
   docker:

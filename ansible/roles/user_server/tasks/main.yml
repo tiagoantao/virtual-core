@@ -1,15 +1,15 @@
 ---
 - name: Build User Server
-  command: docker build -t core_user_server ../docker/user_server
+  command: docker build -t core_user_server ../../docker/user_server
 
 - name: User Server container
   docker:
-    name: user_server
-    domainname: "{{domain_name}}"
-    hostname: user_server
+    name: "{{ item.name }}"
+    domainname: "{{ domain_name }}"
+    hostname: "{{ item.hostname }}"
     image: core_user_server
     net: virtual_core
     state: reloaded
-    ports: ["2222:22"]
-    volumes:
-      - "{{ software_dir }}:/vcore/software"
+    ports: "{{ item.ports }}"
+    volumes: "{{ default_volumes + item.volumes }}"
+  with_items: "{{ user_servers }}"

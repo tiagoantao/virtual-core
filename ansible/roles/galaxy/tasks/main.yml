@@ -1,6 +1,6 @@
 ---
 - name: Build Galaxy server
-  command: docker build -t core_galaxy ../docker/galaxy
+  command: docker build -t core_galaxy ../../docker/galaxy
 
 - name: Galaxy container
   docker:

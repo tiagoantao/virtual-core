@@ -1,6 +1,6 @@
 ---
 - name: Build Zabbix server
-  command: docker build -t core_zabbix ../docker/zabbix
+  command: docker build -t core_zabbix ../../docker/zabbix
 
 - name: Zabbix container
   docker:

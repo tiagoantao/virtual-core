@@ -1,6 +1,6 @@
 ---
 - name: Build Web server
-  command: docker build -t core_web ../docker/web
+  command: docker build -t core_web ../../docker/web
 
 - name: Web container
   docker:

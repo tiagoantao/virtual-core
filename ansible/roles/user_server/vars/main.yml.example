@@ -1,0 +1,8 @@
+---
+default_volumes:
+  - "{{ software_dir }}:/vcore/software"
+
+user_servers:
+  - name: user_server
+    hostname: user_server
+    ports: ["2222:22"]

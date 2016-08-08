@@ -1,6 +1,6 @@
 ---
 - name: Build Cluster Server
-  command: docker build -t core_compute_server ../docker/compute-server
+  command: docker build -t core_compute_server ../../docker/compute-server
 
 - name: Cluster Server container
   docker:

@@ -20,6 +20,8 @@ _instance
 
 link_mutable_files.py
 
+ansible/roles/user_server/vars/main.yml
+
 docker/ldap/named/etc/openldap/cacert.pem
 docker/ldap/named/etc/openldap/ldap.conf
 docker/ldap/named/etc/openldap/servercrt.pem

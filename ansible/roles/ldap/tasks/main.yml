@@ -1,9 +1,9 @@
 ---
 - name: Build LDAP server
-  command: docker build -t core_ldap ../docker/ldap
+  command: docker build -t core_ldap ../../docker/ldap
 
 - name: Build phpLDAPadmin server
-  command: docker build -t core_phpldapadmin ../docker/phpldapadmin
+  command: docker build -t core_phpldapadmin ../../docker/phpldapadmin
 
 - name: LDAP container
   docker:
