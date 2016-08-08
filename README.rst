@@ -60,10 +60,7 @@ on the security front.
 #. Use the wizard to configure the most complicated stuff: ``./run_wizard.sh``
 #. Create a virtual network called virtual_core `docker network create virtual_core`
 #. Create a directory that will store all your docker volumes. This might need to be very big.
-#. ``python3 src/prepare_templates.py [Directory_Above]`` . Prepares the ansible templates (this probably can be put inside ansible).
-#. ``python3 src/create_directory_structure.py [Directory_Above]``
-#. ``cp etc/host.sample etc/hosts``
-#. ``cd ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml``
+#. ``cd _instance/ansible; ansible-playbook --ask-pass -i ../etc/hosts main.yml``
 
 Acknowledgements
 ----------------
