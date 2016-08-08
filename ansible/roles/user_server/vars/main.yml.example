@@ -4,5 +4,6 @@ default_volumes:
 
 user_servers:
   - name: user_server
-    hostname: user_server
+    host_name: user_server
     ports: ["2222:22"]
+    volumes: []

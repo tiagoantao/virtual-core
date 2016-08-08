@@ -6,7 +6,7 @@
   docker:
     name: "{{ item.name }}"
     domainname: "{{ domain_name }}"
-    hostname: "{{ item.hostname }}"
+    hostname: "{{ item.host_name }}"
     image: core_user_server
     net: virtual_core
     state: reloaded
