@@ -32,6 +32,8 @@ descriptive_requirements = {
     'ssl': 'SSL key and ceritificate'
 }
 
+_config_exts = ['.sample', '.link']
+
 
 def load_config():
     '''Loads configuration from a previous execution.
@@ -332,7 +334,27 @@ def get_available_options():
     return options
 
 
+def link_existing_configuration():
+    exiting_confs = glob.glob('_instance/docker', recursive=True)
+    for existing_conf in existing_confs:
+        root_name = existing_conf[10:]
+        is_config = False
+        for ext in _config_exts:
+            if os.path.exists(root_name + ext):
+                is_config = True
+                break
+        if not is_config:
+            continue
+        ext_name = root + ext
+        try:
+            os.remove(ext_name)
+        except OSError:
+            pass  # This is OK, file does not exist yet
+        os.symlink(existing_conf, ext_name)
+
+
 load_config()
 load_requirements()
 get_server_dependencies()
 container_order = compute_container_order()
+link_existing_configuration()
