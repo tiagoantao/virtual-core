@@ -335,8 +335,8 @@ def get_available_options():
 
 
 def link_existing_configuration():
-    exiting_confs = glob.glob('_instance/docker', recursive=True)
-    for existing_conf in _existing_confs:
+    existing_confs = glob.glob('_instance/docker/**', recursive=True)
+    for existing_conf in existing_confs:
         root_name = existing_conf[10:]
         is_config = False
         for ext in _config_exts:
@@ -345,12 +345,12 @@ def link_existing_configuration():
                 break
         if not is_config:
             continue
-        ext_name = root + ext
+        ext_name = root_name + ext
         try:
-            os.remove(ext_name)
+            os.remove(root_name)
         except OSError:
             pass  # This is OK, file does not exist yet
-        os.link(existing_conf, ext_name)
+        os.link(existing_conf, root_name)
         # Docker does not allow symlinks
 
 
@@ -361,7 +361,7 @@ def link_ansible():
         pass  # Fine, already exists
     if not os.path.exists('_instance/ansible/main.yml'):
         shutil.copyfile('ansible/main.yml.example', '_instance/ansible/main.yml')
-    if not os.path.exists('_instance/ansible/roles'):
+    if not os.path.islink('_instance/ansible/roles'):
         os.symlink('ansible/roles', '_instance/ansible/roles')
 
 
