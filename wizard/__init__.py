@@ -334,8 +334,20 @@ def get_available_options():
     return options
 
 
-def link_existing_configuration():
-    existing_confs = glob.glob('_instance/docker/**', recursive=True)
+def make_instance_directory(file_name):
+    instance_directory = file_name[:file_name.rfind('/')]
+    try:
+        os.makedirs(instance_directory)
+    except OSError:
+        pass  # OK, already exists
+
+
+
+def link_existing_configuration(existing_conf=None):
+    if existing_conf is None:
+        existing_confs = glob.glob('_instance/docker/**', recursive=True)
+    else:
+        existing_confs = [existing_conf]
     for existing_conf in existing_confs:
         root_name = existing_conf[10:]
         is_config = False
@@ -345,7 +357,6 @@ def link_existing_configuration():
                 break
         if not is_config:
             continue
-        ext_name = root_name + ext
         try:
             os.remove(root_name)
         except OSError:

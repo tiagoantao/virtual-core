@@ -239,11 +239,13 @@ def process_file():
     file_name = request.form['file_name']
     file_contents = request.form['file_contents'].replace('\r', '')
     # html textareas newlines are DOS, thus the replace
-    final_file = file_name[:-7]
+    final_file = '_instance/' + file_name[:-7]
+    wizard.make_instance_directory(final_file)
     operation = request.form['operation']
     if operation == 'save':
         with open(final_file, 'wt') as w:
             w.write(file_contents)
+        wizard.link_existing_configuration(final_file)
         warn = 'File Saved'
     elif operation == 'reload':
         warn = 'Sample reloaded'
