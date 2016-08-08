@@ -373,7 +373,7 @@ def link_ansible():
     if not os.path.exists('_instance/ansible/main.yml'):
         shutil.copyfile('ansible/main.yml.example', '_instance/ansible/main.yml')
     if not os.path.islink('_instance/ansible/roles'):
-        os.symlink('ansible/roles', '_instance/ansible/roles')
+        os.symlink('../../ansible/roles', '_instance/ansible/roles')
 
 
 def prepare_instance():
