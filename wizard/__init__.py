@@ -353,8 +353,28 @@ def link_existing_configuration():
         os.symlink(existing_conf, ext_name)
 
 
+def link_ansible():
+    try:
+        os.mkdir('_instance/ansible')
+    except OSError:
+        pass  # Fine, already exists
+    if not os.path.exists('_instance/ansible/main.yml'):
+        os.copy('ansible/main.yml.sample', '_instance/ansible/main.yml')
+    if not os.path.exists('_instance/ansible/roles'):
+        os.symlink('ansible/roles', '_instance/ansible/roles')
+
+
+def prepare_instance():
+    try:
+        os.mkdir('_instance')
+    except OSError:
+        pass  # Fine, already exists
+    link_ansible()
+    link_existing_configuration()
+
+
 load_config()
 load_requirements()
 get_server_dependencies()
 container_order = compute_container_order()
-link_existing_configuration()
+prepare_instance()
