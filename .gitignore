@@ -1,4 +1,5 @@
 virtual-core.yml
+*.pyc
 __pycache__
 _build
 etc/analysis
@@ -15,6 +16,7 @@ ansible/main.retry
 authorized_keys
 munge.key
 init.ssl
+_instance
 
 link_mutable_files.py
 
