@@ -9,7 +9,13 @@
     hostname: file_router
     image: core_file_router
     state: reloaded
+    net: virtual_core
     privileged: yes
-    ports: ["111:111", "111:111/udp", "2049:2049", "2049:2049/udp"]
+    ports:
+      - 111:111
+      - 2049:2049
+      - 137:137
+      - 139:139
+      - 445:445
     volumes: "{{ volumes }}"
 
