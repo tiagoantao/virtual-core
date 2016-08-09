@@ -20,6 +20,7 @@ _instance
 
 link_mutable_files.py
 
+ansible/roles/file_router/vars/main.yml
 ansible/roles/user_server/vars/main.yml
 
 docker/ldap/named/etc/openldap/cacert.pem
@@ -39,6 +40,7 @@ docker/postgres/copy/var/lib/postgresql/data/server.crt
 docker/postgres/copy/var/lib/postgresql/data/server.key
 
 docker/file_router/copy/etc/samba/smb.conf
+docker/file_router/copy/etc/samba/users
 
 docker/zabbix/copy/etc/nginx/cert.key
 docker/zabbix/copy/etc/nginx/cert.pem
