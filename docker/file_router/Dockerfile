@@ -4,7 +4,7 @@ MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 RUN apt-get update
 RUN apt-get install -y nfs-kernel-server samba
 RUN apt-get install -y nginx uwsgi-plugin-python3 python3-pip
-RUN apt-get install -y python3-flask python3-flask python3-flask python3-ldap3
+RUN apt-get install -y python3-flask python3-flask python3-flask python3-ldap3 python3-yaml
 RUN pip3 install flask-login
 
 
@@ -30,8 +30,9 @@ COPY copy/sbin/prepare_magic.sh /sbin
 
 #sequencer-router
 COPY copy/etc/sequencer-router.conf /etc
-COPY sequencer-router sequencer-router
+COPY copy/etc/sequencer-router.users /etc
 COPY copy/etc/supervisor/conf.d/sequencer-router.conf /etc/supervisor/conf.d
+COPY sequencer-router sequencer-router
 
 RUN mkdir /vcore
 

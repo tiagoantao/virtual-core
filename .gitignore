@@ -39,8 +39,11 @@ docker/postgres/copy/var/lib/postgresql/data/pg_hba.conf
 docker/postgres/copy/var/lib/postgresql/data/server.crt
 docker/postgres/copy/var/lib/postgresql/data/server.key
 
+docker/file_router/copy/etc/nginx/cert.key
+docker/file_router/copy/etc/nginx/cert.pem
 docker/file_router/copy/etc/samba/smb.conf
 docker/file_router/copy/etc/samba/users
+docker/file_router/copy/etc/sequencer-router.users
 
 docker/zabbix/copy/etc/nginx/cert.key
 docker/zabbix/copy/etc/nginx/cert.pem
