@@ -1,0 +1,5 @@
+AUTHORIZED_USERS = ['Your Lab Admin user']
+DATA_DIR = '/tmp'
+LDAP_ROOT = 'dc=example,dc=com'
+LDAP_SERVER = 'ldap'
+

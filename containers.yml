@@ -37,3 +37,9 @@ analysis:
       - /etc/jupyterhub/cert.pem
     key:
       - /etc/jupyterhub/cert.key
+file_server:
+  ssl:
+    certificate:
+      - /etc/nginx/cert.pem
+    key:
+      - /etc/nginx/cert.key
