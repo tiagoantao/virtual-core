@@ -2,6 +2,7 @@ apt-get upgrade -y
 
 apt-get install -y git vim make gcc tmux
 apt-get install -y python-dev libxrender1
+apt-get install -y parallel
 
 apt-get install -y build-essential cmake zlib1g-dev libbz2-dev nano screen 
 apt-get install -y gfortran libsm6 libxt6
