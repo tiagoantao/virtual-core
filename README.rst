@@ -40,3 +40,5 @@ version 3.
 
 
 .. _project documentation: http://virtual-core.tiago.org
+.. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable
+.. _Samba container: https://github.com/dperson/samba
