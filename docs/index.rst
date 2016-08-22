@@ -37,8 +37,11 @@ The containers can be split across a cluster with Docker Swarm.
 A wizard is included to get a single-machine configuration up and running.
 
 The system can be extended with flavors (Natural Language Processing, Finance,
-costumer analysis). We currently have a flavor for bioinformatics with a
-Galaxy container.
+costumer analysis).
+
+We currently have a flavor for bioinformatics with a
+Galaxy container, extra analysis software (based on bioconda) and the file router
+can be configured to receive data from Illumina Sequencers.
 
 .. warning::
     Virtual Core is currently in production an the University of Montana, but
@@ -53,6 +56,7 @@ Contents
 
 .. toctree::
 
+    install
     notes_on_containers
     customizing_system
     sequencer
