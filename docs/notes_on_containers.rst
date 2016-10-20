@@ -92,12 +92,12 @@ Compute nodes
 We provide support for clusters via SLURM_. You can be in one of three situations:
 
 #. You already have a cluster infrastructure not based on SLURM. If that is your
-case we do not support this directly. But if your cluster is based on free software
-we would be most happy to try to support it, please do contact us!
+   case we do not support this directly. But if your cluster is based on free software
+   we would be most happy to try to support it, please do contact us!
 #. You already have a SLURM based configuration. In this case you will have to
-make a few changes to the configuration. The wizard will help you here.
+   make a few changes to the configuration. The wizard will help you here.
 #. You have nothing installed. We will take care of setting up a complete SLURM
-solution.
+   solution.
 
 
 -----------
