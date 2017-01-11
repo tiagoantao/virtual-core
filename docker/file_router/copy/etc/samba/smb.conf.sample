@@ -270,7 +270,7 @@ disable spoolss = yes
 workgroup = GENOMICS
 
 [sequencer]
-  path = /sequencer/1
+  path = /sequencer_1
   browsable = no
   read only = no
   guest ok = no

@@ -1,0 +1,3 @@
+/software  (insecure,ro,no_root_squash,nohide)
+/data	server.example.com(ro)
+

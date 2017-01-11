@@ -16,7 +16,7 @@ COPY copy/etc/samba/users /etc/samba
 COPY copy/etc/supervisor/conf.d/samba.conf /etc/supervisor/conf.d
 
 #NFS
-#COPY exports /etc/exports
+COPY /copy/etc/exports /etc/exports
 #COPY run.sh run.sh
 
 
@@ -37,6 +37,6 @@ COPY sequencer-router sequencer-router
 RUN mkdir /vcore
 
 #EXPOSE 111/tcp 111/udp 2049 137 139 445 443
-EXPOSE 137 139 445 443
+EXPOSE 111/udp 137 139 445 443 892 2049
 
 VOLUME ["/var/log"]
