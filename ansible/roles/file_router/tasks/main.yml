@@ -1,6 +1,6 @@
 ---
 - name: Build File Router
-  command: docker build -t core_file_router ../../docker/file_router
+  command: docker build -t core_file_router ../docker/file_router
 
 - name: File Router container
   docker:
@@ -12,9 +12,10 @@
     net: virtual_core
     privileged: yes
     ports:
-      - 111:111
+      - 111:111/udp
       - 2049:2049
       - 137:137
+      - 892:892
       - 139:139
       - 445:445
       - 1443:443

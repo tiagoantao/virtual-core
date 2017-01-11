@@ -1,3 +1,4 @@
 ---
 volumes:
-    - /mount_point:/sequencer/1
+    - /mount_point:/sequencer_1
+    - /mount_software:/vcore/software
