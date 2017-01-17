@@ -6,7 +6,8 @@ if [ ! -d /vcore/software/conda/bin ]; then
   bash Miniconda3-latest-Linux-x86_64.sh -p /vcore/software/conda -b
 fi
 
-CONDA=/vcore/software/conda/bin/conda
+CONDABIN=/vcore/software/conda/bin
+CONDA=${CONDABIN}/conda
 
 #$CONDA config --add channels r
 #$CONDA config --add channels bioconda
@@ -39,13 +40,13 @@ $CONDA install -y bioblend blat
 $CONDA install -y stacks transdecoder
 
 $CONDA create -y -n python2 python=2
-source $CONDA/activate python2
+source $CONDABIN/activate python2
 $CONDA install -y pyrad 
 $CONDA install -y fastq-join pear
 
 $CONDA install -y -c http://conda.binstar.org/bpeng simuPOP
 $CONDA install -y biopython qiime qiime-default-reference bioblend
 
-source $CONDA/deactivate
+source $CONDABIN/deactivate
 
 #$CONDA create -y -n trinity trinity
