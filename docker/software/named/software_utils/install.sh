@@ -8,9 +8,9 @@ fi
 
 CONDA=/vcore/software/conda/bin/conda
 
-$CONDA config --add channels r
-$CONDA config --add channels bioconda
-$CONDA config --add channels conda-forge
+#$CONDA config --add channels r
+#$CONDA config --add channels bioconda
+#$CONDA config --add channels conda-forge
 
 $CONDA install -y conda-build gcc
 $CONDA install -y pytables blosc dask pyqt ipyparallel
@@ -48,4 +48,4 @@ $CONDA install -y biopython qiime qiime-default-reference bioblend
 
 source $CONDA/deactivate
 
-$CONDA create -y -n trinity trinity
+#$CONDA create -y -n trinity trinity
