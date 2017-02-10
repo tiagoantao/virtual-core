@@ -1,4 +1,4 @@
-FROM core_analysis
+FROM core_user_server
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
 RUN apt-get update -y

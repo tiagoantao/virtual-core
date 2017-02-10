@@ -16,6 +16,7 @@ CONDA=${CONDABIN}/conda
 $CONDA install -y conda-build gcc
 $CONDA install -y pytables blosc dask pyqt ipyparallel
 $CONDA install -y r-irkernel pcre
+$CONDA install -y networkx
 $CONDA install -y r-ggplot2 r-plyr r-stringi r-igraph r-rcpp r-quadprog
 $CONDA install -y r-sp pydotplus
 $CONDA install -y tensorflow
@@ -32,6 +33,8 @@ $CONDA install -y eigensoft pyvcf pysam
 
 $CONDA install -y bioconductor-biocinstaller
 $CONDA install -y bioconductor-edger
+$CONDA install -y r-wgcna
+$CONDA install -y -c birdhouse r-ncdf4
 
 $CONDA install -y jupyter jupyterhub scipy scikit-learn matplotlib
 $CONDA install -y seaborn pandas rpy2
@@ -44,7 +47,7 @@ source $CONDABIN/activate python2
 $CONDA install -y pyrad 
 $CONDA install -y fastq-join pear
 
-$CONDA install -y -c http://conda.binstar.org/bpeng simuPOP
+$CONDA install -y -c bpeng simuPOP
 $CONDA install -y biopython qiime qiime-default-reference bioblend
 
 source $CONDABIN/deactivate

@@ -1,0 +1,19 @@
+---
+- name: Build Galaxy server
+  command: docker build -t core_galaxy_old ../../docker/galaxy_old
+
+- name: Galaxy container
+  docker:
+    domainname: "{{domain_name}}"
+    hostname: galaxy_old
+    name: galaxy_old
+    image: core_galaxy_old
+    net: virtual_core
+    state: reloaded
+    #ports: ["8000:80", "8021:21", "8800:8880", "9002:9002"]
+    ports: ["444:444", "8022:21", "8801:8880"]
+    privileged: yes
+    volumes:
+      - "{{ galaxy_old_volume_dir }}/data:/data"
+      - "{{ galaxy_old_volume_dir }}/export:/export"
+      - "{{ galaxy_old_volume_dir }}/var/lib/docker:/var/lib/docker"
