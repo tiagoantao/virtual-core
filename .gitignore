@@ -57,8 +57,9 @@ docker/compute_server/copy/etc/slurm-llnl/slurm.conf
 docker/compute_server/copy/etc/supervisor/conf.d/slurm.conf
 
 
-docker/galaxy/copy/etc/galaxy.ini
+docker/galaxy/copy/etc/galaxy/galaxy.ini
 docker/galaxy/copy/etc/galaxy/reports_wsgi.ini
+docker/galaxy/copy/galaxy-central/config/auth_conf.xml
 docker/galaxy/copy/etc/proftpd/proftpd.conf
 docker/galaxy/copy/etc/nginx/cert.key
 docker/galaxy/copy/etc/nginx/cert.pem

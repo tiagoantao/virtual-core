@@ -11,7 +11,7 @@
     net: virtual_core
     state: reloaded
     #ports: ["8000:80", "8021:21", "8800:8880", "9002:9002"]
-    ports: ["444:444", "8022:21", "8801:8880"]
+    ports: ["444:443", "8022:21", "8801:8880"]
     privileged: yes
     volumes:
       - "{{ galaxy_old_volume_dir }}/data:/data"

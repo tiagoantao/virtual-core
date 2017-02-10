@@ -41,18 +41,6 @@ AllowStoreRestart               on
 </Limit>
 
 
-#SFTP
-SFTPEngine on
-Port 2222
-SFTPLog /var/log/proftpd/sftp.log
-# Configure both the RSA and DSA host keys, using the same host key
-# files that OpenSSH uses.
-SFTPHostKey /etc/ssh/ssh_host_rsa_key
-SFTPHostKey /etc/ssh/ssh_host_dsa_key
-SFTPCompression delayed
-SFTPAuthMethods ldap
-
-
 # Do not authenticate against real (system) users
 AuthPAM                         off
 
@@ -70,8 +58,9 @@ LDAPGenerateHomedir on
 LDAPGenerateHomedirPrefix /export/galaxy-central/database/ftp/
 
 
-FTPEngine on
+SFTPEngine on
 Port 2222
 SFTPHostKey /etc/ssh/ssh_host_rsa_key
 SFTPHostKey /etc/ssh/ssh_host_dsa_key
 SFTPCompression delayed
+SFTPAuthMethods password
