@@ -29,7 +29,7 @@ container_order = []  # A possible container order
 requirements = defaultdict(dict)
 descriptive_requirements = {
     'ca': 'Certificate Authority',
-    'ssl': 'SSL key and ceritificate'
+    'ssl': 'SSL key and certificate'
 }
 
 _config_exts = ['.sample', '.link']
@@ -200,7 +200,10 @@ def _copy_ssl_artefact(container, artefact, fname, check=False):
 
 
 def generate_configuration():
+    my_containers = list(config['General']['containers'])
     for container, services in requirements.items():
+        if container not in my_containers:
+            continue
         shutil.copy('etc/ssh/authorized_keys', 'docker/%s' % container)
         for service, artefacts in services.items():
             for artefact, files in artefacts.items():
