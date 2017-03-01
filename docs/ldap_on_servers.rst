@@ -35,3 +35,14 @@ https://wiki.debian.org/LDAP/PAM
 
 
 (uid limitation - pam_filter)
+
+
+CentOS
+------
+
+On CentOS install nss_ldap and nss-pam-ldapd
+
+authconfig --enableldap --enableldapauth --ldapserver=ldap://ldap.YOUR-DOMAIN:389/ \
+  --ldapbasedn="BASE-DN" --enablecache --disablefingerprint --kickstart
+
+https://wiki.centos.org/AdrianHall/CentralizedLDAPAuth
