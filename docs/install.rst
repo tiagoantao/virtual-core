@@ -56,8 +56,10 @@ on the security front.
 
 #. Use the wizard to configure the most complicated stuff: ``./run_wizard.sh``
 #. Create a virtual network called `virtual_core` ``docker network create virtual_core``. **Make sure this is configured everytime you start the system**
-#. Create a directory that will store all your docker volumes. This might need to be very big.
+#. Create a directory that will store all your docker volumes. This might need to be very big. Lets call this your base directory.
 #. ``cp etc/hosts.sample etc/hosts`` (you will want to edit this in the future)
+#. Make sure all variables on ``ansible/`` are correctly defined, especially on the common role
+#. ``python src/create_directory_structure.py <base_directory>``
 #. ``cd _instance/ansible; ansible-playbook --ask-pass -i ../../etc/hosts main.yml``
 
 .. _the most recent version: http://docs.ansible.com/ansible/intro_installation.html
