@@ -45,6 +45,7 @@ We do this manually
 * Make sure openldap-clients and nss_ldap is installed
 * Copy your CA certificate to /etc/openldap/cacerts
 * Make sure /etc/ldap.conf has (among other things)::
+
     URI ldaps://PATH_TO_YOUR_LDAP_SERVER
     BASE your_base
     pam_password exop
@@ -53,6 +54,7 @@ We do this manually
     tls_cacertfile /etc/openldap/cacerts/cacert.pem
 
 * Make sure /etc/openldap/ldap.conf has (among other things)::
+
     URI ldaps://PATH_TO_YOUR_LDAP_SERVER
     BASE your_base
     TLS_CACERT /etc/openldap/cacerts/cacert.pem
