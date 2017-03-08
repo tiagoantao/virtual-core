@@ -3,9 +3,9 @@ LDAP authentication based on the virtual core
 =============================================
 
 
-Here we present an example with Ubuntu, hopefully the added comments
-are enough to help with other operating systems.
 
+Ubuntu
+------
 
 `apt-get install libpam-ldap ldap-utls`
 
@@ -37,8 +37,33 @@ https://wiki.debian.org/LDAP/PAM
 (uid limitation - pam_filter)
 
 
-CentOS
-------
+CentOS 5
+--------
+
+We do this manually
+
+* Make sure openldap-clients and nss_ldap is installed
+* Copy your CA certificate to /etc/openldap/cacerts
+* Make sure /etc/ldap.conf has (among other things)::
+    URI ldaps://PATH_TO_YOUR_LDAP_SERVER
+    BASE your_base
+    pam_password exop
+    ssl on
+    port 636
+    tls_cacertfile /etc/openldap/cacerts/cacert.pem
+
+* Make sure /etc/openldap/ldap.conf has (among other things)::
+    URI ldaps://PATH_TO_YOUR_LDAP_SERVER
+    BASE your_base
+    TLS_CACERT /etc/openldap/cacerts/cacert.pem
+    
+* Edit /etc/nsswitch.conf to include ldap (on password, group and shadow)
+* Restart nscd
+
+CentOS 7
+--------
+
+*needs review*
 
 On CentOS install nss_ldap and nss-pam-ldapd
 
