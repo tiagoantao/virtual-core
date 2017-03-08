@@ -60,6 +60,13 @@ We do this manually
     TLS_CACERT /etc/openldap/cacerts/cacert.pem
     
 * Edit /etc/nsswitch.conf to include ldap (on password, group and shadow)
+* Edit at least /etc/pam.d/system-auth and add in appropriate places::
+
+    auth        sufficient    pam_ldap.so use_first_pass
+    account     [default=bad success=ok user_unknown=ignore] pam_ldap.so
+    password    sufficient    pam_ldap.so use_authtok
+    session     optional      pam_ldap.so
+
 * Restart nscd
 
 CentOS 7
