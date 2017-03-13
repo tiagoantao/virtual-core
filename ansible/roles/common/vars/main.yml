@@ -1,5 +1,0 @@
-domain_name: virtual_core
-volume_dir: /core/docker/volumes
-galaxy_old_dir: /core/galaxy/old
-galaxy_dir: /core/galaxy
-software_dir: "{{volume_dir}}/software"

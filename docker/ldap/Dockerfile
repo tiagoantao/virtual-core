@@ -11,4 +11,4 @@ RUN chmod 0600 /root/.ssh/authorized_keys
 
 VOLUME ["/etc/openldap", "/var/log/", "/var/lib/openldap/", "/var/run/openldap/"]
 
-EXPOSE 636
+EXPOSE 636 389

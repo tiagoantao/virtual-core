@@ -13,7 +13,7 @@
     image: core_ldap
     net: virtual_core
     state: reloaded
-    ports: ["636:636"]
+    ports: ["636:636", "389:389"]
     volumes:
       - "{{ ldap_dir }}/var/lib/openldap:/var/lib/openldap"
       - "{{ ldap_dir }}/var/run/openldap:/var/run/openldap"
