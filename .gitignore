@@ -20,6 +20,7 @@ _instance
 
 link_mutable_files.py
 
+ansible/roles/common/vars/main.yml
 ansible/roles/file_router/vars/main.yml
 ansible/roles/user_server/vars/main.yml
 
@@ -40,6 +41,8 @@ docker/postgres/copy/var/lib/postgresql/data/server.crt
 docker/postgres/copy/var/lib/postgresql/data/server.key
 
 docker/file_router/copy/etc/exports
+docker/file_router/copy/etc/ldap.conf
+docker/file_router/copy/etc/ldap/ldap.conf
 docker/file_router/copy/etc/nginx/cert.key
 docker/file_router/copy/etc/nginx/cert.pem
 docker/file_router/copy/etc/samba/smb.conf
