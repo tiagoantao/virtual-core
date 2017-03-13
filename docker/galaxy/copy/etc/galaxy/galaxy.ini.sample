@@ -1082,7 +1082,7 @@ use_interactive = True
 
 # This should point to a directory containing subdirectories matching users'
 # identifier (defaults to e-mail), where Galaxy will look for files.
-#ftp_upload_dir = None
+ftp_upload_dir = /export/galaxy-central/database/ftp
 
 # This should be the hostname of your FTP server, which will be provided to
 # users in the help text.
