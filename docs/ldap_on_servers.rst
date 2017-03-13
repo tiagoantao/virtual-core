@@ -76,6 +76,10 @@ CentOS 7
 
 On CentOS install nss_ldap and nss-pam-ldapd
 
+/etc/nslcd.conf - ldap server (instead of /etc/ldap.conf)
+
+make sure nslcd is started
+
 authconfig --enableldap --enableldapauth --ldapserver=ldap://ldap.YOUR-DOMAIN:389/ \
   --ldapbasedn="BASE-DN" --enablecache --disablefingerprint --kickstart
 
