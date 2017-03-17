@@ -78,7 +78,7 @@ discuss architecture
 File router
 -----------
 
-The samba user is not LDAP based. Password supplied in the clear
+Please see the dedicated page_
 
 ------------------
 Software container
@@ -116,3 +116,4 @@ based on user server
 share the home dirs...
 
 .. _SLURM: http://slurm.schedmd.com/slurm.html
+.. _page: file_router.rst
