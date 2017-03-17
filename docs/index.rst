@@ -59,8 +59,8 @@ Contents
     install
     notes_on_containers
     customizing_system
-    sequencer
     ldap_on_servers
+    bioinformatics
 
 .. _Docker: https://docker.com
 .. _`Jupyter hub`: http://jupyter.org/
