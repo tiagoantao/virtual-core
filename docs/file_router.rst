@@ -30,10 +30,10 @@ If you want users to be able to mount your volumes as samba shares and have inte
 we offer a ad-hoc script `/usr/bin/change_password.py` that does sync between samba and LDAP. It works this way:
 
 1. The user already has an account on LDAP
-2. You create an account for the user on Samba using `pdbedit -a ldap_uid`. Use `smbpasswd ldap_uid`, password will be `boot`
-3. The user logs in, ASAP, on the file_router and uses `change_password.py boot` to sync the passwords
-4. From now on the user can login on the file_router to change the password (indeed password change can only happen on the
-   file_router or the passwords will be out of sync)
+2. You create an account for the user on Samba using ``pdbedit -a ldap_uid``. Use ``smbpasswd ldap_uid``, password will be ``boot``
+3. The user logs in, ASAP, on the file_router and uses ``change_password.py boot`` to sync the passwords
+4. From now on the user can login on the file_router to change the password using ``change_password.py``
+  (indeed password change can only happen on the file_router or the passwords will be out of sync)
 
 Yes, this is ugly, but LDAP/Samba/Windows AD integration is ugly.
 
