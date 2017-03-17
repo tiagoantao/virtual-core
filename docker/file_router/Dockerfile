@@ -2,7 +2,7 @@ FROM tiagoantao/ubuntu-supervisor-sshd
 MAINTAINER Tiago Antao <tiagoantao@gmail.com>
 
 RUN apt-get update
-RUN apt-get install -y nfs-kernel-server samba
+RUN apt-get install -y nfs-kernel-server samba python-pexpect
 #RUN apt-get install -y nginx uwsgi-plugin-python3 python3-pip
 #RUN apt-get install -y python3-flask python3-flask python3-flask python3-ldap3 python3-yaml
 #RUN pip3 install flask-login
@@ -13,13 +13,15 @@ COPY authorized_keys /root/.ssh
 
 #LDAP
 COPY copy/etc/ldap.conf /etc/
-COPY copy/etc/pam.d /etc/pam.d
+COPY copy/etc/pam.d/* /etc/pam.d/
 COPY copy/etc/nsswitch.conf /etc/
 
 #samba
 COPY copy/etc/samba/smb.conf /etc/samba
 #COPY copy/etc/samba/users /etc/samba
 COPY copy/etc/supervisor/conf.d/samba.conf /etc/supervisor/conf.d
+COPY copy/usr/bin/change_password.py /usr/bin
+RUN chmod a+x /usr/bin/change_password.py
 
 #NFS
 COPY /copy/etc/exports /etc/exports

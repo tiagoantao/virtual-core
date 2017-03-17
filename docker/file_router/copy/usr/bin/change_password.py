@@ -1,4 +1,4 @@
-#!/usr/bin./python
+#!/usr/bin/python2
 import getpass
 import sys
 
@@ -26,15 +26,15 @@ def change_password(old=None, new=None):
         old, new = get_passes()
     p = pexpect.spawn('passwd')
     p.expect('password')
-    p.sendline(old + '\n')
+    p.sendline(old)
     outcome = p.expect(['New', 'incorrect', 'error'])
-    p.sendline(new + '\n')
+    p.sendline(new)
     try:
-        outcome = p.expect('new password:', timeout=1)
+        outcome = p.expect('ew password:', timeout=1)
         if p.match is None:
             print p.buffer, 'new password'
         else:
-            p.sendline(new + '\n')
+            p.sendline(new)
             outcome = p.expect(['success'] , timeout=1)
             if p.match is not None:
                 return old, new
@@ -43,14 +43,14 @@ def change_password(old=None, new=None):
     return False
 
 
-def change_samba_password(old, new)
+def change_samba_password(old, new):
     p = pexpect.spawn('smbpasswd')
     p.expect('Old SMB password:')
-    p.sendline(old + '\n')
+    p.sendline(old)
     p.expect('New SMB password:')
-    p.sendline(new + '\n')
+    p.sendline(new)
     p.expect('Retype new SMB password:')
-    p.sendline(new + '\n')
+    p.sendline(new)
     p.expect('Password changed', timeout=2)
     if p.match is None:
         return False
