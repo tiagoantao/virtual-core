@@ -58,6 +58,7 @@ Contents
 
     install
     notes_on_containers
+    file_router
     customizing_system
     ldap_on_servers
     bioinformatics
