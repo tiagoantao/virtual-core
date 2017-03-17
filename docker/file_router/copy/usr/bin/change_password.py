@@ -28,7 +28,7 @@ def change_password(old=None, new=None):
     p.expect('password')
     p.sendline(old + '\n')
     outcome = p.expect(['New', 'incorrect', 'error'])
-    p.sendline(new1 + '\n')
+    p.sendline(new + '\n')
     try:
         outcome = p.expect('new password:', timeout=1)
         if p.match is None:
@@ -42,7 +42,25 @@ def change_password(old=None, new=None):
         print p.buffer, 'top level'
     return False
 
+
+def change_samba_password(old, new)
+    p = pexpect.spawn('smbpasswd')
+    p.expect('Old SMB password:')
+    p.sendline(old + '\n')
+    p.expect('New SMB password:')
+    p.sendline(new + '\n')
+    p.expect('Retype new SMB password:')
+    p.sendline(new + '\n')
+    p.expect('Password changed', timeout=2)
+    if p.match is None:
+        return False
+    else:
+        return True
+
 pwds = change_password()
-while pwds == False:
+while not pwds:
     pwds = change_password()
 old, new = pwds
+if not change_samba_password('boot' if boot else old, new):
+    print 'Samba password change failed, reverting ldap password'
+    change_password(new, old)
