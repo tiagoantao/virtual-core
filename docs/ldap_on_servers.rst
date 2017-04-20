@@ -69,6 +69,60 @@ We do this manually
 
 * Restart nscd
 
+CentOS 6
+--------
+
+* Install openldap-clients, sssd, pam_ldap and nss-pam-ldapd
+* Make sure sssd is running
+* on /etc/nsswitch.con use sss instead of ldap
+* Here is an example of a sssd.conf file::
+
+    [sssd]
+    domains = LDAP
+    services = nss
+    config_file_version = 2
+
+    [nss]
+    filter_groups = root
+    filter_users = root
+
+    [domain/LDAP]
+    enumerate=true
+    cache_credentials = TRUE
+
+    id_provider = ldap
+    auth_provider = ldap
+    ldap_schema = rfc2307
+    chpass_provider = ldap
+
+    ldap_uri = YOU_SERVER
+    ldap_search_base = YOUR_BASE
+
+
+* Copy your CA certificate to /etc/openldap/cacerts
+* Make sure /etc/pam_ldap.conf has (among other things)::
+
+    URI ldaps://PATH_TO_YOUR_LDAP_SERVER
+    BASE your_base
+    pam_password exop
+    ssl on
+    port 636
+    tls_cacertfile /etc/openldap/cacerts/cacert.pem
+
+* Make sure /etc/openldap/ldap.conf has (among other things)::
+
+    URI ldaps://PATH_TO_YOUR_LDAP_SERVER
+    BASE your_base
+    TLS_CACERT /etc/openldap/cacerts/cacert.pem
+    
+* Edit at least /etc/pam.d/system-auth and add in appropriate places::
+
+    auth        sufficient    pam_ldap.so use_first_pass
+    account     [default=bad success=ok user_unknown=ignore] pam_ldap.so
+    password    sufficient    pam_ldap.so use_authtok
+    session     optional      pam_ldap.so
+
+
 CentOS 7
 --------
 
