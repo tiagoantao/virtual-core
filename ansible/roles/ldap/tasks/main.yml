@@ -34,13 +34,19 @@
 
 - name: phpLDAPadmin container
   docker_service:
-    domainname: "{{domain_name}}"
-    hostname: phpldapadmin
-    name: phpldapadmin
-    image: core_phpldapadmin
-    net: virtual_core
-    state: reloaded
-    ports: ["8636:443"]
-    volumes:
-      - "{{ phpldapadmin_dir }}/var/log:/var/log"
+    project_name: phpldapadmin
+    definition:
+      version: "2"
+      networks:
+        default:
+          external:
+            name: virtual_core
+      services:
+        phpldapadmin:
+          domainname: "{{domain_name}}"
+          hostname: phpldapadmin
+          image: localhost:5000/ldap
+          ports: ["8636:443"]
+          volumes:
+            - "{{ phpldapadmin_dir }}/var/log:/var/log"
 
