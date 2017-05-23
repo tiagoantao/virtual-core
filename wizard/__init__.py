@@ -216,7 +216,6 @@ def generate_configuration():
 
 def all_configurations_copied():
     for container, services in requirements.items():
-        print(container, services)
         if not os.path.exists('docker/%s' % container):
             return False
         for service, artefacts in services.items():
@@ -258,7 +257,6 @@ def check_copies(checkup):
 
 def deploy(my_dir, check_instead=False):
     samples = glob.glob('ansible/roles/**/vars/main.yml')
-    print(list(requirements.keys()), samples, os.getcwd())
     checkup = defaultdict(list)
     links = []
     for sample in samples:
@@ -266,12 +264,10 @@ def deploy(my_dir, check_instead=False):
         if host not in requirements:
             continue
         conf = yaml.load(open(sample))
-        print(9999, sample, conf)
         for k, container_dir in conf.items():
             if not k.endswith('_dir'):
                 continue
             machine = k[:-4]
-            print(my_dir, machine)
             if not check_instead:
                 try:
                     os.mkdir(my_dir + '/' + machine)
@@ -283,7 +279,6 @@ def deploy(my_dir, check_instead=False):
                 if not check_instead:
                     for in_dir in dirs:
                         try:
-                            print(root, in_dir)
                             os.mkdir(root + '/' + in_dir)
                         except FileExistsError:
                             pass  # OK
@@ -296,7 +291,6 @@ def deploy(my_dir, check_instead=False):
                             _get_link_path(sample_dir + '/' + fname),
                             root + '/' + fname[:-5]))
                         continue
-                    print(sample_dir + '/' + fname, root)
                     dest = root + '/' + fname
                     if check_instead:
                         checkup[machine].append((os.path.isfile(dest),

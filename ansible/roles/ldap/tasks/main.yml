@@ -13,18 +13,24 @@
 
 - name: LDAP container
   docker_service:
-    domainname: "{{domain_name}}"
-    hostname: ldap
-    name: ldap
-    image: core_ldap
-    net: virtual_core
-    state: reloaded
-    ports: ["636:636", "389:389"]
-    volumes:
-      - "{{ ldap_dir }}/var/lib/openldap:/var/lib/openldap"
-      - "{{ ldap_dir }}/var/run/openldap:/var/run/openldap"
-      - "{{ ldap_dir }}/etc/openldap:/etc/openldap"
-      - "{{ ldap_dir }}/var/log:/var/log"
+    project_name: ldap
+    definition:
+      version: "2"
+      networks:
+        default:
+          external:
+            name: virtual_core
+      services:
+        ldap:
+          domainname: "{{domain_name}}"
+          hostname: ldap
+          image: localhost:5000/ldap
+          ports: ["636:636", "389:389"]
+          volumes:
+            - "{{ ldap_dir }}/var/lib/openldap:/var/lib/openldap"
+            - "{{ ldap_dir }}/var/run/openldap:/var/run/openldap"
+            - "{{ ldap_dir }}/etc/openldap:/etc/openldap"
+            - "{{ ldap_dir }}/var/log:/var/log"
 
 - name: phpLDAPadmin container
   docker_service:
