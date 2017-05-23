@@ -335,4 +335,4 @@ def check_deployment():
 
 if __name__ == "__main__":
     app.debug = True
-    app.run(port=6000)
+    app.run(port=7000)
