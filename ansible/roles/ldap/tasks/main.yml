@@ -1,12 +1,18 @@
 ---
 - name: Build LDAP server
-  command: docker build -t core_ldap ../../docker/ldap
+  docker_image:
+    path: ../../docker/ldap
+    name: localhost:5000/ldap
+    push: yes
 
 - name: Build phpLDAPadmin server
-  command: docker build -t core_phpldapadmin ../../docker/phpldapadmin
+  docker_image:
+    path: ../../docker/phpldapadmin
+    name: localhost:5000/phpldapadmin
+    push: yes
 
 - name: LDAP container
-  docker:
+  docker_service:
     domainname: "{{domain_name}}"
     hostname: ldap
     name: ldap
@@ -21,7 +27,7 @@
       - "{{ ldap_dir }}/var/log:/var/log"
 
 - name: phpLDAPadmin container
-  docker:
+  docker_service:
     domainname: "{{domain_name}}"
     hostname: phpldapadmin
     name: phpldapadmin
