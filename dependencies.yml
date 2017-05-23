@@ -18,5 +18,5 @@ web:
   - ldap
 zabbix:
   - ldap
-sequencer:
+file_router:
   - ldap
