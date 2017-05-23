@@ -1,23 +1,32 @@
 ---
 - name: Build File Router
-  command: docker build -t core_file_router ../../docker/file_router
+  docker_image:
+    path: ../../docker/file_router
+    name: localhost:5000/file_router
+    push: yes
 
 - name: File Router container
-  docker:
-    name: file_router
-    domainname: "{{domain_name}}"
-    hostname: file_router
-    image: core_file_router
-    state: reloaded
-    net: virtual_core
-    privileged: yes
-    ports:
-      - 111:111/udp
-      - 2049:2049
-      - 137:137
-      - 892:892
-      - 139:139
-      - 445:445
-      - 1443:443
-    volumes: "{{ volumes }}"
+  docker_service:
+    project_name: ldap
+    definition:
+      version: "2"
+      networks:
+        default:
+          external:
+            name: virtual_core
+      services:
+        file_router:
+          domainname: "{{domain_name}}"
+          hostname: file_router
+          image: localhost:5000/file-router
+          privileged: yes
+          ports:
+            - 111:111/udp
+            - 2049:2049
+            - 137:137
+            - 892:892
+            - 139:139
+            - 445:445
+            - 1443:443
+          volumes: "{{ volumes }}"
 
