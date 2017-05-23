@@ -39,6 +39,6 @@ Copyright by Tiago Antao. Licensed under GNU Affero General Public License
 version 3.
 
 
-.. _project documentation: http://virtual-core.tiago.org
+.. _project documentation: http://virtual-core.rtfd.io/
 .. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable
 .. _Samba container: https://github.com/dperson/samba
