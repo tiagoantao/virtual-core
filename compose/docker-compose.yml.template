@@ -1,0 +1,37 @@
+version: '3'
+networks:
+  default:
+    external:
+      name: virtual_core
+services:
+  ldap:
+    domainname: "{{domain_name}}"
+    hostname: ldap
+    image: {{ registry_url }}
+    ports: ["636:636", "389:389"]
+    volumes:
+      - "{{ ldap_dir }}/var/lib/openldap:/var/lib/openldap"
+      - "{{ ldap_dir }}/var/run/openldap:/var/run/openldap"
+      - "{{ ldap_dir }}/etc/openldap:/etc/openldap"
+      - "{{ ldap_dir }}/var/log:/var/log"
+  phpldapadmin:
+    domainname: "{{domain_name}}"
+    hostname: phpldapadmin
+    ports: ["8636:443"]
+    volumes:
+      - "{{ phpldapadmin_dir }}/var/log:/var/log"
+  file_router:
+    domainname: "{{domain_name}}"
+    hostname: file_router
+    image: {{ registry_url }}
+    privileged: yes
+    ports:
+      - 111:111/udp
+      - 2049:2049
+      - 137:137
+      - 892:892
+      - 139:139
+      - 445:445
+      - 1443:443
+    volumes: "{{ file_router_volumes }}"
+
