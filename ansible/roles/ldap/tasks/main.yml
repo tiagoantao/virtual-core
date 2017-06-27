@@ -45,7 +45,7 @@
         phpldapadmin:
           domainname: "{{domain_name}}"
           hostname: phpldapadmin
-          image: localhost:5000/ldap
+          image: localhost:5000/phpldapadmin
           ports: ["8636:443"]
           volumes:
             - "{{ phpldapadmin_dir }}/var/log:/var/log"
