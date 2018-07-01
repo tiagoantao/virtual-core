@@ -2,6 +2,8 @@
 Virtual core for data science
 #############################
 
+.. warning:: virtual-core has been superseded by Skates_!
+
 Virtual Core is a turn-key solution to deploy a complete set of data-science
 core services that can be used as a base infrastructure for big data analysis.
 It was developed to support bioinformatics data analysis at the University of
@@ -66,3 +68,4 @@ Contents
 .. _Docker: https://docker.com
 .. _`Jupyter hub`: http://jupyter.org/
 .. _me: mailto:tiagoantao@gmail.com
+.. _Skates: https://gitlab.com/tiagoantao/skates
