@@ -2,7 +2,14 @@
 A Data Science core based on Docker containers
 ------------------------------------------------
 
-.. warning::  virtual-core has been superseded by Skates_
+Warning
+-------
+
+virtual-core has been superseded by Skates_
+
+
+Summary
+-------
 
 Here you can find a set of containers to help creating a data science core architecture, for example:
 
