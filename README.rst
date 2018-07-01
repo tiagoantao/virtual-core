@@ -2,6 +2,8 @@
 A Data Science core based on Docker containers
 ------------------------------------------------
 
+.. warning::  virtual-core has been superseded by Skates_
+
 Here you can find a set of containers to help creating a data science core architecture, for example:
 
 - LDAP server
@@ -42,3 +44,4 @@ version 3.
 .. _project documentation: http://virtual-core.rtfd.io/
 .. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable
 .. _Samba container: https://github.com/dperson/samba
+.. _Skates: https://gitlab.com/tiagoantao/skates
