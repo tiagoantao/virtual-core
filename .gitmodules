@@ -1,3 +1,0 @@
-[submodule "docker/file_router/sequencer-router"]
-	path = docker/file_router/sequencer-router
-	url = https://github.com/tiagoantao/sequencer-router.git
