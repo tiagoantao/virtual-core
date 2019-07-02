@@ -5,7 +5,7 @@ A Data Science core based on Docker containers
 Warning
 -------
 
-virtual-core has been superseded by Skates_
+virtual-core isn't maintained anymore!
 
 
 Summary
@@ -51,4 +51,3 @@ version 3.
 .. _project documentation: http://virtual-core.rtfd.io/
 .. _Galaxy container: https://github.com/bgruening/docker-galaxy-stable
 .. _Samba container: https://github.com/dperson/samba
-.. _Skates: https://gitlab.com/tiagoantao/skates
